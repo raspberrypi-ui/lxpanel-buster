@@ -1293,7 +1293,7 @@ static GtkWidget *_lxpanel_button_compose(GtkWidget *event_box, GtkWidget *image
 #endif
 
     if (label == NULL)
-        gtk_container_add(GTK_CONTAINER(event_box), image);
+        gtk_button_set_image (event_box, image);
     else
     {
         GtkWidget *inner, *lbl;
