@@ -1663,13 +1663,12 @@ static GtkWidget *_lxpanel_generic_config_dlg(const char *title, Panel *p,
                     entry = gtk_radio_button_new_with_label (NULL, name);
                     g_signal_connect (entry, "toggled", G_CALLBACK(on_radio_changed), val);
                     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (entry), * (int *) val == rb_group);
-                    gtk_radio_button_group (GTK_RADIO_BUTTON (entry));
                     lastbtn = entry;
                     rb_group++;
                 }
                 else
                 {
-                    entry = gtk_radio_button_new_with_label (gtk_radio_button_group (GTK_RADIO_BUTTON (lastbtn)), name);
+                    entry = gtk_radio_button_new_with_label (gtk_radio_button_get_group (GTK_RADIO_BUTTON (lastbtn)), name);
                     g_signal_connect (entry, "toggled", G_CALLBACK(on_radio_changed), val);
                     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (entry), * (int *) val == rb_group);
                     lastbtn = entry;
