@@ -713,7 +713,7 @@ make_button(menup *m, const gchar *fname, const gchar *name, GdkColor* tint, Gtk
 
     gtk_widget_set_visible (m->img, TRUE);
     if (m->padding) gtk_widget_set_size_request (m->img, m->iconsize + 2 * m->padding, -1);
-    gtk_container_add(GTK_CONTAINER(m->box), m->img);
+    gtk_button_set_image (m->box, m->img);
     gtk_widget_set_tooltip_text (m->box, _("Click here to open applications menu"));
 
     m->ds = fm_dnd_src_new(NULL);
@@ -1006,6 +1006,7 @@ static gboolean apply_config(gpointer user_data)
     menup* m = lxpanel_plugin_get_data(p);
 
     m->iconsize = panel_get_safe_icon_size (m->panel);
+    gtk_widget_set_name (m->box, "menu-button");
 
     if( m->fname ) {
         lxpanel_plugin_set_taskbar_icon (m->panel, m->img, m->fname);

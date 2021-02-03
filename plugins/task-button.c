@@ -1478,6 +1478,7 @@ TaskButton *task_button_new(Window win, gint desk, gint desks, LXPanel *panel,
     TaskButton *self = g_object_new(PANEL_TYPE_TASK_BUTTON,
                                     "relief", flags.flat_button ? GTK_RELIEF_NONE : GTK_RELIEF_NORMAL,
                                     NULL);
+    gtk_widget_set_name (self, "task-button");
 
     /* remember data */
     self->desktop = desk;
