@@ -966,6 +966,8 @@ static void _lxpanel_button_set_icon(GtkWidget* btn, FmIcon* icon, gint size)
     /* Locate the image within the button. */
     GtkWidget * child = gtk_bin_get_child(GTK_BIN(btn));
     GtkWidget * img = NULL;
+    if (!(img = gtk_button_get_image (btn)))
+    {
     if (GTK_IS_IMAGE(child))
         img = child;
     else if (GTK_IS_BOX(child))
@@ -973,6 +975,7 @@ static void _lxpanel_button_set_icon(GtkWidget* btn, FmIcon* icon, gint size)
         GList * children = gtk_container_get_children(GTK_CONTAINER(child));
         img = GTK_WIDGET(GTK_IMAGE(children->data));
         g_list_free(children);
+    }
     }
 
     if (img != NULL)
