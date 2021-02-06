@@ -1006,7 +1006,6 @@ static gboolean apply_config(gpointer user_data)
     menup* m = lxpanel_plugin_get_data(p);
 
     m->iconsize = panel_get_safe_icon_size (m->panel);
-    gtk_widget_set_name (m->box, "menu-button");
 
     if( m->fname ) {
         lxpanel_plugin_set_taskbar_icon (m->panel, m->img, m->fname);
