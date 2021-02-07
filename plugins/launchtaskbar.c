@@ -1071,7 +1071,7 @@ static void on_size_allocation(GtkWidget *widget, GtkAllocation *a, LaunchTaskBa
         if (ltbp->lb_built && gtk_widget_get_visible(ltbp->lb_icon_grid))
             panel_icon_grid_set_geometry(PANEL_ICON_GRID(ltbp->lb_icon_grid),
                                          panel_get_orientation(ltbp->panel),
-                                         ltbp->icon_size, ltbp->icon_size,
+                                         ltbp->icon_size + ICON_BUTTON_TRIM, ltbp->icon_size,
                                          3, 0, panel_get_height(ltbp->panel));
         if (ltbp->tb_built && gtk_widget_get_visible(ltbp->tb_icon_grid))
             panel_icon_grid_set_geometry(PANEL_ICON_GRID(ltbp->tb_icon_grid),
@@ -1861,7 +1861,7 @@ static void launchtaskbar_panel_configuration_changed(LXPanel *panel, GtkWidget 
         }
         panel_icon_grid_set_geometry(PANEL_ICON_GRID(ltbp->lb_icon_grid),
                                      panel_get_orientation(panel),
-                                     new_icon_size, new_icon_size,
+                                     new_icon_size + ICON_BUTTON_TRIM, new_icon_size,
                                      3, 0, height);
     }
 
