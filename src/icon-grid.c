@@ -324,6 +324,14 @@ static void panel_icon_grid_calculate_size(PanelIconGrid *ig,
             ig->rows = visible_children; */
         if (ig->columns > 0)
             requisition->height = (ig->child_height + ig->spacing) * ig->rows - ig->spacing + 2 * border;
+#if GTK_CHECK_VERSION(3, 0, 0)
+        /* The line below fixes a problem under GTK+3 whereby an icon grid which is supposed to have a constrained width,
+         * such as the taskbar, just keeps growing as items are added. I am not 100% sure why this fix works - I think it is
+         * because otherwise the icon grid's width request just gets bigger as items are added, and the bar allocates the requested
+         * space; by resetting the requisition to zero, the widget is only ever given any remaining space and so does not grow
+         * infinitely. This may have side effects which I have not yet discovered... */
+        if (ig->constrain_width) requisition->width = 0;
+#endif
     }
     else
     {
