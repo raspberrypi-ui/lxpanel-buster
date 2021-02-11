@@ -353,7 +353,11 @@ static void lxpanel_size_request(GtkWidget *widget, GtkRequisition *req)
     if (!p->visible)
         /* When the panel is in invisible state, the content box also got hidden, thus always
          * report 0 size.  Ask the content box instead for its size. */
+#if GTK_CHECK_VERSION(3, 0, 0)
+        gtk_widget_get_preferred_size(p->box, NULL, req);
+#else
         gtk_widget_size_request(p->box, req);
+#endif
 
     rect.width = req->width;
     rect.height = req->height;
@@ -1528,12 +1532,19 @@ GtkMenu* lxpanel_get_plugin_menu( LXPanel* panel, GtkWidget* plugin, gboolean us
     {
         init = PLUGIN_CLASS(plugin);
         /* create single item - plugin instance settings */
+#if GTK_CHECK_VERSION(3, 0, 0)
+        tmp = g_strdup_printf(_("%s Settings"),
+                              g_dgettext(init->gettext_package, init->name));
+        menu_item = gtk_menu_item_new_with_label( tmp );
+        g_free( tmp );
+#else
         img = gtk_image_new_from_stock( GTK_STOCK_PREFERENCES, GTK_ICON_SIZE_MENU );
         tmp = g_strdup_printf(_("%s Settings"),
                               g_dgettext(init->gettext_package, init->name));
         menu_item = gtk_image_menu_item_new_with_label( tmp );
         g_free( tmp );
         gtk_image_menu_item_set_image( (GtkImageMenuItem*)menu_item, img );
+#endif
         gtk_menu_shell_prepend(GTK_MENU_SHELL(ret), menu_item);
         if( init->config )
             g_signal_connect( menu_item, "activate", G_CALLBACK(panel_popupmenu_config_plugin), plugin );
@@ -1549,19 +1560,29 @@ GtkMenu* lxpanel_get_plugin_menu( LXPanel* panel, GtkWidget* plugin, gboolean us
     if (use_sub_menu)
         menu = GTK_MENU(gtk_menu_new());
 
+#if GTK_CHECK_VERSION(3, 0, 0)
+    menu_item = gtk_menu_item_new_with_label(_("Add / Remove Panel Items"));
+#else
     img = gtk_image_new_from_stock( GTK_STOCK_EDIT, GTK_ICON_SIZE_MENU );
     menu_item = gtk_image_menu_item_new_with_label(_("Add / Remove Panel Items"));
     gtk_image_menu_item_set_image( (GtkImageMenuItem*)menu_item, img );
+#endif
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
     g_signal_connect( menu_item, "activate", G_CALLBACK(panel_popupmenu_add_item), panel );
 
     if( plugin )
     {
+#if GTK_CHECK_VERSION(3, 0, 0)
+        tmp = g_strdup_printf( _("Remove \"%s\" From Panel"), _(init->name) );
+        menu_item = gtk_menu_item_new_with_label( tmp );
+        g_free( tmp );
+#else
         img = gtk_image_new_from_stock( GTK_STOCK_REMOVE, GTK_ICON_SIZE_MENU );
         tmp = g_strdup_printf( _("Remove \"%s\" From Panel"), _(init->name) );
         menu_item = gtk_image_menu_item_new_with_label( tmp );
         g_free( tmp );
         gtk_image_menu_item_set_image( (GtkImageMenuItem*)menu_item, img );
+#endif
         gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
         g_signal_connect( menu_item, "activate", G_CALLBACK(panel_popupmenu_remove_item), plugin );
     }
@@ -1569,21 +1590,33 @@ GtkMenu* lxpanel_get_plugin_menu( LXPanel* panel, GtkWidget* plugin, gboolean us
     menu_item = gtk_separator_menu_item_new();
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
 
+#if GTK_CHECK_VERSION(3, 0, 0)
+    menu_item = gtk_menu_item_new_with_label(_("Panel Settings"));
+#else
     img = gtk_image_new_from_stock( GTK_STOCK_PREFERENCES, GTK_ICON_SIZE_MENU );
     menu_item = gtk_image_menu_item_new_with_label(_("Panel Settings"));
     gtk_image_menu_item_set_image( (GtkImageMenuItem*)menu_item, img );
+#endif
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
     g_signal_connect(G_OBJECT(menu_item), "activate", G_CALLBACK(panel_popupmenu_configure), panel );
 
+#if GTK_CHECK_VERSION(3, 0, 0)
+    menu_item = gtk_menu_item_new_with_label(_("Create New Panel"));
+#else
     img = gtk_image_new_from_stock( GTK_STOCK_NEW, GTK_ICON_SIZE_MENU );
     menu_item = gtk_image_menu_item_new_with_label(_("Create New Panel"));
     gtk_image_menu_item_set_image( (GtkImageMenuItem*)menu_item, img );
+#endif
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
     g_signal_connect( menu_item, "activate", G_CALLBACK(panel_popupmenu_create_panel), panel );
 
+#if GTK_CHECK_VERSION(3, 0, 0)
+    menu_item = gtk_menu_item_new_with_label(_("Delete This Panel"));
+#else
     img = gtk_image_new_from_stock( GTK_STOCK_DELETE, GTK_ICON_SIZE_MENU );
     menu_item = gtk_image_menu_item_new_with_label(_("Delete This Panel"));
     gtk_image_menu_item_set_image( (GtkImageMenuItem*)menu_item, img );
+#endif
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
     g_signal_connect( menu_item, "activate", G_CALLBACK(panel_popupmenu_delete_panel), panel );
     if( ! all_panels->next )    /* if this is the only panel */
@@ -1592,15 +1625,23 @@ GtkMenu* lxpanel_get_plugin_menu( LXPanel* panel, GtkWidget* plugin, gboolean us
     menu_item = gtk_separator_menu_item_new();
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
 
+#if GTK_CHECK_VERSION(3, 0, 0)
+    menu_item = gtk_menu_item_new_with_label(_("About"));
+#else
     img = gtk_image_new_from_stock( GTK_STOCK_ABOUT, GTK_ICON_SIZE_MENU );
     menu_item = gtk_image_menu_item_new_with_label(_("About"));
     gtk_image_menu_item_set_image( (GtkImageMenuItem*)menu_item, img );
+#endif
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
     g_signal_connect( menu_item, "activate", G_CALLBACK(panel_popupmenu_about), panel->priv );
 
     if( use_sub_menu )
     {
+#if GTK_CHECK_VERSION(3, 0, 0)
+        menu_item = gtk_menu_item_new_with_label(_("Panel"));
+#else
         menu_item = gtk_image_menu_item_new_with_label(_("Panel"));
+#endif
         gtk_menu_shell_append(GTK_MENU_SHELL(ret), menu_item);
         gtk_menu_item_set_submenu(GTK_MENU_ITEM(menu_item), GTK_WIDGET(menu) );
     }
@@ -1962,6 +2003,7 @@ static gboolean _panel_idle_reconfigure(gpointer widget)
     }
 
     /* FIXME: it's deprecated, kept for binary compatibility */
+#if !GTK_CHECK_VERSION(3, 0, 0)
     if (p->orientation == GTK_ORIENTATION_HORIZONTAL) {
         p->my_box_new = gtk_hbox_new;
         p->my_separator_new = gtk_vseparator_new;
@@ -1969,6 +2011,7 @@ static gboolean _panel_idle_reconfigure(gpointer widget)
         p->my_box_new = gtk_vbox_new;
         p->my_separator_new = gtk_hseparator_new;
     }
+#endif
 
     /* recreate the main layout box */
     if (p->box != NULL)
@@ -2258,16 +2301,24 @@ gboolean panel_is_dynamic(LXPanel *panel)
 
 GtkWidget *panel_box_new(LXPanel *panel, gboolean homogeneous, gint spacing)
 {
+#if GTK_CHECK_VERSION(3, 0, 0)
+    return gtk_box_new (panel->priv->orientation, spacing);
+#else
     if (panel->priv->orientation == GTK_ORIENTATION_HORIZONTAL)
         return gtk_hbox_new(homogeneous, spacing);
     return gtk_vbox_new(homogeneous, spacing);
+#endif
 }
 
 GtkWidget *panel_separator_new(LXPanel *panel)
 {
+#if GTK_CHECK_VERSION(3, 0, 0)
+    return gtk_separator_new (panel->priv->orientation);
+#else
     if (panel->priv->orientation == GTK_ORIENTATION_HORIZONTAL)
         return gtk_vseparator_new();
     return gtk_hseparator_new();
+#endif
 }
 
 gboolean _class_is_present(const LXPanelPluginInit *init)

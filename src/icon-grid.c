@@ -298,7 +298,11 @@ static void panel_icon_grid_calculate_size(PanelIconGrid *ig,
         for (ige = ig->children; ige != NULL; ige = ige->next)
             if (gtk_widget_get_visible(ige->data))
             {
+#if GTK_CHECK_VERSION(3, 0, 0)
+                gtk_widget_get_preferred_size(ige->data, NULL, &child_requisition);
+#else
                 gtk_widget_size_request(ige->data, &child_requisition);
+#endif
                 icon_grid_element_check_requisition(ig, &child_requisition);
                 if (row == 0)
                     ig->columns++;
@@ -345,7 +349,11 @@ static void panel_icon_grid_calculate_size(PanelIconGrid *ig,
         for (ige = ig->children; ige != NULL; ige = ige->next)
             if (gtk_widget_get_visible(ige->data))
             {
+#if GTK_CHECK_VERSION(3, 0, 0)
+                gtk_widget_get_preferred_size(ige->data, NULL, &child_requisition);
+#else
                 gtk_widget_size_request(ige->data, &child_requisition);
+#endif
                 icon_grid_element_check_requisition(ig, &child_requisition);
                 if (w > 0)
                 {

@@ -626,15 +626,23 @@ static void taskbar_close_all_windows(GtkWidget * widget, TaskButton *tb)
 static void assemble_gui(TaskButton *self)
 {
     /* Create a box to contain the application icon and window title. */
+#if GTK_CHECK_VERSION(3, 0, 0)
+    GtkWidget * container = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 1);
+#else
     GtkWidget * container = gtk_hbox_new(FALSE, 1);
+#endif
     gtk_container_set_border_width(GTK_CONTAINER(container), 0);
 
     /* Add the image to contain the application icon to the box. */
+#if !GTK_CHECK_VERSION(3, 0, 0)
     gtk_misc_set_padding(GTK_MISC(self->image), 0, 0);
+#endif
     gtk_box_pack_start(GTK_BOX(container), self->image, FALSE, FALSE, 0);
 
     /* Add the label to contain the window title to the box. */
+#if !GTK_CHECK_VERSION(3, 0, 0)
     gtk_misc_set_alignment(GTK_MISC(self->label), 0.0, 0.5);
+#endif
     gtk_label_set_ellipsize(GTK_LABEL(self->label), PANGO_ELLIPSIZE_END);
     gtk_box_pack_start(GTK_BOX(container), self->label, TRUE, TRUE, 0);
 
@@ -1316,6 +1324,10 @@ static gboolean task_button_button_release_event(GtkWidget *widget, GdkEventButt
                     /* The menu item has the name, or the iconified name, and
                      * the icon of the application window. */
                     name = task->iconified ? g_strdup_printf("[%s]", task->name) : NULL;
+#if GTK_CHECK_VERSION(3, 0, 0)
+                    task->menu_item = gtk_menu_item_new_with_label(name ? name : task->name);
+                    g_free(name);
+#else
                     task->menu_item = gtk_image_menu_item_new_with_label(name ? name : task->name);
                     g_free(name);
                     if (task->icon)
@@ -1323,6 +1335,7 @@ static gboolean task_button_button_release_event(GtkWidget *widget, GdkEventButt
                         GtkWidget *im = gtk_image_new_from_pixbuf(task->icon);
                         gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(task->menu_item), im);
                     }
+#endif
                     g_signal_connect(task->menu_item, "button-press-event",
                                      G_CALLBACK(taskbar_popup_activate_event), tb);
                     g_signal_connect(task->menu_item, "select",
@@ -1351,7 +1364,11 @@ static gboolean task_button_button_release_event(GtkWidget *widget, GdkEventButt
 
     /* As a matter of policy, avoid showing selected or prelight states on flat buttons. */
     if (tb->flags.flat_button)
+#if GTK_CHECK_VERSION(3, 0, 0)
+        gtk_widget_set_state_flags(widget, GTK_STATE_FLAG_NORMAL, TRUE);
+#else
         gtk_widget_set_state(widget, GTK_STATE_NORMAL);
+#endif
     return TRUE;
 }
 
@@ -1460,7 +1477,11 @@ static void task_button_init(TaskButton *self)
     gtk_container_set_border_width(GTK_CONTAINER(self), 0);
     gtk_widget_set_can_focus(GTK_WIDGET(self), FALSE);
     gtk_widget_set_can_default(GTK_WIDGET(self), FALSE);
+#if GTK_CHECK_VERSION(3, 0, 0)
+    gtk_widget_set_state_flags(GTK_WIDGET(self), GTK_STATE_FLAG_NORMAL, TRUE);
+#else
     gtk_widget_set_state(GTK_WIDGET(self), GTK_STATE_NORMAL);
+#endif
 #if GTK_CHECK_VERSION(3, 0, 0)
     gtk_widget_add_events(GTK_WIDGET(self), GDK_SCROLL_MASK);
 #endif
@@ -1478,7 +1499,6 @@ TaskButton *task_button_new(Window win, gint desk, gint desks, LXPanel *panel,
     TaskButton *self = g_object_new(PANEL_TYPE_TASK_BUTTON,
                                     "relief", flags.flat_button ? GTK_RELIEF_NONE : GTK_RELIEF_NORMAL,
                                     NULL);
-    gtk_widget_set_name (self, "task-button");
 
     /* remember data */
     self->desktop = desk;
@@ -1812,8 +1832,13 @@ void task_button_set_flash_state(TaskButton *button, gboolean state)
             /* don't ever touch selected menu item, it makes odd effects */
             && button->menu_target != details->win)
             /* if submenu exists and mapped then set state too */
+#if GTK_CHECK_VERSION(3, 0, 0)
+            gtk_widget_set_state_flags(details->menu_item,
+                                 m_state ? GTK_STATE_FLAG_SELECTED : GTK_STATE_FLAG_NORMAL, TRUE);
+#else
             gtk_widget_set_state(details->menu_item,
                                  m_state ? GTK_STATE_SELECTED : GTK_STATE_NORMAL);
+#endif
     }
     /* Set state on the button and redraw. */
     if (button->flags.flat_button)
@@ -1826,13 +1851,23 @@ void task_button_set_flash_state(TaskButton *button, gboolean state)
         }
     }
     else if (has_flash)
+#if GTK_CHECK_VERSION(3, 0, 0)
+        gtk_widget_set_state_flags(GTK_WIDGET(button),
+                             state ? GTK_STATE_FLAG_SELECTED : GTK_STATE_FLAG_NORMAL, TRUE);
+#else
         gtk_widget_set_state(GTK_WIDGET(button),
                              state ? GTK_STATE_SELECTED : GTK_STATE_NORMAL);
+#endif
     else if (!button->entered_state && button->has_flash)
         /* if flash state just disappeared and button isn't hovered then
            update the state, otherwise it will be updated on mouse leave */
+#if GTK_CHECK_VERSION(3, 0, 0)
+        gtk_widget_set_state_flags(GTK_WIDGET(button),
+                             button->last_focused == NULL ? GTK_STATE_FLAG_NORMAL : GTK_STATE_FLAG_ACTIVE, TRUE);
+#else
         gtk_widget_set_state(GTK_WIDGET(button),
                              button->last_focused == NULL ? GTK_STATE_NORMAL : GTK_STATE_ACTIVE);
+#endif
     button->has_flash = has_flash;
 }
 

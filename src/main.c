@@ -716,9 +716,11 @@ int main(int argc, char *argv[], char *env[])
     }
 
     /* Add a gtkrc file to be parsed too. */
+#if !GTK_CHECK_VERSION(3, 0, 0)
     file = _user_config_file_name("gtkrc", NULL);
     gtk_rc_parse(file);
     g_free(file);
+#endif
 
     /* Check for duplicated lxpanel instances */
     if (!check_main_lock() && !config) {

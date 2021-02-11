@@ -101,7 +101,11 @@ static void set_clock_length (DClockPlugin *dc)
         current_time->tm_min = digit;
         strftime (clock_value, sizeof (clock_value), dc->clock_format, current_time);
         gtk_label_set_text (GTK_LABEL (dc->clock_label), clock_value);
+#if GTK_CHECK_VERSION(3, 0, 0)
+        gtk_widget_get_preferred_size(dc->clock_label, NULL, &req);
+#else
         gtk_widget_size_request (dc->clock_label, &req);
+#endif
         if (req.width > maxval)
         {
             maxval = req.width;
@@ -121,7 +125,11 @@ static void set_clock_length (DClockPlugin *dc)
             current_time->tm_min = 10 * digit + maxdig;
             strftime (clock_value, sizeof (clock_value), dc->clock_format, current_time);
             gtk_label_set_text (GTK_LABEL (dc->clock_label), clock_value);
+#if GTK_CHECK_VERSION(3, 0, 0)
+            gtk_widget_get_preferred_size(dc->clock_label, NULL, &req);
+#else
             gtk_widget_size_request (dc->clock_label, &req);
+#endif
             if (req.width > maxval)
             {
                 maxval = req.width;
@@ -140,7 +148,11 @@ static void set_clock_length (DClockPlugin *dc)
         current_time->tm_hour = digit;
         strftime (clock_value, sizeof (clock_value), dc->clock_format, current_time);
         gtk_label_set_text (GTK_LABEL (dc->clock_label), clock_value);
+#if GTK_CHECK_VERSION(3, 0, 0)
+        gtk_widget_get_preferred_size(dc->clock_label, NULL, &req);
+#else
         gtk_widget_size_request (dc->clock_label, &req);
+#endif
         if (req.width > maxval)
         {
             maxval = req.width;
@@ -183,7 +195,11 @@ static GtkWidget * dclock_create_calendar(DClockPlugin * dc)
     gtk_window_stick(GTK_WINDOW(win));
 
     /* Create a vertical box as a child of the window. */
+#if GTK_CHECK_VERSION(3, 0, 0)
+    GtkWidget * box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+#else
     GtkWidget * box = gtk_vbox_new(FALSE, 0);
+#endif
     gtk_container_add(GTK_CONTAINER(win), GTK_WIDGET(box));
 
     /* Create a standard calendar widget as a child of the vertical box. */
@@ -441,15 +457,22 @@ static GtkWidget *dclock_constructor(LXPanel *panel, config_setting_t *settings)
     lxpanel_plugin_set_data(p, dc, dclock_destructor);
 
     /* Allocate a horizontal box as the child of the top level. */
+#if GTK_CHECK_VERSION(3, 0, 0)
+    GtkWidget * hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    gtk_box_set_homogeneous (GTK_BOX(hbox), TRUE);
+#else
     GtkWidget * hbox = gtk_hbox_new(TRUE, 0);
+#endif
     gtk_container_add(GTK_CONTAINER(p), hbox);
     gtk_widget_show(hbox);
 
     /* Create a label and an image as children of the horizontal box.
      * Only one of these is visible at a time, controlled by user preference. */
     dc->clock_label = gtk_label_new(NULL);
+#if !GTK_CHECK_VERSION(3, 0, 0)
     gtk_misc_set_alignment(GTK_MISC(dc->clock_label), 0.5, 0.5);
     gtk_misc_set_padding(GTK_MISC(dc->clock_label), 4, 0);
+#endif
     gtk_container_add(GTK_CONTAINER(hbox), dc->clock_label);
     dc->clock_icon = lxpanel_image_new_for_icon(panel, "clock", -1, NULL);
     gtk_container_add(GTK_CONTAINER(hbox), dc->clock_icon);
@@ -512,11 +535,23 @@ static gboolean dclock_apply_configuration(gpointer user_data)
     }
 
     if (dc->center_text == 2)
+#if GTK_CHECK_VERSION(3, 0, 0)
+        gtk_label_set_xalign (GTK_LABEL(dc->clock_label), 1.0);
+#else
         gtk_misc_set_alignment(GTK_MISC(dc->clock_label), 1.0, 0.5);
+#endif
     else if (dc->center_text == 1)
+#if GTK_CHECK_VERSION(3, 0, 0)
+        gtk_label_set_xalign (GTK_LABEL(dc->clock_label), 0.5);
+#else
         gtk_misc_set_alignment(GTK_MISC(dc->clock_label), 0.5, 0.5);
+#endif
     else
+#if GTK_CHECK_VERSION(3, 0, 0)
+        gtk_label_set_xalign (GTK_LABEL(dc->clock_label), 0.0);
+#else
         gtk_misc_set_alignment(GTK_MISC(dc->clock_label), 0.0, 0.5);
+#endif
 
     /* Rerun the experiment to determine update interval and update the display. */
     g_free(dc->prev_clock_value);

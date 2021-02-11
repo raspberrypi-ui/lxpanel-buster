@@ -777,10 +777,17 @@ static void on_add_plugin( GtkButton* btn, GtkTreeView* _view )
 
     parent_win = gtk_widget_get_toplevel( GTK_WIDGET(_view) );
     dlg = gtk_dialog_new_with_buttons( _("Add plugin to panel"),
+#if GTK_CHECK_VERSION(3, 0, 0)
+                                       GTK_WINDOW(parent_win), 0,
+                                       _("_Cancel"),
+                                       GTK_RESPONSE_CANCEL,
+                                       _("_Add"),
+#else
                                        GTK_WINDOW(parent_win), 0,
                                        GTK_STOCK_CANCEL,
                                        GTK_RESPONSE_CANCEL,
                                        GTK_STOCK_ADD,
+#endif
                                        GTK_RESPONSE_OK, NULL );
     panel_apply_icon(GTK_WINDOW(dlg));
 
@@ -1297,7 +1304,11 @@ void panel_configure( LXPanel* panel, int sel_page )
         else if ((info = gtk_icon_theme_lookup_icon(p->icon_theme, "lxpanel-background", 0, 0)))
         {
             gtk_file_chooser_set_filename(GTK_FILE_CHOOSER(w), gtk_icon_info_get_filename(info));
+#if GTK_CHECK_VERSION(3, 0, 0)
+            g_object_unref (info);
+#else
             gtk_icon_info_free(info);
+#endif
         }
 
         if (!p->background)
@@ -1519,10 +1530,17 @@ static void on_browse_btn_clicked(GtkButton* btn, GtkEntry* entry)
                                         (action == GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER) ? _("Select a directory") : _("Select a file"),
                                         GTK_WINDOW(dlg),
                                         action,
+#if GTK_CHECK_VERSION(3, 0, 0)
+                                        _("_Cancel"), GTK_RESPONSE_CANCEL,
+                                        _("_OK"), GTK_RESPONSE_OK,
+#else
                                         GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
                                         GTK_STOCK_OK, GTK_RESPONSE_OK,
+#endif
                                         NULL);
+#if !GTK_CHECK_VERSION(3, 0, 0)
     gtk_dialog_set_alternative_button_order(GTK_DIALOG(fc), GTK_RESPONSE_OK, GTK_RESPONSE_CANCEL, -1);
+#endif
     file = (char*)gtk_entry_get_text(entry);
     if( file && *file )
         gtk_file_chooser_set_filename(GTK_FILE_CHOOSER(fc), file );
@@ -1582,7 +1600,11 @@ static GtkWidget *_lxpanel_generic_config_dlg(const char *title, Panel *p,
                                               const char *name, va_list args)
 {
     GtkWidget* dlg = gtk_dialog_new_with_buttons( title, NULL, 0,
+#if GTK_CHECK_VERSION(3, 0, 0)
+                                                  _("_OK"),
+#else
                                                   GTK_STOCK_OK,
+#endif
                                                   GTK_RESPONSE_CLOSE,
                                                   NULL );
     GtkBox *dlg_vbox = GTK_BOX(gtk_dialog_get_content_area(GTK_DIALOG(dlg)));
@@ -1663,12 +1685,19 @@ static GtkWidget *_lxpanel_generic_config_dlg(const char *title, Panel *p,
                     entry = gtk_radio_button_new_with_label (NULL, name);
                     g_signal_connect (entry, "toggled", G_CALLBACK(on_radio_changed), val);
                     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (entry), * (int *) val == rb_group);
+#if !GTK_CHECK_VERSION(3, 0, 0)
+                    gtk_radio_button_group (GTK_RADIO_BUTTON (entry));
+#endif
                     lastbtn = entry;
                     rb_group++;
                 }
                 else
                 {
+#if GTK_CHECK_VERSION(3, 0, 0)
                     entry = gtk_radio_button_new_with_label (gtk_radio_button_get_group (GTK_RADIO_BUTTON (lastbtn)), name);
+#else
+                    entry = gtk_radio_button_new_with_label (gtk_radio_button_group (GTK_RADIO_BUTTON (lastbtn)), name);
+#endif
                     g_signal_connect (entry, "toggled", G_CALLBACK(on_radio_changed), val);
                     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (entry), * (int *) val == rb_group);
                     lastbtn = entry;
@@ -1682,7 +1711,11 @@ static GtkWidget *_lxpanel_generic_config_dlg(const char *title, Panel *p,
                 gtk_box_pack_start( dlg_vbox, entry, FALSE, FALSE, 2 );
             else
             {
+#if GTK_CHECK_VERSION(3, 0, 0)
+                GtkWidget* hbox = gtk_box_new( GTK_ORIENTATION_HORIZONTAL, 2 );
+#else
                 GtkWidget* hbox = gtk_hbox_new( FALSE, 2 );
+#endif
                 gtk_box_pack_start( GTK_BOX(hbox), gtk_label_new(name), FALSE, FALSE, 2 );
                 gtk_box_pack_start( GTK_BOX(hbox), entry, TRUE, TRUE, 2 );
                 gtk_box_pack_start( dlg_vbox, hbox, FALSE, FALSE, 2 );
@@ -1718,7 +1751,11 @@ GtkWidget *panel_config_int_button_new(const char *name, gint *val,
                                        gint min, gint max)
 {
     GtkWidget *entry = gtk_spin_button_new_with_range(min, max, 1);
+#if GTK_CHECK_VERSION(3, 0, 0)
+    GtkWidget *hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 2);
+#else
     GtkWidget *hbox = gtk_hbox_new(FALSE, 2);
+#endif
 
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(entry), *val);
     g_signal_connect(entry, "value-changed", G_CALLBACK(on_spin_changed), val);

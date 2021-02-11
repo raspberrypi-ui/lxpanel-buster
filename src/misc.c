@@ -966,8 +966,10 @@ static void _lxpanel_button_set_icon(GtkWidget* btn, FmIcon* icon, gint size)
     /* Locate the image within the button. */
     GtkWidget * child = gtk_bin_get_child(GTK_BIN(btn));
     GtkWidget * img = NULL;
-    if (!(img = gtk_button_get_image (btn)))
+#if GTK_CHECK_VERSION(3, 0, 0)
+    if (!(img = gtk_button_get_image (GTK_BUTTON(btn))))
     {
+#endif
     if (GTK_IS_IMAGE(child))
         img = child;
     else if (GTK_IS_BOX(child))
@@ -976,7 +978,9 @@ static void _lxpanel_button_set_icon(GtkWidget* btn, FmIcon* icon, gint size)
         img = GTK_WIDGET(GTK_IMAGE(children->data));
         g_list_free(children);
     }
+#if GTK_CHECK_VERSION(3, 0, 0)
     }
+#endif
 
     if (img != NULL)
     {
@@ -1096,7 +1100,11 @@ static void _gtk_image_set_from_file_scaled(GtkWidget * img, ImgData * data)
     else
     {
         /* No pixbuf available.  Set the "missing image" icon. */
+#if GTK_CHECK_VERSION(3, 0, 0)
+        gtk_image_set_from_icon_name(GTK_IMAGE(img), "gtk-missing-image", GTK_ICON_SIZE_BUTTON);
+#else
         gtk_image_set_from_stock(GTK_IMAGE(img), GTK_STOCK_MISSING_IMAGE, GTK_ICON_SIZE_BUTTON);
+#endif
     }
 }
 
@@ -1190,7 +1198,11 @@ get_button_spacing(GtkRequisition *req, GtkContainer *parent, gchar *name)
         gtk_container_add(parent, b);
 
     gtk_widget_show(b);
+#if GTK_CHECK_VERSION(3, 0, 0)
+    gtk_widget_get_preferred_size(b, NULL, req);
+#else
     gtk_widget_size_request(b, req);
+#endif
 
     gtk_widget_destroy(b);
     RET();
@@ -1283,8 +1295,10 @@ static GtkWidget *_lxpanel_button_compose(GtkWidget *event_box, GtkWidget *image
 {
     ImgData * data = (ImgData *) g_object_get_qdata(G_OBJECT(image), img_data_id);
 
+#if !GTK_CHECK_VERSION(3, 0, 0)
     gtk_misc_set_padding(GTK_MISC(image), 0, 0);
     gtk_misc_set_alignment(GTK_MISC(image), 0.5, 0.5);
+#endif
 #if 0
     if (highlight_color != 0 && data != NULL)
     {
@@ -1296,12 +1310,20 @@ static GtkWidget *_lxpanel_button_compose(GtkWidget *event_box, GtkWidget *image
 #endif
 
     if (label == NULL)
-        gtk_button_set_image (event_box, image);
+#if GTK_CHECK_VERSION(3, 0, 0)
+        gtk_button_set_image (GTK_BUTTON(event_box), image);
+#else
+        gtk_container_add(GTK_CONTAINER(event_box), image);
+#endif
     else
     {
         GtkWidget *inner, *lbl;
 
+#if GTK_CHECK_VERSION(3, 0, 0)
+        inner = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+#else
         inner = gtk_hbox_new(FALSE, 0);
+#endif
         gtk_container_set_border_width(GTK_CONTAINER(inner), 0);
         gtk_widget_set_can_focus(inner, FALSE);
         gtk_container_add(GTK_CONTAINER(event_box), inner);
@@ -1319,7 +1341,9 @@ static GtkWidget *_lxpanel_button_compose(GtkWidget *event_box, GtkWidget *image
         }
         else
             gtk_label_set_text(GTK_LABEL(lbl), label);
+#if !GTK_CHECK_VERSION(3, 0, 0)
         gtk_misc_set_padding(GTK_MISC(lbl), 2, 0);
+#endif
         gtk_box_pack_end(GTK_BOX(inner), lbl, FALSE, FALSE, 0);
     }
 

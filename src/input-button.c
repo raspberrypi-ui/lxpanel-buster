@@ -322,7 +322,11 @@ static void config_input_button_class_init(PanelCfgInputButtonClass *klass)
 
 static void config_input_button_init(PanelCfgInputButton *self)
 {
+#if GTK_CHECK_VERSION(3, 0, 0)
+    GtkWidget *w = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 6);
+#else
     GtkWidget *w = gtk_hbox_new(FALSE, 6);
+#endif
     GtkBox *box = GTK_BOX(w);
 
     /* GtkRadioButton "None" */

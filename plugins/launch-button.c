@@ -151,7 +151,6 @@ LaunchButton *launch_button_new(LXPanel *panel, GtkWidget *plugin, FmPath *id,
                                 config_setting_t *settings)
 {
     LaunchButton *self = g_object_new(PANEL_TYPE_LAUNCH_BUTTON, NULL);
-    gtk_widget_set_name (self, "launch-button");
     GtkWidget *image;
 
     self->panel = panel;
