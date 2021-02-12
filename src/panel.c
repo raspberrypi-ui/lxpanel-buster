@@ -128,7 +128,11 @@ int gdk_mon_num (int x_mon_num)
 
     /* this will currently only return the secondary monitor, if there is one */
     /* for some future world, this needs to compare co-ords against those from xrandr */
+#if GTK_CHECK_VERSION(3, 0, 0)
+    for (int i = 0; i < gdk_display_get_n_monitors (disp); i++)
+#else
     for (int i = 0; i < gdk_screen_get_n_monitors (scr); i++)
+#endif
     {
         if (i != prim) return i;
     }
@@ -145,7 +149,11 @@ int x_mon_num (int gdk_mon_num)
 
     if (gdk_mon_num == prim) return 0;
 
+#if GTK_CHECK_VERSION(3, 0, 0)
+    if (gdk_display_get_n_monitors (disp) > 1) return 1;
+#else
     if (gdk_screen_get_n_monitors (scr) > 1) return 1;
+#endif
     else return -1;
 }
 
@@ -674,7 +682,11 @@ gboolean _panel_edge_can_strut(LXPanel *panel, int edge, gint monitor, gulong *s
     }
 
     screen = gtk_widget_get_screen(GTK_WIDGET(panel));
+#if GTK_CHECK_VERSION(3, 0, 0)
+    n = gdk_display_get_n_monitors(gtk_widget_get_display(GTK_WIDGET(panel)));
+#else
     n = gdk_screen_get_n_monitors(screen);
+#endif
     if (monitor >= n) /* hidden now */
         return FALSE;
 
@@ -1379,7 +1391,11 @@ static void panel_popupmenu_create_panel( GtkMenuItem* item, LXPanel* panel )
 
     /* Allocate the edge. */
     g_assert(screen);
+#if GTK_CHECK_VERSION(3, 0, 0)
+    monitors = gdk_display_get_n_monitors(gtk_widget_get_display(GTK_WIDGET(panel)));
+#else
     monitors = gdk_screen_get_n_monitors(screen);
+#endif
     /* try to allocate edge on current monitor first */
     m = panel->priv->monitor;
     if (m < 0)
@@ -2197,7 +2213,11 @@ static int panel_start(LXPanel *p)
     if (!list || !panel_parse_global(p->priv, config_setting_get_elem(list, 0)))
         RET(0);
 
+#if GTK_CHECK_VERSION(3, 0, 0)
+    if (p->priv->monitor < gdk_display_get_n_monitors(gtk_widget_get_display(GTK_WIDGET(p))))
+#else
     if (p->priv->monitor < gdk_screen_get_n_monitors(screen))
+#endif
         panel_start_gui(p, list);
     if (monitors_handler == 0)
         monitors_handler = g_signal_connect(screen, "monitors-changed",
@@ -2261,7 +2281,11 @@ LXPanel* panel_new_mon_fb (const char* config_file, const char* config_name)
             return NULL;
         }
 
+#if GTK_CHECK_VERSION(3, 0, 0)
+        int n_mons = gdk_display_get_n_monitors (gtk_widget_get_display (GTK_WIDGET (panel)));
+#else
         int n_mons = gdk_screen_get_n_monitors (screen);
+#endif
         if (panel->priv->monitor < n_mons)
             panel_start_gui (panel, list);
         else if (n_mons == 1 && panel->priv->monitor == 1)

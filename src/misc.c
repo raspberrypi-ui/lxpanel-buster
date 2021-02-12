@@ -868,7 +868,11 @@ void _calculate_position(LXPanel *panel, GdkRectangle *rect)
         marea.width = gdk_screen_get_width(screen);
         marea.height = gdk_screen_get_height(screen);
     }
+#if GTK_CHECK_VERSION(3, 0, 0)
+    else if (np->monitor < gdk_display_get_n_monitors(gtk_widget_get_display(GTK_WIDGET(panel))))
+#else
     else if (np->monitor < gdk_screen_get_n_monitors(screen))
+#endif
         gdk_screen_get_monitor_geometry(screen,gdk_mon_num (np->monitor),&marea);
     else
     {

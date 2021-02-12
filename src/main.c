@@ -203,7 +203,11 @@ static void process_client_msg ( XClientMessageEvent* ev )
                                 }
                                 if (sscanf (linebuf, "%*[ \t]monitor=%d", &val) == 1)
                                 {
+#if GTK_CHECK_VERSION(3, 0, 0)
+                                    if (!mon_override || gdk_display_get_n_monitors (gtk_widget_get_display (GTK_WIDGET (p))) > 1)
+#else
                                     if (!mon_override || gdk_screen_get_n_monitors (gtk_widget_get_screen (GTK_WIDGET (p))) > 1)
+#endif
                                     {
                                         p->priv->monitor = val;
                                         panel_set_panel_configuration_changed (p->priv);
@@ -265,7 +269,11 @@ static void process_client_msg ( XClientMessageEvent* ev )
                     if (p != NULL)
                     {
                         int ppm = p->priv->monitor;
+#if GTK_CHECK_VERSION(3, 0, 0)
+                        if (p->priv->monitor < gdk_display_get_n_monitors (gtk_widget_get_display (GTK_WIDGET (p))) - 1)
+#else
                         if (p->priv->monitor < gdk_screen_get_n_monitors (gtk_widget_get_screen (GTK_WIDGET (p))) - 1)
+#endif
                             p->priv->monitor++;
                         else
                             p->priv->monitor = 0;
@@ -573,7 +581,11 @@ static gboolean check_main_lock()
 
 out:
     XUngrabServer (xdisplay);
+#if GTK_CHECK_VERSION(3, 0, 0)
+    gdk_display_flush (gdk_display_get_default());
+#else
     gdk_flush ();
+#endif
 
     return retval;
 }
