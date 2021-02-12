@@ -1108,7 +1108,11 @@ void panel_configure( LXPanel* panel, int sel_page )
     GtkWidget *w, *w2, *tint_clr;
     FmMimeType *mt;
     GtkComboBox *fm;
+#if GTK_CHECK_VERSION(3, 0, 0)
+    GdkDisplay *display;
+#else
     GdkScreen *screen;
+#endif
     gint monitors;
 
     if( p->pref_dialog )
@@ -1152,8 +1156,13 @@ void panel_configure( LXPanel* panel, int sel_page )
 
     /* monitor */
     monitors = 1;
+#if GTK_CHECK_VERSION(3, 0, 0)
+    display = gtk_widget_get_display(GTK_WIDGET(panel));
+    if(display) monitors = gdk_display_get_n_monitors(display);
+#else
     screen = gtk_widget_get_screen(GTK_WIDGET(panel));
     if(screen) monitors = gdk_screen_get_n_monitors(screen);
+#endif
     g_assert(monitors >= 1);
     w = (GtkWidget*)gtk_builder_get_object( builder, "monitor" );
     if (GTK_IS_SPIN_BUTTON(w))
