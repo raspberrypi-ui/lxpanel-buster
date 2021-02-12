@@ -1886,9 +1886,15 @@ void panel_adjust_geometry_terminology(Panel * p)
 
 /* Draw text into a label, with the user preference color and optionally bold. */
 static
+#if GTK_CHECK_VERSION(3, 0, 0)
+void panel_draw_label_text_with_color(Panel * p, GtkWidget * label, const char * text,
+                           gboolean bold, float custom_size_factor,
+                           gboolean custom_color, GdkRGBA *gdkcolor)
+#else
 void panel_draw_label_text_with_color(Panel * p, GtkWidget * label, const char * text,
                            gboolean bold, float custom_size_factor,
                            gboolean custom_color, GdkColor *gdkcolor)
+#endif
 {
     if (text == NULL)
     {
@@ -1964,9 +1970,15 @@ void lxpanel_draw_label_text(LXPanel * p, GtkWidget * label, const char * text,
     gtk_label_set_text (GTK_LABEL (label), text);
 }
 
+#if GTK_CHECK_VERSION(3, 0, 0)
+void lxpanel_draw_label_text_with_color(LXPanel * p, GtkWidget * label, const char * text,
+                                    gboolean bold, float custom_size_factor,
+                                    GdkRGBA *color)
+#else
 void lxpanel_draw_label_text_with_color(LXPanel * p, GtkWidget * label, const char * text,
                                     gboolean bold, float custom_size_factor,
                                     GdkColor *color)
+#endif
 {
     panel_draw_label_text_with_color(p->priv, label, text, bold, custom_size_factor, FALSE, color);
 }

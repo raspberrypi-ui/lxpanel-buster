@@ -184,8 +184,13 @@ guint32 gcolor2rgb24(GdkColor *color);
  *
  * Returns: (transfer full): a new #GtkEventBox widget.
  */
+#if GTK_CHECK_VERSION(3, 0, 0)
+extern GtkWidget *lxpanel_button_new_for_icon(LXPanel *panel, const gchar *name, GdkRGBA *color, const gchar *label);
+extern GtkWidget *lxpanel_button_new_for_fm_icon(LXPanel *panel, FmIcon *icon, GdkRGBA *color, const gchar *label);
+#else
 extern GtkWidget *lxpanel_button_new_for_icon(LXPanel *panel, const gchar *name, GdkColor *color, const gchar *label);
 extern GtkWidget *lxpanel_button_new_for_fm_icon(LXPanel *panel, FmIcon *icon, GdkColor *color, const gchar *label);
+#endif
 
 /**
  * lxpanel_button_set_icon
@@ -232,8 +237,13 @@ extern gboolean lxpanel_button_set_label(GtkWidget *btn, const char *label);
  *
  * Since: 0.8.0
  */
+#if GTK_CHECK_VERSION(3, 0, 0)
+extern GtkWidget *lxpanel_button_compose(GtkWidget *event_box, GtkWidget *image,
+                                         GdkRGBA *color, const gchar *label);
+#else
 extern GtkWidget *lxpanel_button_compose(GtkWidget *event_box, GtkWidget *image,
                                          GdkColor *color, const gchar *label);
+#endif
 
 /**
  * lxpanel_image_new_for_icon

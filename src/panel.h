@@ -123,9 +123,15 @@ extern void lxpanel_draw_label_text(LXPanel * p, GtkWidget * label, const char *
  * Changes @label to contain @text with appropriate attributes using the
  * panel @p settings.
  */
+#if GTK_CHECK_VERSION(3, 0, 0)
+extern void lxpanel_draw_label_text_with_color(LXPanel * p, GtkWidget * label, const char * text,
+                                    gboolean bold, float custom_size_factor,
+                                    GdkRGBA *color);
+#else
 extern void lxpanel_draw_label_text_with_color(LXPanel * p, GtkWidget * label, const char * text,
                                     gboolean bold, float custom_size_factor,
                                     GdkColor *color);
+#endif
 
 /**
  * lxpanel_config_save

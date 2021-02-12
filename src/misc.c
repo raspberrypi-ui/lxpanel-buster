@@ -1373,8 +1373,13 @@ static GtkWidget *_lxpanel_button_compose(GtkWidget *event_box, GtkWidget *image
     return event_box;
 }
 
+#if GTK_CHECK_VERSION(3, 0, 0)
+GtkWidget *lxpanel_button_compose(GtkWidget *event_box, GtkWidget *image,
+                                  GdkRGBA *color, const gchar *label)
+#else
 GtkWidget *lxpanel_button_compose(GtkWidget *event_box, GtkWidget *image,
                                   GdkColor *color, const gchar *label)
+#endif
 {
     gulong highlight_color = color ? gcolor2rgb24(color) : PANEL_ICON_HIGHLIGHT;
     return _lxpanel_button_compose(event_box, image, highlight_color, label);
@@ -1393,14 +1398,22 @@ static GtkWidget *_lxpanel_button_new_for_icon(LXPanel *panel, FmIcon *icon,
     return _lxpanel_button_compose(event_box, image, highlight_color, label);
 }
 
+#if GTK_CHECK_VERSION(3, 0, 0)
+GtkWidget *lxpanel_button_new_for_icon(LXPanel *panel, const gchar *name, GdkRGBA *color, const gchar *label)
+#else
 GtkWidget *lxpanel_button_new_for_icon(LXPanel *panel, const gchar *name, GdkColor *color, const gchar *label)
+#endif
 {
     gulong highlight_color = color ? gcolor2rgb24(color) : PANEL_ICON_HIGHLIGHT;
     return _lxpanel_button_new_for_icon(panel, fm_icon_from_name(name), -1,
                                         highlight_color, label);
 }
 
+#if GTK_CHECK_VERSION(3, 0, 0)
+GtkWidget *lxpanel_button_new_for_fm_icon(LXPanel *panel, FmIcon *icon, GdkRGBA *color, const gchar *label)
+#else
 GtkWidget *lxpanel_button_new_for_fm_icon(LXPanel *panel, FmIcon *icon, GdkColor *color, const gchar *label)
+#endif
 {
     gulong highlight_color = color ? gcolor2rgb24(color) : PANEL_ICON_HIGHLIGHT;
     return _lxpanel_button_new_for_icon(panel, g_object_ref(icon), -1,
