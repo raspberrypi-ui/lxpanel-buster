@@ -54,8 +54,13 @@ struct cpu_stat {
 
 /* Private context for CPU plugin. */
 typedef struct {
+#if GTK_CHECK_VERSION(3, 0, 0)
+    GdkRGBA foreground_color;			/* Foreground color for drawing area */
+    GdkRGBA background_color;			/* Background color for drawing area */
+#else
     GdkColor foreground_color;			/* Foreground color for drawing area */
     GdkColor background_color;			/* Background color for drawing area */
+#endif
     GtkWidget * da;				/* Drawing area */
     cairo_surface_t * pixmap;				/* Pixmap to be drawn on drawing area */
 
@@ -83,25 +88,35 @@ static void cpu_destructor(gpointer user_data);
 /* Redraw after timer callback or resize. */
 static void redraw_pixmap(CPUPlugin * c)
 {
+#if !GTK_CHECK_VERSION(3, 0, 0)
     GdkColor col;
+#endif
     cairo_t * cr = cairo_create(c->pixmap);
     GtkStyle * style = gtk_widget_get_style(c->da);
     cairo_set_line_width (cr, 1.0);
     /* Erase pixmap. */
     cairo_rectangle(cr, 0, 0, c->pixmap_width, c->pixmap_height);
+#if GTK_CHECK_VERSION(3, 0, 0)
+    cairo_set_source_rgba(cr, c->background_color.blue,  c->background_color.green, c->background_color.red, c->background_color.alpha);
+#else
     col.red = c->background_color.blue;
     col.green = c->background_color.green;
     col.blue = c->background_color.red;
     gdk_cairo_set_source_color(cr, &col);
+#endif
     cairo_fill(cr);
 
     /* Recompute pixmap. */
     unsigned int i;
     unsigned int drawing_cursor = c->ring_cursor;
+#if GTK_CHECK_VERSION(3, 0, 0)
+    cairo_set_source_rgba(cr, c->foreground_color.blue,  c->foreground_color.green, c->foreground_color.red, c->foreground_color.alpha);
+#else
     col.red = c->foreground_color.blue;
     col.green = c->foreground_color.green;
     col.blue = c->foreground_color.red;
     gdk_cairo_set_source_color(cr, &col);
+#endif
     for (i = 0; i < c->pixmap_width; i++)
     {
         /* Draw one bar of the CPU usage graph. */
@@ -299,6 +314,19 @@ static GtkWidget *cpu_constructor(LXPanel *panel, config_setting_t *settings)
     if (config_setting_lookup_int(settings, "ShowPercent", &tmp_int))
         c->show_percentage = tmp_int != 0;
 
+#if GTK_CHECK_VERSION(3, 0, 0)
+    if (config_setting_lookup_string(settings, "Foreground", &str))
+    {
+	if (!gdk_rgba_parse (&c->foreground_color, str))
+		gdk_rgba_parse(&c->foreground_color, "dark gray");
+    } else gdk_rgba_parse(&c->foreground_color, "dark gray");
+
+    if (config_setting_lookup_string(settings, "Background", &str))
+    {
+	if (!gdk_rgba_parse (&c->background_color, str))
+		gdk_rgba_parse(&c->background_color, "light gray");
+    } else gdk_rgba_parse(&c->background_color, "light gray");
+#else
     if (config_setting_lookup_string(settings, "Foreground", &str))
     {
 	if (!gdk_color_parse (str, &c->foreground_color))
@@ -310,6 +338,7 @@ static GtkWidget *cpu_constructor(LXPanel *panel, config_setting_t *settings)
 	if (!gdk_color_parse (str, &c->background_color))
 		gdk_color_parse("light gray",  &c->background_color);
     } else gdk_color_parse("light gray",  &c->background_color);
+#endif
 
     /* Allocate top level widget and set into Plugin widget pointer. */
     p = gtk_event_box_new();
@@ -356,9 +385,17 @@ static gboolean cpu_apply_configuration (gpointer user_data)
     GtkWidget * p = user_data;
     CPUPlugin * c = lxpanel_plugin_get_data(p);
     config_group_set_int (c->settings, "ShowPercent", c->show_percentage);
+#if GTK_CHECK_VERSION(3, 0, 0)
+    sprintf (colbuf, "%s", gdk_rgba_to_string (&c->foreground_color));
+#else
     sprintf (colbuf, "%s", gdk_color_to_string (&c->foreground_color));
+#endif
     config_group_set_string (c->settings, "Foreground", colbuf);
+#if GTK_CHECK_VERSION(3, 0, 0)
+    sprintf (colbuf, "%s", gdk_rgba_to_string (&c->background_color));
+#else
     sprintf (colbuf, "%s", gdk_color_to_string (&c->background_color));
+#endif
     config_group_set_string (c->settings, "Background", colbuf);
 }
 

@@ -1292,7 +1292,7 @@ void panel_configure( LXPanel* panel, int sel_page )
     tint_clr = w = (GtkWidget*)gtk_builder_get_object( builder, "tint_clr" );
 #if GTK_CHECK_VERSION(3, 0, 0)
     p->gtintcolor.alpha = ((double) p->alpha) / 256.0;
-    gtk_color_chooser_set_rgba(GTK_COLOR_BUTTON(w), &p->gtintcolor);
+    gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(w), &p->gtintcolor);
 #else
     gtk_color_button_set_color(GTK_COLOR_BUTTON(w), &p->gtintcolor);
     gtk_color_button_set_alpha(GTK_COLOR_BUTTON(w), alpha_scale_factor * p->alpha);
@@ -1544,11 +1544,19 @@ static void on_file_chooser_btn_file_set(GtkFileChooser* btn, char** val)
     notify_apply_config( GTK_WIDGET(btn) );
 }
 
+#if GTK_CHECK_VERSION(3, 0, 0)
+static void on_color_button_set(GtkColorChooser* btn, char** val)
+{
+    gtk_color_chooser_get_rgba (btn, (GdkRGBA *) val);
+    notify_apply_config( GTK_WIDGET(btn) );
+}
+#else
 static void on_color_button_set(GtkColorButton* btn, char** val)
 {
     gtk_color_button_get_color (btn, (GdkColor *) val);
     notify_apply_config( GTK_WIDGET(btn) );
 }
+#endif
 
 static void on_browse_btn_clicked(GtkButton* btn, GtkEntry* entry)
 {
@@ -1704,7 +1712,11 @@ static GtkWidget *_lxpanel_generic_config_dlg(const char *title, Panel *p,
             case CONF_TYPE_COLOR:
                 {
                 entry = gtk_color_button_new();
+#if GTK_CHECK_VERSION(3, 0, 0)
+                gtk_color_chooser_set_rgba (GTK_COLOR_CHOOSER (entry), val);
+#else
                 gtk_color_button_set_color (GTK_COLOR_BUTTON (entry), val);
+#endif
                 g_signal_connect (entry, "color-set", G_CALLBACK (on_color_button_set), val);
                 }
                 break;

@@ -571,7 +571,7 @@ static void lxpanel_init(PanelToplevel *self)
     p->transparent = 0;
     p->alpha = 255;
 #if GTK_CHECK_VERSION(3, 0, 0)
-    gdk_rgba_parse(&p->gtintcolor, "#FFFFFF");
+    gdk_rgba_parse(&p->gtintcolor, "white");
 #else
     gdk_color_parse("white", &p->gtintcolor);
 #endif
