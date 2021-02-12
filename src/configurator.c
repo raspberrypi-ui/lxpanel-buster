@@ -424,11 +424,19 @@ background_disable_toggle( GtkWidget *b, Panel* p )
 }
 
 static void
+#if GTK_CHECK_VERSION(3, 0, 0)
+on_font_color_set(GtkColorChooser* clr, LXPanel* panel)
+#else
 on_font_color_set(GtkColorButton* clr, LXPanel* panel)
+#endif
 {
     Panel *p = panel->priv;
 
+#if GTK_CHECK_VERSION(3, 0, 0)
+    gtk_color_chooser_get_rgba( clr, &p->gfontcolor );
+#else
     gtk_color_button_get_color( clr, &p->gfontcolor );
+#endif
     panel_set_panel_configuration_changed(p);
     p->fontcolor = gcolor2rgb24(&p->gfontcolor);
     UPDATE_GLOBAL_COLOR(p, "fontcolor", p->fontcolor);
@@ -436,11 +444,23 @@ on_font_color_set(GtkColorButton* clr, LXPanel* panel)
 }
 
 static void
+#if GTK_CHECK_VERSION(3, 0, 0)
+on_tint_color_set( GtkColorChooser* clr,  Panel* p )
+#else
 on_tint_color_set( GtkColorButton* clr,  Panel* p )
+#endif
 {
+#if GTK_CHECK_VERSION(3, 0, 0)
+    gtk_color_chooser_get_rgba( clr, &p->gtintcolor );
+#else
     gtk_color_button_get_color( clr, &p->gtintcolor );
+#endif
     p->tintcolor = gcolor2rgb24(&p->gtintcolor);
+#if GTK_CHECK_VERSION(3, 0, 0)
+    p->alpha = (int) (p->gtintcolor.alpha * 256.0);
+#else
     p->alpha = gtk_color_button_get_alpha( clr ) / alpha_scale_factor;
+#endif
     panel_update_background( p );
     UPDATE_GLOBAL_COLOR(p, "tintcolor", p->tintcolor);
     UPDATE_GLOBAL_INT(p, "alpha", p->alpha);
@@ -1270,8 +1290,13 @@ void panel_configure( LXPanel* panel, int sel_page )
 
     /* transparancy */
     tint_clr = w = (GtkWidget*)gtk_builder_get_object( builder, "tint_clr" );
+#if GTK_CHECK_VERSION(3, 0, 0)
+    p->gtintcolor.alpha = ((double) p->alpha) / 256.0;
+    gtk_color_chooser_set_rgba(GTK_COLOR_BUTTON(w), &p->gtintcolor);
+#else
     gtk_color_button_set_color(GTK_COLOR_BUTTON(w), &p->gtintcolor);
     gtk_color_button_set_alpha(GTK_COLOR_BUTTON(w), alpha_scale_factor * p->alpha);
+#endif
     if ( ! p->transparent )
         gtk_widget_set_sensitive( w, FALSE );
     g_signal_connect( w, "color-set", G_CALLBACK( on_tint_color_set ), p );
@@ -1319,7 +1344,11 @@ void panel_configure( LXPanel* panel, int sel_page )
 
     /* font color */
     w = (GtkWidget*)gtk_builder_get_object( builder, "font_clr" );
+#if GTK_CHECK_VERSION(3, 0, 0)
+    gtk_color_chooser_set_rgba( GTK_COLOR_CHOOSER(w), &p->gfontcolor );
+#else
     gtk_color_button_set_color( GTK_COLOR_BUTTON(w), &p->gfontcolor );
+#endif
     g_signal_connect(w, "color-set", G_CALLBACK( on_font_color_set ), panel);
 
     w2 = (GtkWidget*)gtk_builder_get_object( builder, "use_font_clr" );

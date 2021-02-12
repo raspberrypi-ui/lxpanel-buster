@@ -570,7 +570,11 @@ static void lxpanel_init(PanelToplevel *self)
     p->height_when_hidden = 2;
     p->transparent = 0;
     p->alpha = 255;
+#if GTK_CHECK_VERSION(3, 0, 0)
+    gdk_rgba_parse(&p->gtintcolor, "#FFFFFF");
+#else
     gdk_color_parse("white", &p->gtintcolor);
+#endif
     p->tintcolor = gcolor2rgb24(&p->gtintcolor);
     p->usefontcolor = 0;
     p->fontcolor = 0x00000000;
@@ -939,8 +943,14 @@ static void _panel_determine_background_pixmap(LXPanel * panel)
         else
         {
             /* Either color is set or image is invalid, fill the background */
+#if GTK_CHECK_VERSION(3, 0, 0)
+            p->gtintcolor.alpha = p->transparent ? (((double) p->alpha) / 256.0) : 1.0;
+            gdk_cairo_set_source_rgba(cr, &p->gtintcolor);
+            cairo_paint (cr);
+#else
             gdk_cairo_set_source_color(cr, &p->gtintcolor);
             cairo_paint_with_alpha(cr, p->transparent ? (double)p->alpha/255 : 1.0);
+#endif
         }
         cairo_destroy(cr);
     }
@@ -2098,8 +2108,13 @@ panel_parse_global(Panel *p, config_setting_t *cfg)
         p->height_when_hidden = MAX(0, i);
     if (config_setting_lookup_string(cfg, "tintcolor", &str))
     {
+#if GTK_CHECK_VERSION(3, 0, 0)
+        if (!gdk_rgba_parse (&p->gtintcolor, str))
+            gdk_rgba_parse (&p->gtintcolor, "#FFFFFF");
+#else
         if (!gdk_color_parse (str, &p->gtintcolor))
             gdk_color_parse ("white", &p->gtintcolor);
+#endif
         p->tintcolor = gcolor2rgb24(&p->gtintcolor);
             DBG("tintcolor=%x\n", p->tintcolor);
     }
@@ -2107,8 +2122,13 @@ panel_parse_global(Panel *p, config_setting_t *cfg)
         p->usefontcolor = i != 0;
     if (config_setting_lookup_string(cfg, "fontcolor", &str))
     {
+#if GTK_CHECK_VERSION(3, 0, 0)
+        if (!gdk_rgba_parse (&p->gfontcolor, str))
+            gdk_rgba_parse (&p->gfontcolor, "#000000");
+#else
         if (!gdk_color_parse (str, &p->gfontcolor))
             gdk_color_parse ("black", &p->gfontcolor);
+#endif
         p->fontcolor = gcolor2rgb24(&p->gfontcolor);
             DBG("fontcolor=%x\n", p->fontcolor);
     }

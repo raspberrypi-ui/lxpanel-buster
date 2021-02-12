@@ -164,7 +164,11 @@ gchar *expand_tilda(const gchar *file);
  *
  * Returns: a 32-bit integer.
  */
+#if GTK_CHECK_VERSION(3, 0, 0)
+guint32 gcolor2rgb24(GdkRGBA *color);
+#else
 guint32 gcolor2rgb24(GdkColor *color);
+#endif
 
 /**
  * lxpanel_button_new_for_icon

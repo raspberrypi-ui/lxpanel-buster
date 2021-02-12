@@ -1209,6 +1209,26 @@ get_button_spacing(GtkRequisition *req, GtkContainer *parent, gchar *name)
 }
 
 
+#if GTK_CHECK_VERSION(3, 0, 0)
+guint32 gcolor2rgb24(GdkRGBA *color)
+{
+    guint32 i;
+    double f;
+
+    ENTER;
+
+    f = color->red * 255.999;
+    i = ((guint32) f) & 0xFF;
+    i <<= 8;
+    f = color->green * 255.999;
+    i |= ((guint32) f) & 0xFF;
+    i <<= 8;
+    f = color->blue * 255.999;
+    i |= ((guint32) f) & 0xFF;
+    DBG("i=%x\n", i);
+    RET(i);
+}
+#else
 guint32 gcolor2rgb24(GdkColor *color)
 {
     guint32 i;
@@ -1223,6 +1243,7 @@ guint32 gcolor2rgb24(GdkColor *color)
     DBG("i=%x\n", i);
     RET(i);
 }
+#endif
 
 /* Handler for "enter-notify-event" signal on image that has highlighting requested. */
 static gboolean fb_button_enter(GtkImage * widget, GdkEventCrossing * event)
