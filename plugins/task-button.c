@@ -763,7 +763,11 @@ static GdkPixbuf * _wnck_gdk_pixbuf_get_from_pixmap(GdkScreen *screen, Pixmap xp
   cairo_surface_destroy (surface);
 
 TRAP_POP:
+#if GTK_CHECK_VERSION(3, 0, 0)
+  gdk_display_flush(gdk_display_get_default());
+#else
   gdk_flush();
+#endif
   if (gdk_error_trap_pop())
     g_warning("task button : X error");
 

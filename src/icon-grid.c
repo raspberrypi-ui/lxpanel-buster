@@ -207,7 +207,11 @@ static void panel_icon_grid_size_allocate(GtkWidget *widget,
         if (gtk_widget_get_visible(child))
         {
             /* Do necessary operations on the child. */
+#if GTK_CHECK_VERSION(3, 0, 0)
+            gtk_widget_get_preferred_size (child, NULL, &req);
+#else
             gtk_widget_get_child_requisition(child, &req);
+#endif
             icon_grid_element_check_requisition(ig, &req);
             child_allocation.width = MIN(req.width, child_width);
             child_allocation.height = MIN(req.height, child_height);
