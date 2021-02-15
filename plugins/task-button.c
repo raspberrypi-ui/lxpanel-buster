@@ -742,7 +742,9 @@ static GdkPixbuf * _wnck_gdk_pixbuf_get_from_pixmap(GdkScreen *screen, Pixmap xp
   surface = NULL;
   xdisplay = GDK_DISPLAY_XDISPLAY(gdk_display_get_default());
 
+#if !GTK_CHECK_VERSION(3, 0, 0)
   gdk_error_trap_push();
+#endif
 
   if (!XGetWindowAttributes (xdisplay, win, &attrs))
     goto TRAP_POP;
@@ -771,9 +773,9 @@ TRAP_POP:
   gdk_display_flush(gdk_display_get_default());
 #else
   gdk_flush();
-#endif
   if (gdk_error_trap_pop())
     g_warning("task button : X error");
+#endif
 
   return pixbuf;
 }
@@ -1286,8 +1288,12 @@ static gboolean task_button_button_press_event(GtkWidget *widget, GdkEventButton
             gtk_menu_detach(GTK_MENU(menu));
         /* attach menu to the widget and show it */
         gtk_menu_attach_to_widget(GTK_MENU(menu), widget, NULL);
+#if GTK_CHECK_VERSION(3, 0, 0)
+        gtk_menu_popup_at_widget (GTK_MENU(menu), widget, GDK_GRAVITY_NORTH_WEST, GDK_GRAVITY_NORTH_WEST, (GdkEvent *) event);
+#else
         gtk_menu_popup(GTK_MENU(menu), NULL, NULL, taskbar_popup_set_position,
                        tb, event->button, event->time);
+#endif
     }
     return TRUE;
 }
@@ -1360,8 +1366,12 @@ static gboolean task_button_button_release_event(GtkWidget *widget, GdkEventButt
              * positioned with respect to the button. */
             gtk_widget_show_all(GTK_WIDGET(tb->menu_list));
             gtk_menu_attach_to_widget(tb->menu_list, widget, NULL);
+#if GTK_CHECK_VERSION(3, 0, 0)
+            gtk_menu_popup_at_widget (tb->menu_list, widget, GDK_GRAVITY_NORTH_WEST, GDK_GRAVITY_NORTH_WEST, (GdkEvent *) event);
+#else
             gtk_menu_popup(tb->menu_list, NULL, NULL, taskbar_popup_set_position,
                            tb, event->button, event->time);
+#endif
         }
     }
     else
