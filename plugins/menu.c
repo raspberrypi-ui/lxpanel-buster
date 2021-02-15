@@ -643,10 +643,14 @@ reload_system_menu( menup* m, GtkMenu* menu )
 
 static void show_menu( GtkWidget* widget, menup* m, int btn, guint32 time )
 {
+#if GTK_CHECK_VERSION(3, 0, 0)
+    gtk_menu_popup_at_widget (GTK_MENU(m->menu), widget, GDK_GRAVITY_NORTH_WEST, GDK_GRAVITY_NORTH_WEST, NULL);
+#else
     gtk_menu_popup(GTK_MENU(m->menu),
                    NULL, NULL,
                    (GtkMenuPositionFunc)menu_pos, widget,
                    btn, time);
+#endif
 }
 
 static gboolean

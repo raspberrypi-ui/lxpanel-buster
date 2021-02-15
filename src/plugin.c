@@ -240,7 +240,11 @@ static gboolean lxpanel_plugin_button_press_event(GtkWidget *plugin, GdkEventBut
 		textdomain ( GETTEXT_PACKAGE );
 #endif
         GtkMenu* popup = (GtkMenu*)lxpanel_get_plugin_menu(panel, plugin, FALSE);
+#if GTK_CHECK_VERSION(3, 0, 0)
+        gtk_menu_popup_at_widget (popup, plugin, GDK_GRAVITY_NORTH_WEST, GDK_GRAVITY_NORTH_WEST, (GdkEvent *) event);
+#else
         gtk_menu_popup(popup, NULL, NULL, NULL, NULL, event->button, event->time);
+#endif
         return TRUE;
     }
     return FALSE;

@@ -247,7 +247,11 @@ static void dirmenu_show_menu(GtkWidget * widget, DirMenuPlugin * dm, int btn, g
     g_signal_connect(menu, "selection-done", G_CALLBACK(dirmenu_menu_selection_done), dm);
 
     /* Show the menu.  Use a positioning function to get it placed next to the top level widget. */
+#if GTK_CHECK_VERSION(3, 0, 0)
+    gtk_menu_popup_at_widget (GTK_MENU(menu), widget, GDK_GRAVITY_NORTH_WEST, GDK_GRAVITY_NORTH_WEST, NULL);
+#else
     gtk_menu_popup(GTK_MENU(menu), NULL, NULL, (GtkMenuPositionFunc) dirmenu_popup_set_position, widget, btn, time);
+#endif
 }
 
 /* Handler for button-press-event on top level widget. */
