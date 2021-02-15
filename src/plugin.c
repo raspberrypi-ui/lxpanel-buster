@@ -216,9 +216,13 @@ void plugin_widget_set_background(GtkWidget * w, LXPanel * panel)
         if (GTK_IS_SOCKET(w))
         {
             gtk_widget_hide(w);
+#if !GTK_CHECK_VERSION(3, 0, 0)
             gdk_window_process_all_updates();
+#endif
             gtk_widget_show(w);
+#if !GTK_CHECK_VERSION(3, 0, 0)
             gdk_window_process_all_updates();
+#endif
         }
 
         /* Recursively process all children of a container. */
@@ -241,7 +245,7 @@ static gboolean lxpanel_plugin_button_press_event(GtkWidget *plugin, GdkEventBut
 #endif
         GtkMenu* popup = (GtkMenu*)lxpanel_get_plugin_menu(panel, plugin, FALSE);
 #if GTK_CHECK_VERSION(3, 0, 0)
-        gtk_menu_popup_at_widget (popup, plugin, GDK_GRAVITY_NORTH_WEST, GDK_GRAVITY_NORTH_WEST, (GdkEvent *) event);
+        gtk_menu_popup_at_pointer (popup, (GdkEvent *) event);
 #else
         gtk_menu_popup(popup, NULL, NULL, NULL, NULL, event->button, event->time);
 #endif
@@ -276,7 +280,9 @@ void lxpanel_plugin_popup_set_position_helper(LXPanel * p, GtkWidget * near, Gtk
     {
         GdkRectangle extents;
         /* FIXME: can we wait somehow for WM drawing decorations? */
+#if !GTK_CHECK_VERSION(3, 0, 0)
         gdk_window_process_all_updates();
+#endif
         gdk_window_get_frame_extents(gtk_widget_get_window(popup), &extents);
         popup_req.width = extents.width;
         popup_req.height = extents.height;
