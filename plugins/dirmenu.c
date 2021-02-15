@@ -125,12 +125,20 @@ static GtkWidget * dirmenu_create_menu(DirMenuPlugin * dm, const char * path, gb
     {
         int w;
         int h;
+#if GTK_CHECK_VERSION(3, 0, 0)
+        gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &w, &h);
+#else
         gtk_icon_size_lookup_for_settings(gtk_widget_get_settings(menu), GTK_ICON_SIZE_MENU, &w, &h);
+#endif
         dm->folder_icon = gtk_icon_theme_load_icon(
             panel_get_icon_theme(dm->panel),
             "gnome-fs-directory", MAX(w, h), 0, NULL);
         if (dm->folder_icon == NULL)
+#if GTK_CHECK_VERSION(3, 0, 0)
+            dm->folder_icon = gtk_icon_theme_load_icon(panel_get_icon_theme(dm->panel), "gtk-directory", MAX(w, h), 0, NULL);
+#else
             dm->folder_icon = gtk_widget_render_icon(menu, GTK_STOCK_DIRECTORY, GTK_ICON_SIZE_MENU, NULL);
+#endif
     }
 
     g_object_set_data_full(G_OBJECT(menu), "path", g_strdup(path), g_free);
