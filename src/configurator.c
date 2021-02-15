@@ -325,13 +325,23 @@ static void set_width_type( GtkWidget *item, LXPanel* panel )
     case WIDTH_PIXEL:
         if ((p->edge == EDGE_TOP) || (p->edge == EDGE_BOTTOM))
         {
+#if GTK_CHECK_VERSION(3, 0, 0)
+            gtk_spin_button_set_range( GTK_SPIN_BUTTON(spin), 0, screen_width (NULL) );
+            gtk_spin_button_set_value( GTK_SPIN_BUTTON(spin), screen_width (NULL) );
+#else
             gtk_spin_button_set_range( GTK_SPIN_BUTTON(spin), 0, gdk_screen_width() );
             gtk_spin_button_set_value( GTK_SPIN_BUTTON(spin), gdk_screen_width() );
+#endif
         }
         else
         {
+#if GTK_CHECK_VERSION(3, 0, 0)
+            gtk_spin_button_set_range( GTK_SPIN_BUTTON(spin), 0, screen_height (NULL) );
+            gtk_spin_button_set_value( GTK_SPIN_BUTTON(spin), screen_height (NULL) );
+#else
             gtk_spin_button_set_range( GTK_SPIN_BUTTON(spin), 0, gdk_screen_height() );
             gtk_spin_button_set_value( GTK_SPIN_BUTTON(spin), gdk_screen_height() );
+#endif
         }
         break;
     case WIDTH_REQUEST:
@@ -1233,7 +1243,11 @@ void panel_configure( LXPanel* panel, int sel_page )
     if( p->widthtype == WIDTH_PERCENT)
         upper = 100;
     else if( p->widthtype == WIDTH_PIXEL)
+#if GTK_CHECK_VERSION(3, 0, 0)
+        upper = (((p->edge == EDGE_TOP) || (p->edge == EDGE_BOTTOM)) ? screen_width (NULL) : screen_height (NULL));
+#else
         upper = (((p->edge == EDGE_TOP) || (p->edge == EDGE_BOTTOM)) ? gdk_screen_width() : gdk_screen_height());
+#endif
     gtk_spin_button_set_range( GTK_SPIN_BUTTON(w), 0, upper );
     gtk_spin_button_set_value( GTK_SPIN_BUTTON(w), p->width );
     g_signal_connect( w, "value-changed", G_CALLBACK(set_width), panel );

@@ -259,7 +259,11 @@ void lxpanel_plugin_popup_set_position_helper(LXPanel * p, GtkWidget * near, Gtk
     GtkAllocation allocation;
     GtkAllocation popup_req;
     GdkScreen *screen = NULL;
+#if GTK_CHECK_VERSION(3, 0, 0)
+    GdkMonitor *monitor;
+#else
     gint monitor;
+#endif
 
     /* Get the allocation of the popup menu. */
     gtk_widget_realize(popup);
@@ -300,10 +304,11 @@ void lxpanel_plugin_popup_set_position_helper(LXPanel * p, GtkWidget * near, Gtk
     else
         /* panel as a GtkWindow always has a screen */
         screen = gtk_widget_get_screen(GTK_WIDGET(p));
-    monitor = gdk_screen_get_monitor_at_point(screen, x, y);
-#if GTK_CHECK_VERSION(3, 4, 0)
-    gdk_screen_get_monitor_workarea(screen, monitor, &allocation);
+#if GTK_CHECK_VERSION(3, 0, 0)
+    monitor = gdk_display_get_monitor_at_point (gdk_screen_get_display (screen), x, y);
+    gdk_monitor_get_workarea (monitor, &allocation);
 #else
+    monitor = gdk_screen_get_monitor_at_point(screen, x, y);
     gdk_screen_get_monitor_geometry(screen, monitor, &allocation);
 #endif
     x = CLAMP(x, allocation.x, allocation.x + allocation.width - popup_req.width);

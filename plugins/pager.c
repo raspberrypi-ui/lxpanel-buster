@@ -53,7 +53,11 @@ static void on_realize(GtkWidget *p, LXPanel *panel)
     /* set geometry */
     wnck_pager_set_orientation(d->pager, panel_get_orientation(panel));
     if (panel_get_orientation(panel) == GTK_ORIENTATION_VERTICAL)
+#if GTK_CHECK_VERSION(3, 0, 0)
+        h *= ((gfloat) screen_height (NULL) / (gfloat) screen_width (NULL));
+#else
         h *= ((gfloat) gdk_screen_height() / (gfloat) gdk_screen_width());
+#endif
     rows = h / (panel_get_icon_size(panel) * 2) + 1; /* min */
     r = (h - 2) / panel_get_icon_size(panel); /* max */
     /* g_debug("pager for height %d and icon size %d: %d to %d",panel_get_height(panel),panel_get_icon_size(panel),r,rows); */

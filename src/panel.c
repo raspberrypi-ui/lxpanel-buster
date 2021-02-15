@@ -707,7 +707,11 @@ gboolean _panel_edge_can_strut(LXPanel *panel, int edge, gint monitor, gulong *s
             break;
         case EDGE_RIGHT:
             rect.x += rect.width;
+#if GTK_CHECK_VERSION(3, 0, 0)
+            rect.width = screen_width(screen) - rect.x;
+#else
             rect.width = gdk_screen_get_width(screen) - rect.x;
+#endif
             s += rect.width;
             break;
         case EDGE_TOP:
@@ -717,7 +721,11 @@ gboolean _panel_edge_can_strut(LXPanel *panel, int edge, gint monitor, gulong *s
             break;
         case EDGE_BOTTOM:
             rect.y += rect.height;
+#if GTK_CHECK_VERSION(3, 0, 0)
+            rect.height = screen_height(screen) - rect.y;
+#else
             rect.height = gdk_screen_get_height(screen) - rect.y;
+#endif
             s += rect.height;
             break;
         default: ;
@@ -1403,7 +1411,11 @@ static void panel_popupmenu_create_panel( GtkMenuItem* item, LXPanel* panel )
         /* panel is spanned over the screen, guess from pointer now */
         gint x, y;
         gdk_display_get_pointer(gdk_display_get_default(), NULL, &x, &y, NULL);
+#if GTK_CHECK_VERSION(3, 0, 0)
+        m = x_mon_num (gdk_display_get_monitor_at_point (gdk_screen_get_display (screen), x, y));
+#else
         m = x_mon_num (gdk_screen_get_monitor_at_point(screen, x, y));
+#endif
     }
     for (e = 1; e < 5; ++e)
     {
@@ -2034,7 +2046,11 @@ static gboolean _panel_idle_reconfigure(gpointer widget)
             gtk_spin_button_set_value(GTK_SPIN_BUTTON(p->height_control), p->height);
         if ((p->widthtype == WIDTH_PIXEL) && (p->width_control != NULL))
         {
+#if GTK_CHECK_VERSION(3, 0, 0)
+            int value = ((p->orientation == GTK_ORIENTATION_HORIZONTAL) ? screen_width (NULL) : screen_height (NULL));
+#else
             int value = ((p->orientation == GTK_ORIENTATION_HORIZONTAL) ? gdk_screen_width() : gdk_screen_height());
+#endif
             gtk_spin_button_set_range(GTK_SPIN_BUTTON(p->width_control), 0, value);
             gtk_spin_button_set_value(GTK_SPIN_BUTTON(p->width_control), value);
         }
@@ -2179,7 +2195,11 @@ panel_parse_global(Panel *p, config_setting_t *cfg)
 static void on_monitors_changed(GdkScreen* screen, gpointer unused)
 {
     GSList *pl;
+#if GTK_CHECK_VERSION(3, 0, 0)
+    int monitors = gdk_display_get_n_monitors (gdk_screen_get_display (screen));
+#else
     int monitors = gdk_screen_get_n_monitors(screen);
+#endif
 
     for (pl = all_panels; pl; pl = pl->next)
     {

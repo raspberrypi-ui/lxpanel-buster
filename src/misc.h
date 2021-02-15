@@ -283,6 +283,12 @@ extern GtkWidget *lxpanel_image_new_for_fm_icon(LXPanel *panel, FmIcon *icon,
 extern gboolean lxpanel_image_change_icon(GtkWidget *img, const gchar *name,
                                           const char *fallback);
 
+
+#if GTK_CHECK_VERSION(3, 0, 0)
+extern int screen_width (GdkScreen *scr);
+extern int screen_height (GdkScreen *scr);
+#endif
+
 G_END_DECLS
 
 #endif

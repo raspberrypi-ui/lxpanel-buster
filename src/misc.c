@@ -865,15 +865,21 @@ void _calculate_position(LXPanel *panel, GdkRectangle *rect)
     {
         marea.x = 0;
         marea.y = 0;
+#if GTK_CHECK_VERSION(3, 0, 0)
+        marea.width = screen_width(screen);
+        marea.height = screen_height(screen);
+#else
         marea.width = gdk_screen_get_width(screen);
         marea.height = gdk_screen_get_height(screen);
+#endif
     }
 #if GTK_CHECK_VERSION(3, 0, 0)
     else if (np->monitor < gdk_display_get_n_monitors(gtk_widget_get_display(GTK_WIDGET(panel))))
+        gdk_monitor_get_geometry (gdk_display_get_monitor (gdk_screen_get_display (screen), gdk_mon_num (np->monitor)), &marea);
 #else
     else if (np->monitor < gdk_screen_get_n_monitors(screen))
-#endif
         gdk_screen_get_monitor_geometry(screen,gdk_mon_num (np->monitor),&marea);
+#endif
     else
     {
         marea.x = 0;
@@ -1720,5 +1726,43 @@ gboolean lxpanel_launch_app(const char* exec, GList* files, gboolean in_terminal
 
     return (error == NULL);
 }
+
+#if GTK_CHECK_VERSION(3, 0, 0)
+int screen_width (GdkScreen *scr)
+{
+    GdkDisplay *disp = gdk_screen_get_display (scr == NULL ? gdk_screen_get_default () : scr);
+    GdkMonitor *mon;
+    GdkRectangle rect;
+    int min = -1, max = 0, i;
+
+    for (i = 0; i < gdk_display_get_n_monitors (disp); i++)
+    {
+        mon = gdk_display_get_monitor (disp, i);
+        gdk_monitor_get_geometry (mon, &rect);
+        if (min == -1 || rect.x < min) min = rect.x;
+        if (rect.x + rect.width > max) max = rect.x + rect.width;
+    }
+
+    return max - min;
+}
+
+int screen_height (GdkScreen *scr)
+{
+    GdkDisplay *disp = gdk_screen_get_display (scr == NULL ? gdk_screen_get_default () : scr);
+    GdkMonitor *mon;
+    GdkRectangle rect;
+    int min = -1, max = 0, i;
+
+    for (i = 0; i < gdk_display_get_n_monitors (disp); i++)
+    {
+        mon = gdk_display_get_monitor (disp, i);
+        gdk_monitor_get_geometry (mon, &rect);
+        if (min == -1 || rect.y < min) min = rect.y;
+        if (rect.y + rect.height > max) max = rect.y + rect.height;
+    }
+
+    return max - min;
+}
+#endif
 
 /* vim: set sw=4 et sts=4 : */
