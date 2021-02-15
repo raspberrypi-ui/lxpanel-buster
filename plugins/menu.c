@@ -678,8 +678,13 @@ static void show_system_menu(GtkWidget *p)
 	if (m->has_system_menu) show_menu( m->box, m, 0, GDK_CURRENT_TIME );
 }
 
+#if GTK_CHECK_VERSION(3, 0, 0)
+static GtkWidget *
+make_button(menup *m, const gchar *fname, const gchar *name, GdkRGBA* tint, GtkWidget *menu)
+#else
 static GtkWidget *
 make_button(menup *m, const gchar *fname, const gchar *name, GdkColor* tint, GtkWidget *menu)
+#endif
 {
     char* title = NULL;
 
@@ -877,7 +882,11 @@ read_submenu(menup *m, config_setting_t *s, int as_item)
     GtkWidget *mi, *menu;
     const gchar *name, *fname, *str;
     config_setting_t *list = config_setting_add(s, "", PANEL_CONF_TYPE_LIST);
+#if GTK_CHECK_VERSION(3, 0, 0)
+    GdkRGBA color={0.0, 0.141, 0,376, 1.0};
+#else
     GdkColor color={0, 0, 36 * 0xffff / 0xff, 96 * 0xffff / 0xff};
+#endif
     guint i;
 
     ENTER;
@@ -891,7 +900,11 @@ read_submenu(menup *m, config_setting_t *s, int as_item)
     config_setting_lookup_string(s, "name", &name);
     config_setting_lookup_string(s, "image", &fname);
     if (config_setting_lookup_string(s, "tintcolor", &str))
+#if GTK_CHECK_VERSION(3, 0, 0)
+        gdk_rgba_parse(&color, str);
+#else
         gdk_color_parse(str, &color);
+#endif
 
     for (i = 0; (s = config_setting_get_elem(list, i)) != NULL; i++)
     {
