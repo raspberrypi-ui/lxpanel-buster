@@ -66,9 +66,15 @@ typedef struct thermal {
          *str_cl_warning1,
          *str_cl_warning2;
     unsigned int timer;
+#if GTK_CHECK_VERSION(3, 0, 0)
+    GdkRGBA cl_normal,
+             cl_warning1,
+             cl_warning2;
+#else
     GdkColor cl_normal,
              cl_warning1,
              cl_warning2;
+#endif
     int numsensors;
     char *sensor_array[MAX_NUM_SENSORS];
     char *sensor_name[MAX_NUM_SENSORS];
@@ -264,7 +270,11 @@ update_display(thermal *th)
     char buffer [60];
     int i;
     int temp;
+#if GTK_CHECK_VERSION(3, 0, 0)
+    GdkRGBA color;
+#else
     GdkColor color;
+#endif
     gchar *separator;
 
     temp = get_temperature(th, &i);
@@ -444,9 +454,15 @@ static gboolean applyConfig(gpointer p)
     int critical;
     ENTER;
 
+#if GTK_CHECK_VERSION(3, 0, 0)
+    if (th->str_cl_normal) gdk_rgba_parse(&th->cl_normal, th->str_cl_normal);
+    if (th->str_cl_warning1) gdk_rgba_parse(&th->cl_warning1, th->str_cl_warning1);
+    if (th->str_cl_warning2) gdk_rgba_parse(&th->cl_warning2, th->str_cl_warning2);
+#else
     if (th->str_cl_normal) gdk_color_parse(th->str_cl_normal, &th->cl_normal);
     if (th->str_cl_warning1) gdk_color_parse(th->str_cl_warning1, &th->cl_warning1);
     if (th->str_cl_warning2) gdk_color_parse(th->str_cl_warning2, &th->cl_warning2);
+#endif
 
     remove_all_sensors(th);
     /* FIXME: support wildcards in th->sensor */

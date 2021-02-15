@@ -178,7 +178,11 @@ netstatus_icon_lookup_icon_theme (NetstatusIcon *icon,
     {
       filename = g_strdup (gtk_icon_info_get_filename (icon_info));
 
+#if GTK_CHECK_VERSION(3, 0, 0)
+      g_object_unref (icon_info);
+#else
       gtk_icon_info_free (icon_info);
+#endif
     }
 
   return filename;
@@ -588,7 +592,11 @@ netstatus_icon_scale_icons (NetstatusIcon  *icon,
 static inline GObjectClass *
 get_box_class (GtkOrientation orientation)
 {
+#if GTK_CHECK_VERSION(3, 0, 0)
+  return g_type_class_peek(GTK_TYPE_BOX);
+#else
   return g_type_class_peek(orientation == GTK_ORIENTATION_HORIZONTAL ? GTK_TYPE_HBOX : GTK_TYPE_VBOX);
+#endif
 }
 
 #if !GTK_CHECK_VERSION(3, 0, 0)

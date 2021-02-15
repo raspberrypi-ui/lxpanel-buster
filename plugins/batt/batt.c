@@ -61,11 +61,19 @@ typedef struct {
         *chargingColor2,
         *dischargingColor1,
         *dischargingColor2;
+#if GTK_CHECK_VERSION(3, 0, 0)
+    GdkRGBA background,
+        charging1,
+        charging2,
+        discharging1,
+        discharging2;
+#else
     GdkColor background,
         charging1,
         charging2,
         discharging1,
         discharging2;
+#endif
     cairo_surface_t *pixmap;
     GtkContainer *box;
     GtkWidget *drawingArea;
@@ -233,7 +241,11 @@ void update_display(lx_battery *lx_b, gboolean repaint) {
     cairo_set_line_width (cr, 1.0);
 
     /* draw background */
+#if GTK_CHECK_VERSION(3, 0, 0)
+    gdk_cairo_set_source_rgba(cr, &lx_b->background);
+#else
     gdk_cairo_set_source_color(cr, &lx_b->background);
+#endif
     cairo_rectangle(cr, 0, 0, lx_b->width, lx_b->height);
     cairo_fill(cr);
 
@@ -290,13 +302,23 @@ void update_display(lx_battery *lx_b, gboolean repaint) {
 
         /* Draw the battery bar vertically, using color 1 for the left half and
            color 2 for the right half */
+#if GTK_CHECK_VERSION(3, 0, 0)
+        gdk_cairo_set_source_rgba(cr,
+                isCharging ? &lx_b->charging1 : &lx_b->discharging1);
+#else
         gdk_cairo_set_source_color(cr,
                 isCharging ? &lx_b->charging1 : &lx_b->discharging1);
+#endif
         cairo_rectangle(cr, 0, lx_b->height - chargeLevel,
                         lx_b->width / 2, chargeLevel);
         cairo_fill(cr);
+#if GTK_CHECK_VERSION(3, 0, 0)
+        gdk_cairo_set_source_rgba(cr,
+                isCharging ? &lx_b->charging2 : &lx_b->discharging2);
+#else
         gdk_cairo_set_source_color(cr,
                 isCharging ? &lx_b->charging2 : &lx_b->discharging2);
+#endif
         cairo_rectangle(cr, lx_b->width / 2, lx_b->height - chargeLevel,
                         (lx_b->width + 1) / 2, chargeLevel);
         cairo_fill(cr);
@@ -306,12 +328,22 @@ void update_display(lx_battery *lx_b, gboolean repaint) {
 
         /* Draw the battery bar horizontally, using color 1 for the top half and
            color 2 for the bottom half */
+#if GTK_CHECK_VERSION(3, 0, 0)
+        gdk_cairo_set_source_rgba(cr,
+                isCharging ? &lx_b->charging1 : &lx_b->discharging1);
+#else
         gdk_cairo_set_source_color(cr,
                 isCharging ? &lx_b->charging1 : &lx_b->discharging1);
+#endif
         cairo_rectangle(cr, 0, 0, chargeLevel, lx_b->height / 2);
         cairo_fill(cr);
+#if GTK_CHECK_VERSION(3, 0, 0)
+        gdk_cairo_set_source_rgba(cr,
+                isCharging ? &lx_b->charging2 : &lx_b->discharging2);
+#else
         gdk_cairo_set_source_color(cr,
                 isCharging ? &lx_b->charging2 : &lx_b->discharging2);
+#endif
         cairo_rectangle(cr, 0, (lx_b->height + 1) / 2,
                         chargeLevel, lx_b->height / 2);
         cairo_fill(cr);
@@ -332,7 +364,9 @@ static int update_timout(lx_battery *lx_b) {
     battery *bat;
     if (g_source_is_destroyed(g_main_current_source()))
         return FALSE;
+#if !GTK_CHECK_VERSION(3, 0, 0)
     GDK_THREADS_ENTER();
+#endif
     lx_b->state_elapsed_time++;
     lx_b->info_elapsed_time++;
 
@@ -347,7 +381,9 @@ static int update_timout(lx_battery *lx_b) {
 
     update_display( lx_b, TRUE );
 
+#if !GTK_CHECK_VERSION(3, 0, 0)
     GDK_THREADS_LEAVE();
+#endif
     return TRUE;
 }
 
@@ -555,11 +591,19 @@ static GtkWidget * constructor(LXPanel *panel, config_setting_t *settings)
     if (! lx_b->dischargingColor2)
         lx_b->dischargingColor2 = g_strdup("#d9ca00");
 
+#if GTK_CHECK_VERSION(3, 0, 0)
+    gdk_rgba_parse(&lx_b->background, lx_b->backgroundColor);
+    gdk_rgba_parse(&lx_b->charging1, lx_b->chargingColor1);
+    gdk_rgba_parse(&lx_b->charging2, lx_b->chargingColor2);
+    gdk_rgba_parse(&lx_b->discharging1, lx_b->dischargingColor1);
+    gdk_rgba_parse(&lx_b->discharging2, lx_b->dischargingColor2);
+#else
     gdk_color_parse(lx_b->backgroundColor, &lx_b->background);
     gdk_color_parse(lx_b->chargingColor1, &lx_b->charging1);
     gdk_color_parse(lx_b->chargingColor2, &lx_b->charging2);
     gdk_color_parse(lx_b->dischargingColor1, &lx_b->discharging1);
     gdk_color_parse(lx_b->dischargingColor2, &lx_b->discharging2);
+#endif
 
     /* Start the update loop */
     lx_b->timer = g_timeout_add_seconds( 9, (GSourceFunc) update_timout, (gpointer) lx_b);
@@ -636,17 +680,37 @@ static gboolean applyConfig(gpointer user_data)
 
     /* Update colors */
     if (b->backgroundColor &&
+#if GTK_CHECK_VERSION(3, 0, 0)
+            gdk_rgba_parse(&b->background, b->backgroundColor))
+#else
             gdk_color_parse(b->backgroundColor, &b->background))
+#endif
         config_group_set_string(b->settings, "BackgroundColor", b->backgroundColor);
+#if GTK_CHECK_VERSION(3, 0, 0)
+    if (b->chargingColor1 && gdk_rgba_parse(&b->charging1, b->chargingColor1))
+#else
     if (b->chargingColor1 && gdk_color_parse(b->chargingColor1, &b->charging1))
+#endif
         config_group_set_string(b->settings, "ChargingColor1", b->chargingColor1);
+#if GTK_CHECK_VERSION(3, 0, 0)
+    if (b->chargingColor2 && gdk_rgba_parse(&b->charging2, b->chargingColor2))
+#else
     if (b->chargingColor2 && gdk_color_parse(b->chargingColor2, &b->charging2))
+#endif
         config_group_set_string(b->settings, "ChargingColor2", b->chargingColor2);
     if (b->dischargingColor1 &&
+#if GTK_CHECK_VERSION(3, 0, 0)
+            gdk_rgba_parse(&b->discharging1, b->dischargingColor1))
+#else
             gdk_color_parse(b->dischargingColor1, &b->discharging1))
+#endif
         config_group_set_string(b->settings, "DischargingColor1", b->dischargingColor1);
     if (b->dischargingColor2 &&
+#if GTK_CHECK_VERSION(3, 0, 0)
+            gdk_rgba_parse(&b->discharging2, b->dischargingColor2))
+#else
             gdk_color_parse(b->dischargingColor2, &b->discharging2))
+#endif
         config_group_set_string(b->settings, "DischargingColor2", b->dischargingColor2);
 
     /* Make sure it is at least 1 px */

@@ -170,7 +170,11 @@ wireless_menu(netdev_info *ni)
 
             /* create a new item */
             menu_item = gtk_menu_item_new();
+#if GTK_CHECK_VERSION(3, 0, 0)
+            item_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+#else
             item_box = gtk_hbox_new(FALSE, 0);
+#endif
 
             /* Encryption */
             if (aps->apinfo->haskey) {
@@ -185,7 +189,9 @@ wireless_menu(netdev_info *ni)
                 essid_label = gtk_label_new(aps->apinfo->essid);
 
             gtk_label_set_justify(GTK_LABEL(essid_label), GTK_JUSTIFY_LEFT);
+#if !GTK_CHECK_VERSION(3, 0, 0)
             gtk_misc_set_padding(GTK_MISC(essid_label), 2, 0);
+#endif
             gtk_box_pack_start(GTK_BOX(item_box), essid_label, TRUE, FALSE, 0);
 
             /* Quality */

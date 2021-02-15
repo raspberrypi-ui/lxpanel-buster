@@ -90,8 +90,13 @@ struct pgui *passwd_gui_new(ap_setting *aps)
     pwdgui->dlg = gtk_dialog_new_with_buttons(_("Setting Encryption Key"),
                                        NULL,
                                        GTK_DIALOG_NO_SEPARATOR,
+#if GTK_CHECK_VERSION(3, 0, 0)
+                                       _("_OK"), GTK_RESPONSE_OK,
+                                       _("_Cancel"), GTK_RESPONSE_CANCEL,
+#else
                                        GTK_STOCK_OK, GTK_RESPONSE_OK,
                                        GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+#endif
                                        NULL );
     gtk_dialog_set_default_response(GTK_DIALOG(pwdgui->dlg), GTK_RESPONSE_OK);
     gtk_window_set_position(GTK_WINDOW(pwdgui->dlg), GTK_WIN_POS_CENTER);
@@ -102,7 +107,11 @@ struct pgui *passwd_gui_new(ap_setting *aps)
     gtk_box_pack_start(dialog_vbox, msg, FALSE, FALSE, 8);
 
     /* entry Box */
+#if GTK_CHECK_VERSION(3, 0, 0)
+    inputbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+#else
     inputbox = gtk_hbox_new(FALSE, 0);
+#endif
     inputlabel = gtk_label_new(_("Encryption Key:"));
     gtk_box_pack_start(GTK_BOX(inputbox), inputlabel, TRUE, TRUE, 4);
     pwdgui->pentry = gtk_entry_new();

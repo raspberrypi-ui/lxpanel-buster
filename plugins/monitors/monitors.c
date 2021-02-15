@@ -101,7 +101,11 @@
 typedef float stats_set;
 
 struct Monitor {
+#if GTK_CHECK_VERSION(3, 0, 0)
+    GdkRGBA     foreground_color;  /* Foreground color for drawing area      */
+#else
     GdkColor     foreground_color;  /* Foreground color for drawing area      */
+#endif
     GtkWidget    *da;               /* Drawing area                           */
     cairo_surface_t    *pixmap;     /* Pixmap to be drawn on drawing area     */
     gint         pixmap_width;      /* Width and size of the buffer           */
@@ -214,7 +218,11 @@ monitor_set_foreground_color(MonitorsPlugin *mp, Monitor *m, const gchar *color)
 {
     g_free(m->color);
     m->color = g_strndup(color, COLOR_SIZE - 1);
+#if GTK_CHECK_VERSION(3, 0, 0)
+    gdk_rgba_parse(&m->foreground_color, color);
+#else
     gdk_color_parse(color, &m->foreground_color);
+#endif
 }
 /******************************************************************************
  *                          End of monitor functions                          *
@@ -548,10 +556,18 @@ redraw_pixmap (Monitor *m)
     cairo_set_line_width (cr, 1.0);
 
     /* Erase pixmap */
+#if GTK_CHECK_VERSION(3, 0, 0)
+    cairo_set_source_rgb(cr, 0, 0, 0); // FIXME: use black color from style
+#else
     gdk_cairo_set_source_color(cr, &style->black);
+#endif
     cairo_paint(cr);
 
+#if GTK_CHECK_VERSION(3, 0, 0)
+    gdk_cairo_set_source_rgba(cr, &m->foreground_color);
+#else
     gdk_cairo_set_source_color(cr, &m->foreground_color);
+#endif
     for (i = 0; i < m->pixmap_width; i++)
     {
         unsigned int drawing_cursor = (m->ring_cursor + i) % m->pixmap_width;
@@ -653,7 +669,12 @@ monitors_constructor(LXPanel *panel, config_setting_t *settings)
     mp->panel = panel;
     mp->settings = settings;
 
+#if GTK_CHECK_VERSION(3, 0, 0)
+    p = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 2);
+    gtk_box_set_homogeneous (GTK_BOX (p), TRUE);
+#else
     p = gtk_hbox_new(TRUE, 2);
+#endif
     lxpanel_plugin_set_data(p, mp, monitors_destructor);
 
     /* First time we use this plugin : only display CPU usage */
