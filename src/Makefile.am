@@ -21,6 +21,10 @@ endif
 
 pkglib_LTLIBRARIES = liblxpanel.la
 
+if GTK2_ONLY
+GTK2_ONLY_LIB_SOURCES =	input-button.c
+endif
+
 liblxpanel_la_CPPFLAGS = $(lxpanel_CPPFLAGS)
 liblxpanel_la_SOURCES = \
 	misc.c \
@@ -33,7 +37,7 @@ liblxpanel_la_SOURCES = \
 	plugin.c \
 	conf.c \
 	space.c \
-	input-button.c
+	$(GTK2_ONLY_LIB_SOURCES)
 
 liblxpanel_la_LDFLAGS = \
 	-no-undefined \
@@ -52,8 +56,12 @@ lxpanel_include_HEADERS = \
 	icon-grid.h \
 	conf.h
 
+if GTK2_ONLY
+GTK2_ONLY_SOURCES =	icon-grid-old.c
+endif
+
 lxpanel_SOURCES = \
-	icon-grid-old.c \
+	$(GTK2_ONLY_SOURCES) \
 	bg.c \
 	gtk-run.c \
 	main.c \

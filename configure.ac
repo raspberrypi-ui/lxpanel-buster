@@ -32,6 +32,7 @@ AC_HELP_STRING([--enable-gtk3],[enable to use gtk-3.0 instead of gtk-2.0]),
   no)   enable_gtk3=no ;;
   *) AC_MSG_ERROR([bad value "${enableval}" for --enable-gtk3, use "yes" (default) or "no".]) ;;
 esac],[enable_gtk3=yes])
+AM_CONDITIONAL(GTK2_ONLY, test x"$enable_gtk3" = x"no")
 
 if test "x$enable_gtk3" = "xyes" ; then
   gtk_module="gtk+-3.0"
