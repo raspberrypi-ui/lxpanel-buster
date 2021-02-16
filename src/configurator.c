@@ -821,9 +821,11 @@ static void on_add_plugin( GtkButton* btn, GtkTreeView* _view )
                                        GTK_RESPONSE_OK, NULL );
     panel_apply_icon(GTK_WINDOW(dlg));
 
+#if !GTK_CHECK_VERSION(3, 0, 0)
     /* fix background */
     if (p->priv->background)
         gtk_widget_set_style(dlg, p->priv->defstyle);
+#endif
 
     /* gtk_widget_set_sensitive( parent_win, FALSE ); */
     scroll = gtk_scrolled_window_new( NULL, NULL );

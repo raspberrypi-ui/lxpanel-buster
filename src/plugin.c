@@ -205,10 +205,12 @@ void plugin_widget_set_background(GtkWidget * w, LXPanel * panel)
                 if ((p->background) || (p->transparent))
                     /* Reset background for the child, using background of panel */
                     gdk_window_invalidate_rect(window, NULL, TRUE);
+#if !GTK_CHECK_VERSION(3, 0, 0)
                 else
                     /* Set background according to the current GTK style. */
                     gtk_style_set_background(gtk_widget_get_style(w), window,
                                              GTK_STATE_NORMAL);
+#endif
             }
         }
 

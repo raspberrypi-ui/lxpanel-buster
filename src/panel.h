@@ -148,7 +148,9 @@ extern gint panel_get_safe_icon_size(LXPanel *panel);
 extern gint panel_get_height(LXPanel *panel);
 extern Window panel_get_xwindow(LXPanel *panel);
 extern gint panel_get_monitor(LXPanel *panel);
+#if !GTK_CHECK_VERSION(3, 0, 0)
 extern GtkStyle *panel_get_defstyle(LXPanel *panel);
+#endif
 extern GtkIconTheme *panel_get_icon_theme(LXPanel *panel);
 extern gboolean panel_is_at_bottom(LXPanel *panel);
 extern gboolean panel_is_dynamic(LXPanel *panel);

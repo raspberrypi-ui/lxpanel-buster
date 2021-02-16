@@ -949,11 +949,13 @@ static void panel_icon_grid_realize(GtkWidget *widget)
         gdk_window_set_user_data(ig->event_window, widget);
     }
 
+#if !GTK_CHECK_VERSION(3, 0, 0)
     style = gtk_style_attach(gtk_widget_get_style(widget), window);
     gtk_widget_set_style(widget, style);
 
     if (visible_window)
         gtk_style_set_background(style, window, GTK_STATE_NORMAL);
+#endif
 }
 
 static void panel_icon_grid_unrealize(GtkWidget *widget)

@@ -614,7 +614,9 @@ static void lxpanel_init(PanelToplevel *self)
     p->icon_size = PANEL_ICON_SIZE;
     p->icon_theme = gtk_icon_theme_get_default();
     p->config = config_new();
+#if !GTK_CHECK_VERSION(3, 0, 0)
     p->defstyle = gtk_widget_get_default_style();
+#endif
     p->point_at_menu = 0;
 }
 
@@ -1977,8 +1979,16 @@ void panel_draw_label_text_with_color(Panel * p, GtkWidget * label, const char *
         font_desc = p->fontsize;
     else
     {
+#if GTK_CHECK_VERSION(3, 0, 0)
+        PangoFontDescription *desc;
+        GtkStyleContext *sc = gtk_widget_get_style_context (label);
+        gtk_style_context_get (sc, GTK_STATE_FLAG_NORMAL, "font", &desc, NULL);
+        font_desc = pango_font_description_get_size (desc) / PANGO_SCALE;
+        pango_font_description_free (desc);
+#else
         GtkStyle *style = gtk_widget_get_style(label);
         font_desc = pango_font_description_get_size(style->font_desc) / PANGO_SCALE;
+#endif
     }
     font_desc *= custom_size_factor;
 
@@ -2395,10 +2405,12 @@ gint panel_get_monitor(LXPanel *panel)
     return gdk_mon_num (panel->priv->monitor);
 }
 
+#if !GTK_CHECK_VERSION(3, 0, 0)
 GtkStyle *panel_get_defstyle(LXPanel *panel)
 {
     return panel->priv->defstyle;
 }
+#endif
 
 GtkIconTheme *panel_get_icon_theme(LXPanel *panel)
 {
