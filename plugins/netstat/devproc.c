@@ -250,7 +250,7 @@ int netproc_scandevice(int sockfd, int iwsockfd, FILE *fp, NETDEVLIST_PTR *netde
 
 		/* check interface hw_type */
 		bzero(&ifr, sizeof(ifr));
-		strncpy(ifr.ifr_name, name, strlen(name));
+		strncpy(ifr.ifr_name, name, strlen(ifr.ifr_name));
 		ifr.ifr_name[strlen(name)+1] = '\0';
 		if (ioctl(sockfd, SIOCGIFHWADDR, &ifr)<0)
 			continue;
