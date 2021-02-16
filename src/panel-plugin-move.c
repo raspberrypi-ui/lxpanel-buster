@@ -36,7 +36,7 @@ gboolean _lxpanel_button_release(GtkWidget *widget, GdkEventButton *event)
         {
             /* ungrab device and return back previous cursor */
 #if GTK_CHECK_VERSION(3, 0, 0)
-            gdk_device_ungrab(event->device, event->time);
+            gdk_seat_ungrab (gdk_display_get_default_seat (gdk_display_get_default ()));
 #else
             gdk_pointer_ungrab(event->time);
 #endif
@@ -94,11 +94,9 @@ gboolean _lxpanel_motion_notify(GtkWidget *widget, GdkEventMotion *event)
             }
             /* grab pointer, use cursor "move" */
 #if GTK_CHECK_VERSION(3, 0, 0)
-            s = gdk_device_grab(event->device, gtk_widget_get_window(widget),
-                                GDK_OWNERSHIP_NONE, FALSE,
-                                GDK_POINTER_MOTION_MASK | GDK_BUTTON_RELEASE_MASK,
-                                gdk_cursor_new_from_name(p->display, "move"),
-                                event->time);
+            s = gdk_seat_grab (gdk_display_get_default_seat (gdk_display_get_default ()),
+                gtk_widget_get_window (widget), GDK_SEAT_CAPABILITY_ALL_POINTING,
+                FALSE, gdk_cursor_new_from_name (p->display, "move"), (GdkEvent *) event, NULL, NULL);
 #else
             s = gdk_pointer_grab(gtk_widget_get_window(widget), FALSE,
                                  GDK_POINTER_MOTION_MASK | GDK_BUTTON_RELEASE_MASK,
