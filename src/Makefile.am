@@ -21,10 +21,6 @@ endif
 
 pkglib_LTLIBRARIES = liblxpanel.la
 
-if GTK2_ONLY
-GTK2_ONLY_LIB_SOURCES =	input-button.c
-endif
-
 liblxpanel_la_CPPFLAGS = $(lxpanel_CPPFLAGS)
 liblxpanel_la_SOURCES = \
 	misc.c \
@@ -37,7 +33,7 @@ liblxpanel_la_SOURCES = \
 	plugin.c \
 	conf.c \
 	space.c \
-	$(GTK2_ONLY_LIB_SOURCES)
+	input-button.c
 
 liblxpanel_la_LDFLAGS = \
 	-no-undefined \

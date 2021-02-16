@@ -114,8 +114,14 @@ static void on_focus_in_event(GtkButton *test, GdkEvent *event,
     gtk_toggle_button_set_active(btn->custom, TRUE);
     btn->has_focus = TRUE;
     if (btn->do_key)
+#if GTK_CHECK_VERSION(3, 0, 0)
+        gdk_seat_grab (gdk_display_get_default_seat (gdk_display_get_default ()),
+            gtk_widget_get_window(GTK_WIDGET(test)), GDK_SEAT_CAPABILITY_KEYBOARD,
+            TRUE, NULL, event, NULL, NULL);
+#else
         gdk_keyboard_grab(gtk_widget_get_window(GTK_WIDGET(test)),
                           TRUE, GDK_CURRENT_TIME);
+#endif
 }
 
 static void on_focus_out_event(GtkButton *test, GdkEvent *event,
@@ -124,7 +130,11 @@ static void on_focus_out_event(GtkButton *test, GdkEvent *event,
     /* stop accepting mouse clicks */
     btn->has_focus = FALSE;
     if (btn->do_key)
+#if GTK_CHECK_VERSION(3, 0, 0)
+        gdk_seat_ungrab (gdk_display_get_default_seat (gdk_display_get_default ()));
+#else
         gdk_keyboard_ungrab(GDK_CURRENT_TIME);
+#endif
 }
 
 static void _button_set_click_label(GtkButton *btn, guint keyval, GdkModifierType state)
@@ -173,8 +183,14 @@ static gboolean on_key_event(GtkButton *test, GdkEventKey *event,
     if (event->keyval == GDK_KEY_Tab)
         return FALSE;
     /* request mods directly, event->state isn't updated yet */
+#if GTK_CHECK_VERSION(3, 0, 0)
+    gdk_window_get_device_position (gtk_widget_get_window (GTK_WIDGET(test)),
+        gdk_seat_get_pointer (gdk_display_get_default_seat (gdk_display_get_default ())),
+        NULL, NULL, &state);
+#else
     gdk_window_get_pointer(gtk_widget_get_window(GTK_WIDGET(test)),
                            NULL, NULL, &state);
+#endif
     /* special support for Win key, it doesn't work sometimes */
     if ((state & GDK_SUPER_MASK) == 0 && (state & GDK_MOD4_MASK) != 0)
         state |= GDK_SUPER_MASK;
