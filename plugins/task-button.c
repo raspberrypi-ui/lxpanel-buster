@@ -132,7 +132,10 @@ static gint get_window_monitor(Window win)
     gwin = gdk_x11_window_foreign_new_for_display(display,win);
     g_assert(gwin);
 #if GTK_CHECK_VERSION(3, 0, 0)
-    m = gdk_display_get_monitor_at_window (gdk_window_get_display (gwin), gwin);
+    m = -1;
+    GdkMonitor *mon = gdk_display_get_monitor_at_window (gdk_window_get_display (gwin), gwin);
+    for (int i = 0; i < gdk_display_get_n_monitors (gdk_window_get_display (gwin)); i++)
+        if (gdk_display_get_monitor (gdk_window_get_display (gwin), i) == mon) m = i;
 #else
     m = gdk_screen_get_monitor_at_window(gdk_window_get_screen(gwin),gwin);
 #endif

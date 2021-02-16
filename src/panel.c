@@ -239,7 +239,11 @@ static void panel_stop_gui(LXPanel *self)
     {
         gtk_window_group_remove_window(win_grp, GTK_WINDOW(self));
         xdisplay = GDK_DISPLAY_XDISPLAY(gdk_display_get_default());
+#if GTK_CHECK_VERSION(3, 0, 0)
+        gdk_display_flush (gdk_display_get_default ());
+#else
         gdk_flush();
+#endif
         XFlush(xdisplay);
         XSync(xdisplay, True);
         p->initialized = FALSE;
@@ -687,7 +691,7 @@ gboolean _panel_edge_can_strut(LXPanel *panel, int edge, gint monitor, gulong *s
 
     screen = gtk_widget_get_screen(GTK_WIDGET(panel));
 #if GTK_CHECK_VERSION(3, 0, 0)
-    n = gdk_display_get_n_monitors(gtk_widget_get_display(GTK_WIDGET(panel)));
+    n = gdk_display_get_n_monitors (gtk_widget_get_display (GTK_WIDGET (panel)));
 #else
     n = gdk_screen_get_n_monitors(screen);
 #endif
@@ -700,8 +704,11 @@ gboolean _panel_edge_can_strut(LXPanel *panel, int edge, gint monitor, gulong *s
     if (G_LIKELY(size))
         *size = s;
     return TRUE;
-
+#if GTK_CHECK_VERSION(3, 0, 0)
+    gdk_monitor_get_geometry (gdk_display_get_monitor (gdk_screen_get_display (screen), gdk_mon_num (monitor)), &rect);
+#else
     gdk_screen_get_monitor_geometry(screen, gdk_mon_num (monitor), &rect);
+#endif
     switch (edge)
     {
         case EDGE_LEFT:
@@ -741,7 +748,11 @@ gboolean _panel_edge_can_strut(LXPanel *panel, int edge, gint monitor, gulong *s
         {
             if (i == monitor)
                 continue;
+#if GTK_CHECK_VERSION(3, 0, 0)
+            gdk_monitor_get_geometry (gdk_display_get_monitor (gdk_screen_get_display (screen), gdk_mon_num (i)), &rect2);
+#else
             gdk_screen_get_monitor_geometry(screen, gdk_mon_num (i), &rect2);
+#endif
             if (gdk_rectangle_intersect(&rect, &rect2, NULL))
                 /* that monitor lies over the edge */
                 return FALSE;
@@ -1404,7 +1415,7 @@ static void panel_popupmenu_create_panel( GtkMenuItem* item, LXPanel* panel )
     /* Allocate the edge. */
     g_assert(screen);
 #if GTK_CHECK_VERSION(3, 0, 0)
-    monitors = gdk_display_get_n_monitors(gtk_widget_get_display(GTK_WIDGET(panel)));
+    monitors = gdk_display_get_n_monitors (gtk_widget_get_display (GTK_WIDGET (panel)));
 #else
     monitors = gdk_screen_get_n_monitors(screen);
 #endif
@@ -1416,7 +1427,11 @@ static void panel_popupmenu_create_panel( GtkMenuItem* item, LXPanel* panel )
         gint x, y;
         gdk_display_get_pointer(gdk_display_get_default(), NULL, &x, &y, NULL);
 #if GTK_CHECK_VERSION(3, 0, 0)
-        m = x_mon_num (gdk_display_get_monitor_at_point (gdk_screen_get_display (screen), x, y));
+        int n = -1;
+        GdkMonitor *mon = gdk_display_get_monitor_at_point (gdk_screen_get_display (screen), x, y);
+        for (int i = 0; i < gdk_display_get_n_monitors (gdk_screen_get_display (screen)); i++)
+            if (gdk_display_get_monitor (gdk_screen_get_display (screen), i) == mon) n = i;
+        m = x_mon_num (n);
 #else
         m = x_mon_num (gdk_screen_get_monitor_at_point(screen, x, y));
 #endif
@@ -2238,7 +2253,7 @@ static int panel_start(LXPanel *p)
         RET(0);
 
 #if GTK_CHECK_VERSION(3, 0, 0)
-    if (p->priv->monitor < gdk_display_get_n_monitors(gtk_widget_get_display(GTK_WIDGET(p))))
+    if (p->priv->monitor < gdk_display_get_n_monitors (gtk_widget_get_display (GTK_WIDGET (p))))
 #else
     if (p->priv->monitor < gdk_screen_get_n_monitors(screen))
 #endif

@@ -1168,7 +1168,7 @@ void panel_configure( LXPanel* panel, int sel_page )
     monitors = 1;
 #if GTK_CHECK_VERSION(3, 0, 0)
     display = gtk_widget_get_display(GTK_WIDGET(panel));
-    if(display) monitors = gdk_display_get_n_monitors(display);
+    if (display) monitors = gdk_display_get_n_monitors(display);
 #else
     screen = gtk_widget_get_screen(GTK_WIDGET(panel));
     if(screen) monitors = gdk_screen_get_n_monitors(screen);
