@@ -153,6 +153,7 @@ struct LaunchTaskBarPlugin {
     int              w, h;              /* override GtkBox bug with allocation */
 };
 
+#if !GTK_CHECK_VERSION(3, 0, 0)
 static gchar *launchtaskbar_rc = "style 'launchtaskbar-style' = 'theme-panel'\n"
         "{\n"
         "GtkWidget::focus-padding=0\n"
@@ -162,6 +163,7 @@ static gchar *launchtaskbar_rc = "style 'launchtaskbar-style' = 'theme-panel'\n"
         "}\n"
         "widget '*launchbar.*' style 'launchtaskbar-style'\n"
         "widget '*taskbar.*' style 'launchtaskbar-style'";
+#endif
 
 #define DRAG_ACTIVE_DELAY    1000
 #define TASK_WIDTH_MAX       200
@@ -1095,7 +1097,9 @@ static GtkWidget *_launchtaskbar_constructor(LXPanel *panel, config_setting_t *s
     LaunchTaskBarPlugin *ltbp;
     int height;
 
+#if !GTK_CHECK_VERSION(3, 0, 0)
     gtk_rc_parse_string(launchtaskbar_rc);
+#endif
 
     /* Allocate plugin context and set into Plugin private data pointer. */
     ltbp = g_new0(LaunchTaskBarPlugin, 1);
