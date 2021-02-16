@@ -551,7 +551,9 @@ redraw_pixmap (Monitor *m)
 {
     int i;
     cairo_t *cr = cairo_create(m->pixmap);
+#if !GTK_CHECK_VERSION(3, 0, 0)
     GtkStyle *style = gtk_widget_get_style(m->da);
+#endif
 
     cairo_set_line_width (cr, 1.0);
 

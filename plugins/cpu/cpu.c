@@ -92,7 +92,9 @@ static void redraw_pixmap(CPUPlugin * c)
     GdkColor col;
 #endif
     cairo_t * cr = cairo_create(c->pixmap);
+#if !GTK_CHECK_VERSION(3, 0, 0)
     GtkStyle * style = gtk_widget_get_style(c->da);
+#endif
     cairo_set_line_width (cr, 1.0);
     /* Erase pixmap. */
     cairo_rectangle(cr, 0, 0, c->pixmap_width, c->pixmap_height);
