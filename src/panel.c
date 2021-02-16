@@ -1852,7 +1852,9 @@ panel_start_gui(LXPanel *panel, config_setting_t *list)
     p->ax = p->ay = p->aw = p->ah = 0;
 
     p->display = gdk_display_get_default();
+#if !GTK_CHECK_VERSION(3, 0, 0)
     gtk_window_set_wmclass(GTK_WINDOW(panel), "panel", "lxpanel");
+#endif
 
     if (G_UNLIKELY(win_grp == NULL))
     {
