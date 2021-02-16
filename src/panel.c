@@ -120,8 +120,15 @@ static guint signals[N_SIGNALS];
 int gdk_mon_num (int x_mon_num)
 {
     GdkDisplay *disp = gdk_display_get_default ();
+#if GTK_CHECK_VERSION(3, 0, 0)
+    int prim = -1;
+    GdkMonitor *mon = gdk_display_get_primary_monitor (disp);
+    for (int i = 0; i < gdk_display_get_n_monitors (disp); i++)
+        if (gdk_display_get_monitor (disp, i) == mon) prim = i;
+#else
     GdkScreen *scr = gdk_display_get_screen (disp, 0);
     int prim = gdk_screen_get_primary_monitor (scr);
+#endif
 
     /* monitor 0 is always the primary monitor */
     if (x_mon_num == 0) return prim;
@@ -144,8 +151,15 @@ int gdk_mon_num (int x_mon_num)
 int x_mon_num (int gdk_mon_num)
 {
     GdkDisplay *disp = gdk_display_get_default ();
+#if GTK_CHECK_VERSION(3, 0, 0)
+    int prim = -1;
+    GdkMonitor *mon = gdk_display_get_primary_monitor (disp);
+    for (int i = 0; i < gdk_display_get_n_monitors (disp); i++)
+        if (gdk_display_get_monitor (disp, i) == mon) prim = i;
+#else
     GdkScreen *scr = gdk_display_get_screen (disp, 0);
     int prim = gdk_screen_get_primary_monitor (scr);
+#endif
 
     if (gdk_mon_num == prim) return 0;
 
@@ -1109,7 +1123,11 @@ mouse_watch(LXPanel *panel)
         return FALSE;
 
     ENTER;
+#if GTK_CHECK_VERSION(3, 0, 0)
+    gdk_device_get_position (gdk_seat_get_pointer (gdk_display_get_default_seat (gdk_display_get_default ())), NULL, &x, &y);
+#else
     gdk_display_get_pointer(gdk_display_get_default(), NULL, &x, &y, NULL);
+#endif
 
 /*  Reduce sensitivity area
     p->ah_far = ((x < p->cx - GAP) || (x > p->cx + p->cw + GAP)
@@ -1425,14 +1443,15 @@ static void panel_popupmenu_create_panel( GtkMenuItem* item, LXPanel* panel )
     {
         /* panel is spanned over the screen, guess from pointer now */
         gint x, y;
-        gdk_display_get_pointer(gdk_display_get_default(), NULL, &x, &y, NULL);
 #if GTK_CHECK_VERSION(3, 0, 0)
+        gdk_device_get_position (gdk_seat_get_pointer (gdk_display_get_default_seat (gdk_display_get_default ())), NULL, &x, &y);
         int n = -1;
         GdkMonitor *mon = gdk_display_get_monitor_at_point (gdk_screen_get_display (screen), x, y);
         for (int i = 0; i < gdk_display_get_n_monitors (gdk_screen_get_display (screen)); i++)
             if (gdk_display_get_monitor (gdk_screen_get_display (screen), i) == mon) n = i;
         m = x_mon_num (n);
 #else
+        gdk_display_get_pointer(gdk_display_get_default(), NULL, &x, &y, NULL);
         m = x_mon_num (gdk_screen_get_monitor_at_point(screen, x, y));
 #endif
     }
