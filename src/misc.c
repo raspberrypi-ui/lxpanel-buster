@@ -977,7 +977,7 @@ static void _lxpanel_button_set_icon(GtkWidget* btn, FmIcon* icon, gint size)
     GtkWidget * child = gtk_bin_get_child(GTK_BIN(btn));
     GtkWidget * img = NULL;
 #if GTK_CHECK_VERSION(3, 0, 0)
-    if (!(img = gtk_button_get_image (GTK_BUTTON(btn))))
+    if (GTK_IS_BUTTON (btn) && !(img = gtk_button_get_image (GTK_BUTTON(btn))))
     {
 #endif
     if (GTK_IS_IMAGE(child))
@@ -1378,7 +1378,7 @@ static GtkWidget *_lxpanel_button_compose(GtkWidget *event_box, GtkWidget *image
         gtk_box_pack_end(GTK_BOX(inner), lbl, FALSE, FALSE, 0);
     }
 
-    gtk_button_set_relief (GTK_BUTTON (event_box), GTK_RELIEF_NONE);
+    if (GTK_IS_BUTTON (event_box)) gtk_button_set_relief (GTK_BUTTON (event_box), GTK_RELIEF_NONE);
     gtk_widget_show_all(event_box);
     return event_box;
 }
