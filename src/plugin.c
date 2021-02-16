@@ -197,9 +197,7 @@ void plugin_widget_set_background(GtkWidget * w, LXPanel * panel)
             if (gtk_widget_get_realized(w))
             {
                 GdkWindow *window = gtk_widget_get_window(w);
-#if GTK_CHECK_VERSION(3, 0, 0)
-                gdk_window_set_background_pattern(window, NULL);
-#else
+#if !GTK_CHECK_VERSION(3, 0, 0)
                 gdk_window_set_back_pixmap(window, NULL, TRUE);
 #endif
                 if ((p->background) || (p->transparent))
