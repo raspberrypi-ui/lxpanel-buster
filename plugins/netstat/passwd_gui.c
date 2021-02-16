@@ -54,10 +54,12 @@ static void passwd_gui_on_response(GtkDialog* dlg, gint response, struct passwd_
     gtk_widget_destroy((GtkWidget*)dlg);
 }
 
+#if !GTK_CHECK_VERSION(3, 0, 0)
 void passwd_gui_set_style(struct pgui *pg, GtkStyle *style)
 {
     gtk_widget_set_style(pg->dlg, style);
 }
+#endif
 
 static void passwd_gui_free(gpointer ptr, GObject *dummy)
 {
