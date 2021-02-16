@@ -64,6 +64,10 @@
 # endif
 #endif
 
+#if GTK_CHECK_VERSION(3, 0, 0)
+#define MENU_ICON_SPACE 6
+#endif
+
 #define DEFAULT_MENU_ICON PACKAGE_DATA_DIR "/images/my-computer.png"
 /*
  * SuxPanel version 0.1
@@ -177,7 +181,12 @@ static void on_menu_item( GtkMenuItem* mi, menup* m )
 /* load icon when mapping the menu item to speed up */
 static void on_menu_item_map(GtkWidget *mi, menup *m)
 {
+#if GTK_CHECK_VERSION(3, 0, 0)
+  GList *children = gtk_container_get_children (GTK_CONTAINER (gtk_bin_get_child (GTK_BIN (mi))));
+  GtkImage *img = children->data;  // this should always be the image...
+#else
   GtkImage* img = GTK_IMAGE(gtk_image_menu_item_get_image(GTK_IMAGE_MENU_ITEM(mi)));
+#endif
     if( img )
     {
         FmFileInfo *fi;
@@ -359,7 +368,6 @@ static gboolean on_menu_button_press(GtkWidget* mi, GdkEventButton* evt, menup* 
         }
 
         p = GTK_MENU(gtk_menu_new());
-
         item = gtk_menu_item_new_with_label(_("Add to desktop"));
         g_signal_connect(item, "activate", G_CALLBACK(on_add_menu_item_to_desktop), mi);
         gtk_menu_shell_append(GTK_MENU_SHELL(p), item);
@@ -414,12 +422,26 @@ static GtkWidget* create_item(MenuCacheItem *item, menup *m)
 
         g_free(mpath);
         fm_path_unref(path);
+#if GTK_CHECK_VERSION(3, 0, 0)
+        GtkWidget *box, *label;
+        mi = gtk_menu_item_new ();
+        box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MENU_ICON_SPACE);
+        gtk_container_add (GTK_CONTAINER (mi), box);
+        label = gtk_label_new (menu_cache_item_get_name (item));
+        g_object_set_qdata_full(G_OBJECT(mi), SYS_MENU_ITEM_ID, fi,
+                                (GDestroyNotify)fm_file_info_unref);
+        img = gtk_image_new ();
+        gtk_container_add (GTK_CONTAINER (box), img);
+        gtk_container_add (GTK_CONTAINER (box), label);
+        gtk_widget_show_all (box);
+#else
         mi = gtk_image_menu_item_new_with_mnemonic( menu_cache_item_get_name(item) );
         gtk_image_menu_item_set_always_show_image (GTK_IMAGE_MENU_ITEM (mi), TRUE);
         g_object_set_qdata_full(G_OBJECT(mi), SYS_MENU_ITEM_ID, fi,
                                 (GDestroyNotify)fm_file_info_unref);
         img = gtk_image_new();
         gtk_image_menu_item_set_image( GTK_IMAGE_MENU_ITEM(mi), img );
+#endif
         if( menu_cache_item_get_type(item) == MENU_CACHE_TYPE_APP )
         {
             const char *comment = menu_cache_item_get_comment(item);
@@ -499,6 +521,9 @@ static int load_menu(menup* m, MenuCacheDir* dir, GtkWidget* menu, int pos )
 	    if (menu_cache_item_get_type(item) == MENU_CACHE_TYPE_DIR)
 	    {
                 GtkWidget* sub = gtk_menu_new();
+#if GTK_CHECK_VERSION(3, 0, 0)
+                gtk_menu_set_reserve_toggle_size (GTK_MENU (sub), FALSE);
+#endif
             g_signal_connect(sub, "key-press-event", G_CALLBACK(check_close), m->menu);
 		/*  always pass -1 for position */
 		gint s_count = load_menu( m, MENU_CACHE_DIR(item), sub, -1 );
@@ -543,6 +568,22 @@ static void _unload_old_icons(GtkMenu* menu, GtkIconTheme* theme, menup* m)
         {
             GtkImage* img;
             item = GTK_MENU_ITEM( child->data );
+#if GTK_CHECK_VERSION(3, 0, 0)
+            if (GTK_IS_MENU_ITEM (item))
+            {
+                GtkWidget *box = gtk_bin_get_child (GTK_BIN (item));
+                if (GTK_IS_BOX (box))
+                {
+                    GList *children = gtk_container_get_children (GTK_CONTAINER (box));
+                    if (GTK_IS_IMAGE (children->data))
+                    {
+                        img = GTK_IMAGE (children->data);
+                        gtk_image_clear(img);
+                        if (gtk_widget_get_mapped (GTK_WIDGET(img))) on_menu_item_map(GTK_WIDGET(item), m);
+                    }
+                }
+            }
+#else
             if( GTK_IS_IMAGE_MENU_ITEM(item) )
             {
 	        img = GTK_IMAGE(gtk_image_menu_item_get_image(GTK_IMAGE_MENU_ITEM(item)));
@@ -550,6 +591,7 @@ static void _unload_old_icons(GtkMenu* menu, GtkIconTheme* theme, menup* m)
                 if (gtk_widget_get_mapped(GTK_WIDGET(img)))
 		    on_menu_item_map(GTK_WIDGET(item), m);
             }
+#endif
         }
         else if( ( sub_menu = gtk_menu_item_get_submenu( item ) ) )
         {
@@ -723,7 +765,7 @@ make_button(menup *m, const gchar *fname, const gchar *name, GdkColor* tint, Gtk
     gtk_widget_set_visible (m->img, TRUE);
     if (m->padding) gtk_widget_set_size_request (m->img, m->iconsize + 2 * m->padding, -1);
 #if GTK_CHECK_VERSION(3, 0, 0)
-    gtk_button_set_image (m->box, m->img);
+    gtk_button_set_image (GTK_BUTTON (m->box), m->img);
 #else
     gtk_container_add(GTK_CONTAINER(m->box), m->img);
 #endif
@@ -756,6 +798,9 @@ read_item(menup *m, config_setting_t *s)
     GtkWidget *item;
     Command *cmd_entry = NULL;
     char *tmp;
+#if GTK_CHECK_VERSION(3, 0, 0)
+    GtkWidget *box, *label;
+#endif
 
     ENTER;
     name = fname = action = NULL;
@@ -777,22 +822,41 @@ read_item(menup *m, config_setting_t *s)
     /* menu button */
     if( cmd_entry ) /* built-in commands */
     {
+#if GTK_CHECK_VERSION(3, 0, 0)
+        item = gtk_menu_item_new ();
+        box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MENU_ICON_SPACE);
+        gtk_container_add (GTK_CONTAINER (item), box);
+        if (name == NULL)
+            label = gtk_label_new ( _(cmd_entry->disp_name) );
+        else
+            label = gtk_label_new (name);
+#else
         if (name == NULL)
             item = gtk_image_menu_item_new_with_label( _(cmd_entry->disp_name) );
         else
             item = gtk_image_menu_item_new_with_label (name);
+#endif
         g_signal_connect(G_OBJECT(item), "activate", (GCallback)run_command, cmd_entry->cmd);
     }
     else if (action)
     {
+#if GTK_CHECK_VERSION(3, 0, 0)
+        item = gtk_menu_item_new ();
+        box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MENU_ICON_SPACE);
+        gtk_container_add (GTK_CONTAINER (item), box);
+        label = gtk_label_new (name ? name : "");
+#else
         item = gtk_image_menu_item_new_with_label(name ? name : "");
+#endif
         tmp = g_strdup(action);
         g_object_weak_ref(G_OBJECT(item), (GWeakNotify)g_free, tmp);
         g_signal_connect(G_OBJECT(item), "activate", (GCallback)spawn_app, tmp);
     }
     else
         goto error;
+#if !GTK_CHECK_VERSION(3, 0, 0)
     gtk_image_menu_item_set_always_show_image (GTK_IMAGE_MENU_ITEM (item), TRUE);
+#endif
     gtk_container_set_border_width(GTK_CONTAINER(item), 0);
     if (fname) {
         GtkWidget *img;
@@ -800,9 +864,18 @@ read_item(menup *m, config_setting_t *s)
         tmp = expand_tilda(fname);
         img = lxpanel_image_new_for_icon(m->panel, tmp, m->iconsize, NULL);
         gtk_widget_show(img);
+#if GTK_CHECK_VERSION(3, 0, 0)
+        gtk_container_add (GTK_CONTAINER (box), img);
+        gtk_container_add (GTK_CONTAINER (box), label);
+#else
         gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(item), img);
+#endif
         g_free(tmp);
     }
+#if GTK_CHECK_VERSION(3, 0, 0)
+    else gtk_container_add (GTK_CONTAINER (box), label);
+    gtk_widget_show_all (box);
+#endif
     RET(item);
 
  error:
@@ -887,7 +960,7 @@ read_submenu(menup *m, config_setting_t *s, int as_item)
     const gchar *name, *fname, *str;
     config_setting_t *list = config_setting_add(s, "", PANEL_CONF_TYPE_LIST);
 #if GTK_CHECK_VERSION(3, 0, 0)
-    GdkRGBA color={0.0, 0.141, 0,376, 1.0};
+    GdkRGBA color={0.0, 0.141, 0.376, 1.0};
 #else
     GdkColor color={0, 0, 36 * 0xffff / 0xff, 96 * 0xffff / 0xff};
 #endif
@@ -896,6 +969,9 @@ read_submenu(menup *m, config_setting_t *s, int as_item)
     ENTER;
 
     menu = gtk_menu_new ();
+#if GTK_CHECK_VERSION(3, 0, 0)
+    gtk_menu_set_reserve_toggle_size (GTK_MENU (menu), FALSE);
+#endif
     gtk_container_set_border_width(GTK_CONTAINER(menu), 0);
     g_signal_connect(menu, "key-press-event", G_CALLBACK(check_close), menu);
 
@@ -940,15 +1016,32 @@ read_submenu(menup *m, config_setting_t *s, int as_item)
     }
     if (as_item == 2) return menu;
     if (as_item) {
+#if GTK_CHECK_VERSION(3, 0, 0)
+        GtkWidget *box, *label;
+        mi = gtk_menu_item_new ();
+        box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MENU_ICON_SPACE);
+        gtk_container_add (GTK_CONTAINER (mi), box);
+        label = gtk_label_new (name);
+#else
         mi = gtk_image_menu_item_new_with_label(name);
+#endif
         if (fname) {
             GtkWidget *img;
             char *expanded = expand_tilda(fname);
             img = lxpanel_image_new_for_icon(m->panel, expanded, m->iconsize, NULL);
             gtk_widget_show(img);
+#if GTK_CHECK_VERSION(3, 0, 0)
+            gtk_container_add (GTK_CONTAINER (box), img);
+            gtk_container_add (GTK_CONTAINER (box), label);
+#else
             gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(mi), img);
+#endif
             g_free(expanded);
         }
+#if GTK_CHECK_VERSION(3, 0, 0)
+        else gtk_container_add (GTK_CONTAINER (box), label);
+        gtk_widget_show_all (box);
+#endif
         gtk_menu_item_set_submenu (GTK_MENU_ITEM (mi), menu);
     } else {
         m->fname = fname ? expand_tilda(fname) : g_strdup(DEFAULT_MENU_ICON);
