@@ -101,10 +101,14 @@ netstatus_icon_get_default_pixbuf (NetstatusIcon *icon __attribute__((unused)))
 
   if (!fallback_pixbuf)
     {
+#if GTK_CHECK_VERSION(3, 0, 0)
+      fallback_pixbuf = gdk_pixbuf_new_from_data (fallback_icon_data, GDK_COLORSPACE_RGB, TRUE, 8, 48, 48, 192, NULL, NULL);
+#else
       fallback_pixbuf = gdk_pixbuf_new_from_inline (-1,
 						    fallback_icon_data,
 						    FALSE,
 						    NULL);
+#endif
       g_object_add_weak_pointer (G_OBJECT (fallback_pixbuf),
 				 (gpointer) &fallback_pixbuf);
 
@@ -707,9 +711,11 @@ netstatus_icon_realize (GtkWidget *widget)
   gtk_widget_set_window (widget, window);
   gdk_window_set_user_data (window, widget);
 
+#if !GTK_CHECK_VERSION(3, 0, 0)
   gtk_widget_ensure_style (widget);
   style = gtk_widget_get_style (widget);
   gtk_style_set_background (style, window, GTK_STATE_NORMAL);
+#endif
 }
 
 static gboolean

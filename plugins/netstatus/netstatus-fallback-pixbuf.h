@@ -9,6 +9,7 @@ static const guint8 fallback_icon_data[] __attribute__ ((__aligned__ (4))) =
 static const guint8 fallback_icon_data[] = 
 #endif
 { ""
+#if !GTK_CHECK_VERSION(3, 0, 0)
   /* Pixbuf magic (0x47646b50) */
   "GdkP"
   /* length: header (24) + pixel_data (9216) */
@@ -21,6 +22,7 @@ static const guint8 fallback_icon_data[] =
   "\0\0\0""0"
   /* height (48) */
   "\0\0\0""0"
+#endif
   /* pixel_data: */
   "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
   "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
