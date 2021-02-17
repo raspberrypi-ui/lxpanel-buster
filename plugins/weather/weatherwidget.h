@@ -46,6 +46,9 @@ typedef struct _GtkWeatherClass GtkWeatherClass;
 struct _GtkWeather
 {
   GtkEventBox widget;
+#if GTK_CHECK_VERSION(3, 0, 0)
+  gpointer priv;
+#endif
 };
 
 struct _GtkWeatherClass

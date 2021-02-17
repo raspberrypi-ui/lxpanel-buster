@@ -37,8 +37,12 @@
 #include "gtk-compat.h"
 
 /* Private structure, property and signal definitions. */
+#if GTK_CHECK_VERSION(3, 0, 0)
+#define GTK_WEATHER_GET_PRIVATE(obj) ((GtkWeatherPrivate *)((GTK_WEATHER (obj))->priv))
+#else
 #define GTK_WEATHER_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), \
                                       GTK_WEATHER_TYPE, GtkWeatherPrivate))
+#endif
 
 /* This will exit the app gracefully... */
 #ifdef DEBUG
@@ -269,7 +273,9 @@ gtk_weather_class_init(GtkWeatherClass * klass)
   widget_class->size_allocate      = gtk_weather_size_allocate;
   widget_class->button_press_event = gtk_weather_button_pressed;
   
+#if !GTK_CHECK_VERSION(3, 0, 0)
   g_type_class_add_private(klass, sizeof(GtkWeatherPrivate));
+#endif
 
   g_object_class_install_property(gobject_class, PROP_LOCATION,
                                   g_param_spec_pointer("location",
@@ -317,6 +323,9 @@ gtk_weather_init(GtkWeather * weather)
 {
   LXW_LOG(LXW_DEBUG, "GtkWeather::init()");
 
+#if GTK_CHECK_VERSION(3, 0, 0)
+  weather->priv = (GtkWeatherPrivate *) g_malloc0 (sizeof (GtkWeatherPrivate));
+#endif
   GtkWeatherPrivate * priv = GTK_WEATHER_GET_PRIVATE(weather);
 
   /* Box layout internals */
@@ -395,6 +404,14 @@ gtk_weather_destroy(GObject * object)
   priv->previous_location = NULL;
   priv->location = NULL;
   priv->forecast = NULL;
+
+#if GTK_CHECK_VERSION(3, 0, 0)
+  if (priv != NULL)
+  {
+    g_free (priv);
+    weather->priv = NULL;
+  }
+#endif
 }
 
 /**
