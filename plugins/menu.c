@@ -444,6 +444,7 @@ static GtkWidget* create_item(MenuCacheItem *item, menup *m)
 #endif
         if( menu_cache_item_get_type(item) == MENU_CACHE_TYPE_APP )
         {
+            gtk_widget_set_name (mi, "syssubmenu");
             const char *comment = menu_cache_item_get_comment(item);
             if (comment != NULL)
                 gtk_widget_set_tooltip_text(mi, comment);
@@ -527,6 +528,7 @@ static int load_menu(menup* m, MenuCacheDir* dir, GtkWidget* menu, int pos )
             g_signal_connect(sub, "key-press-event", G_CALLBACK(check_close), m->menu);
 		/*  always pass -1 for position */
 		gint s_count = load_menu( m, MENU_CACHE_DIR(item), sub, -1 );
+                if (s_count) gtk_widget_set_name (mi, "sysmenu");
                 if (s_count)
 		    gtk_menu_item_set_submenu( GTK_MENU_ITEM(mi), sub );
 		else
@@ -1011,6 +1013,7 @@ read_submenu(menup *m, config_setting_t *s, int as_item)
             g_warning("menu: can't create menu item");
             goto error;
         }
+        gtk_widget_set_name (mi, "sysmenu");
         gtk_widget_show(mi);
         gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
     }
