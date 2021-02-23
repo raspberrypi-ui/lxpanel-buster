@@ -387,6 +387,9 @@ void lxpanel_remove_plugin(LXPanel *p, GtkWidget *plugin);
 
 extern void lxpanel_plugin_set_taskbar_icon (LXPanel *p, GtkWidget *image, const char *icon);
 extern void lxpanel_plugin_set_menu_icon (LXPanel *p, GtkWidget *image, const char *icon);
+extern GtkWidget *lxpanel_plugin_new_menu_item (LXPanel *p, const char *text, int maxlen, const char *iconname);
+extern void lxpanel_plugin_update_menu_icon (GtkWidget *item, GtkWidget *image);
+extern void lxpanel_plugin_append_menu_icon (GtkWidget *item, GtkWidget *image);
 
 G_END_DECLS
 

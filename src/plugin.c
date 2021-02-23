@@ -634,13 +634,55 @@ void lxpanel_plugin_set_taskbar_icon (LXPanel *p, GtkWidget *image, const char *
 
 void lxpanel_plugin_set_menu_icon (LXPanel *p, GtkWidget *image, const char *icon)
 {
-    GdkPixbuf *pixbuf;
+    GdkPixbuf *pixbuf = NULL;
 
-    pixbuf = gtk_icon_theme_load_icon (panel_get_icon_theme (p), icon,
-        panel_get_safe_icon_size (p) > 32 ? 24 : 16, GTK_ICON_LOOKUP_FORCE_SIZE, NULL);
-    if (pixbuf)
+    if (icon)
+        pixbuf = gtk_icon_theme_load_icon (panel_get_icon_theme (p), icon,
+            panel_get_safe_icon_size (p) > 32 ? 24 : 16, GTK_ICON_LOOKUP_FORCE_SIZE, NULL);
+    if (!pixbuf)
     {
-        gtk_image_set_from_pixbuf (GTK_IMAGE (image), pixbuf);
-        g_object_unref (pixbuf);
+        pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, panel_get_safe_icon_size (p) > 32 ? 24 : 16, 
+            panel_get_safe_icon_size (p) > 32 ? 24 : 16);
+        gdk_pixbuf_fill (pixbuf, 0xffffff00);
     }
+    gtk_image_set_from_pixbuf (GTK_IMAGE (image), pixbuf);
+    g_object_unref (pixbuf);
+}
+
+GtkWidget *lxpanel_plugin_new_menu_item (LXPanel *p, const char *text, int maxlen, const char *iconname)
+{
+    GtkWidget *item = gtk_menu_item_new ();
+    gtk_widget_set_name (item, "panelmenuitem");
+    GtkWidget *box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MENU_ICON_SPACE);
+    GtkWidget *label = gtk_label_new (text);
+    GtkWidget *icon = gtk_image_new ();
+    lxpanel_plugin_set_menu_icon (p, icon, iconname);
+
+    if (maxlen)
+    {
+        gtk_label_set_max_width_chars (GTK_LABEL (label), maxlen);
+        gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_END);
+    }
+
+    gtk_container_add (GTK_CONTAINER (item), box);
+    gtk_container_add (GTK_CONTAINER (box), icon);
+    gtk_container_add (GTK_CONTAINER (box), label);
+
+    return item;
+}
+
+void lxpanel_plugin_update_menu_icon (GtkWidget *item, GtkWidget *image)
+{
+    GtkWidget *box = gtk_bin_get_child (GTK_BIN (item));
+    GList *children = gtk_container_get_children (GTK_CONTAINER (box));
+    GtkWidget *img = (GtkWidget *) children->data;
+    gtk_container_remove (GTK_CONTAINER (box), img);
+    gtk_box_pack_start (GTK_BOX (box), image, FALSE, FALSE, 0);
+    gtk_box_reorder_child (GTK_BOX (box), image, 0);
+}
+
+void lxpanel_plugin_append_menu_icon (GtkWidget *item, GtkWidget *image)
+{
+    GtkWidget *box = gtk_bin_get_child (GTK_BIN (item));
+    gtk_box_pack_start (GTK_BOX (box), image, FALSE, FALSE, 0);
 }
