@@ -64,10 +64,6 @@
 # endif
 #endif
 
-#if GTK_CHECK_VERSION(3, 0, 0)
-#define MENU_ICON_SPACE 6
-#endif
-
 #define DEFAULT_MENU_ICON PACKAGE_DATA_DIR "/images/my-computer.png"
 /*
  * SuxPanel version 0.1
