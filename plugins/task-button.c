@@ -1331,6 +1331,9 @@ static gboolean task_button_button_release_event(GtkWidget *widget, GdkEventButt
                 gtk_menu_detach(tb->menu_list);
             }
             tb->menu_list = GTK_MENU(gtk_menu_new());
+#if GTK_CHECK_VERSION(3, 0, 0)
+            gtk_menu_set_reserve_toggle_size (GTK_MENU (tb->menu_list), FALSE);
+#endif
             g_object_add_weak_pointer(G_OBJECT(tb->menu_list), (void **)&tb->menu_list);
             g_signal_connect(G_OBJECT(tb->menu_list), "selection-done",
                              G_CALLBACK(on_menu_list_selection_done), tb);
@@ -1344,8 +1347,13 @@ static gboolean task_button_button_release_event(GtkWidget *widget, GdkEventButt
                      * the icon of the application window. */
                     name = task->iconified ? g_strdup_printf("[%s]", task->name) : NULL;
 #if GTK_CHECK_VERSION(3, 0, 0)
-                    task->menu_item = gtk_menu_item_new_with_label(name ? name : task->name);
+                    task->menu_item = lxpanel_plugin_new_menu_item (tb->panel, name ? name : task->name, 0, NULL);
                     g_free(name);
+                    if (task->icon)
+                    {
+                        GtkWidget *im = gtk_image_new_from_pixbuf(task->icon);
+                        lxpanel_plugin_update_menu_icon (task->menu_item, im);
+                    }
 #else
                     task->menu_item = gtk_image_menu_item_new_with_label(name ? name : task->name);
                     g_free(name);
