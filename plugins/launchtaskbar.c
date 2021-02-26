@@ -1073,11 +1073,7 @@ static void on_size_allocation(GtkWidget *widget, GtkAllocation *a, LaunchTaskBa
         if (ltbp->lb_built && gtk_widget_get_visible(ltbp->lb_icon_grid))
             panel_icon_grid_set_geometry(PANEL_ICON_GRID(ltbp->lb_icon_grid),
                                          panel_get_orientation(ltbp->panel),
-#if GTK_CHECK_VERSION(3, 0, 0)
-                                         ltbp->icon_size + ICON_BUTTON_TRIM, ltbp->icon_size,
-#else
                                          ltbp->icon_size, ltbp->icon_size,
-#endif
                                          3, 0, panel_get_height(ltbp->panel));
         if (ltbp->tb_built && gtk_widget_get_visible(ltbp->tb_icon_grid))
             panel_icon_grid_set_geometry(PANEL_ICON_GRID(ltbp->tb_icon_grid),

@@ -762,11 +762,7 @@ make_button(menup *m, const gchar *fname, const gchar *name, GdkColor* tint, Gtk
 
     gtk_widget_set_visible (m->img, TRUE);
     if (m->padding) gtk_widget_set_size_request (m->img, m->iconsize + 2 * m->padding, -1);
-#if GTK_CHECK_VERSION(3, 0, 0)
-    gtk_button_set_image (GTK_BUTTON (m->box), m->img);
-#else
     gtk_container_add(GTK_CONTAINER(m->box), m->img);
-#endif
     gtk_widget_set_tooltip_text (m->box, _("Click here to open applications menu"));
 
     m->ds = fm_dnd_src_new(NULL);
