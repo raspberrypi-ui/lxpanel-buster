@@ -1865,11 +1865,7 @@ static void launchtaskbar_panel_configuration_changed(LXPanel *panel, GtkWidget 
         }
         panel_icon_grid_set_geometry(PANEL_ICON_GRID(ltbp->lb_icon_grid),
                                      panel_get_orientation(panel),
-#if GTK_CHECK_VERSION(3, 0, 0)
-                                     new_icon_size + ICON_BUTTON_TRIM, new_icon_size,
-#else
                                      new_icon_size, new_icon_size,
-#endif
                                      3, 0, height);
     }
 
@@ -1880,7 +1876,11 @@ static void launchtaskbar_panel_configuration_changed(LXPanel *panel, GtkWidget 
         panel_icon_grid_set_geometry(PANEL_ICON_GRID(ltbp->tb_icon_grid),
             panel_get_orientation(panel),
             ((ltbp->flags.icons_only) ? ltbp->icon_size + ICON_ONLY_EXTRA : ltbp->task_width_max),
+#if GTK_CHECK_VERSION(3, 0, 0)
+            ((ltbp->flags.icons_only) ? ltbp->icon_size + ICON_ONLY_EXTRA : ltbp->icon_size),
+#else
             ((ltbp->flags.icons_only) ? ltbp->icon_size + ICON_ONLY_EXTRA : ltbp->icon_size + ICON_BUTTON_TRIM),
+#endif
             ltbp->spacing, 0, height);
         taskbar_reset_menu(ltbp);
         taskbar_redraw(ltbp);
