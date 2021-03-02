@@ -1782,7 +1782,10 @@ gtk_weather_run_conditions_dialog(GtkWeather * weather)
       GtkWidget * location_name_label = gtk_label_new(_("Location:"));
       GtkWidget * location_name_text  = gtk_label_new(location_label_text);
 
-#if !GTK_CHECK_VERSION(3, 0, 0)
+#if GTK_CHECK_VERSION(3, 0, 0)
+      gtk_label_set_xalign (GTK_LABEL (location_name_label), 0.0);
+      gtk_label_set_xalign (GTK_LABEL (location_name_text), 0.0);
+#else
       GtkWidget * label_alignment = gtk_alignment_new(0, 0.5, 0, 0);
       GtkWidget * text_alignment = gtk_alignment_new(0, 0.5, 0, 0);
 
@@ -1817,7 +1820,10 @@ gtk_weather_run_conditions_dialog(GtkWeather * weather)
       GtkWidget * updated_label = gtk_label_new(_("Last updated:"));
       GtkWidget * updated_text = gtk_label_new(forecast->pcTime_);
 
-#if !GTK_CHECK_VERSION(3, 0, 0)
+#if GTK_CHECK_VERSION(3, 0, 0)
+      gtk_label_set_xalign (GTK_LABEL (updated_label), 0.0);
+      gtk_label_set_xalign (GTK_LABEL (updated_text), 0.0);
+#else
       GtkWidget * updated_alignment = gtk_alignment_new(0, 0.5, 0, 0);
       GtkWidget * updated_text_alignment = gtk_alignment_new(0, 0.5, 0, 0);
 
@@ -1863,7 +1869,10 @@ gtk_weather_run_conditions_dialog(GtkWeather * weather)
           GtkWidget * feels_label = gtk_label_new(_("Feels like:"));
           GtkWidget * feels_text = gtk_label_new(feels);
 
-#if !GTK_CHECK_VERSION(3, 0, 0)
+#if GTK_CHECK_VERSION(3, 0, 0)
+          gtk_label_set_xalign (GTK_LABEL (feels_label), 0.0);
+          gtk_label_set_xalign (GTK_LABEL (feels_text), 0.0);
+#else
           GtkWidget * feels_alignment = gtk_alignment_new(0, 0.5, 0, 0);
           gtk_container_add(GTK_CONTAINER(feels_alignment), feels_label);
 
@@ -1901,7 +1910,10 @@ gtk_weather_run_conditions_dialog(GtkWeather * weather)
       GtkWidget * humidity_label = gtk_label_new(_("Humidity:"));
       GtkWidget * humidity_text = gtk_label_new(humidity);
 
-#if !GTK_CHECK_VERSION(3, 0, 0)
+#if GTK_CHECK_VERSION(3, 0, 0)
+      gtk_label_set_xalign (GTK_LABEL (humidity_label), 0.0);
+      gtk_label_set_xalign (GTK_LABEL (humidity_text), 0.0);
+#else
       GtkWidget * humidity_alignment = gtk_alignment_new(0, 0.5, 0, 0);
       gtk_container_add(GTK_CONTAINER(humidity_alignment), humidity_label);
 
@@ -1940,7 +1952,10 @@ gtk_weather_run_conditions_dialog(GtkWeather * weather)
       GtkWidget * pressure_label = gtk_label_new(_("Pressure:"));
       GtkWidget * pressure_text = gtk_label_new(pressure);
 
-#if !GTK_CHECK_VERSION(3, 0, 0)
+#if GTK_CHECK_VERSION(3, 0, 0)
+      gtk_label_set_xalign (GTK_LABEL (pressure_label), 0.0);
+      gtk_label_set_xalign (GTK_LABEL (pressure_text), 0.0);
+#else
       GtkWidget * pressure_alignment = gtk_alignment_new(0, 0.5, 0, 0);
       gtk_container_add(GTK_CONTAINER(pressure_alignment), pressure_label);
 
@@ -1979,7 +1994,10 @@ gtk_weather_run_conditions_dialog(GtkWeather * weather)
       GtkWidget * visibility_label = gtk_label_new(_("Visibility:"));
       GtkWidget * visibility_text = gtk_label_new(visibility);
 
-#if !GTK_CHECK_VERSION(3, 0, 0)
+#if GTK_CHECK_VERSION(3, 0, 0)
+      gtk_label_set_xalign (GTK_LABEL (visibility_label), 0.0);
+      gtk_label_set_xalign (GTK_LABEL (visibility_text), 0.0);
+#else
       GtkWidget * visibility_alignment = gtk_alignment_new(0, 0.5, 0, 0);
       gtk_container_add(GTK_CONTAINER(visibility_alignment), visibility_label);
 
@@ -2019,7 +2037,10 @@ gtk_weather_run_conditions_dialog(GtkWeather * weather)
       GtkWidget * wind_label = gtk_label_new(_("Wind:"));
       GtkWidget * wind_text = gtk_label_new(wind);
 
-#if !GTK_CHECK_VERSION(3, 0, 0)
+#if GTK_CHECK_VERSION(3, 0, 0)
+      gtk_label_set_xalign (GTK_LABEL (wind_label), 0.0);
+      gtk_label_set_xalign (GTK_LABEL (wind_text), 0.0);
+#else
       GtkWidget * wind_alignment = gtk_alignment_new(0, 0.5, 0, 0);
       gtk_container_add(GTK_CONTAINER(wind_alignment), wind_label);
 
@@ -2054,7 +2075,10 @@ gtk_weather_run_conditions_dialog(GtkWeather * weather)
       GtkWidget * sunrise_label = gtk_label_new(_("Sunrise:"));
       GtkWidget * sunrise_text = gtk_label_new(forecast->pcSunrise_);
 
-#if !GTK_CHECK_VERSION(3, 0, 0)
+#if GTK_CHECK_VERSION(3, 0, 0)
+      gtk_label_set_xalign (GTK_LABEL (sunrise_label), 0.0);
+      gtk_label_set_xalign (GTK_LABEL (sunrise_text), 0.0);
+#else
       GtkWidget * sunrise_alignment = gtk_alignment_new(0, 0.5, 0, 0);
       gtk_container_add(GTK_CONTAINER(sunrise_alignment), sunrise_label);
 
@@ -2089,7 +2113,10 @@ gtk_weather_run_conditions_dialog(GtkWeather * weather)
       GtkWidget * sunset_label = gtk_label_new(_("Sunset:"));
       GtkWidget * sunset_text = gtk_label_new(forecast->pcSunset_);
 
-#if !GTK_CHECK_VERSION(3, 0, 0)
+#if GTK_CHECK_VERSION(3, 0, 0)
+      gtk_label_set_xalign (GTK_LABEL (sunset_label), 0.0);
+      gtk_label_set_xalign (GTK_LABEL (sunset_text), 0.0);
+#else
       GtkWidget * sunset_alignment = gtk_alignment_new(0, 0.5, 0, 0);
       gtk_container_add(GTK_CONTAINER(sunset_alignment), sunset_label);
 
