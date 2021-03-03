@@ -457,6 +457,10 @@ static void lxpanel_size_allocate(GtkWidget *widget, GtkAllocation *a)
     p->ax = rect.x;
     p->ay = rect.y;
 
+#if GTK_CHECK_VERSION(3, 0, 0)
+    if (a->width != p->aw || a->height != p->ah) gtk_widget_set_size_request (widget, p->aw, p->ah);
+#endif
+
     if (rect.width != p->aw || rect.height != p->ah || x != p->ax || y != p->ay)
     {
         p->aw = rect.width;
