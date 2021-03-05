@@ -686,3 +686,19 @@ void lxpanel_plugin_append_menu_icon (GtkWidget *item, GtkWidget *image)
     GtkWidget *box = gtk_bin_get_child (GTK_BIN (item));
     gtk_box_pack_start (GTK_BOX (box), image, FALSE, FALSE, 0);
 }
+
+const char *lxpanel_plugin_get_menu_label (GtkWidget *item)
+{
+    if (!GTK_IS_BIN (item)) return "";
+    GtkWidget *box = gtk_bin_get_child (GTK_BIN (item));
+    if (!box) return "";
+    GList *children = gtk_container_get_children (GTK_CONTAINER (box));
+    if (!children) return "";
+    while (children->data)
+    {
+        if (GTK_IS_LABEL ((GtkWidget *) children->data))
+            return gtk_label_get_text (GTK_LABEL ((GtkWidget *) children->data));
+        children = children->next;
+    }
+    return "";
+}

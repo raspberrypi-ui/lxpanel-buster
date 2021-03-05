@@ -390,6 +390,7 @@ extern void lxpanel_plugin_set_menu_icon (LXPanel *p, GtkWidget *image, const ch
 extern GtkWidget *lxpanel_plugin_new_menu_item (LXPanel *p, const char *text, int maxlen, const char *iconname);
 extern void lxpanel_plugin_update_menu_icon (GtkWidget *item, GtkWidget *image);
 extern void lxpanel_plugin_append_menu_icon (GtkWidget *item, GtkWidget *image);
+extern const char *lxpanel_plugin_get_menu_label (GtkWidget *item);
 
 G_END_DECLS
 
