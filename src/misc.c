@@ -1326,7 +1326,12 @@ static GtkWidget *_lxpanel_button_compose(GtkWidget *event_box, GtkWidget *image
 {
     ImgData * data = (ImgData *) g_object_get_qdata(G_OBJECT(image), img_data_id);
 
-#if !GTK_CHECK_VERSION(3, 0, 0)
+#if GTK_CHECK_VERSION(3, 0, 0)
+    gtk_widget_set_margin_start (image, 0);
+    gtk_widget_set_margin_end (image, 0);
+    gtk_widget_set_margin_top (image, 0);
+    gtk_widget_set_margin_bottom (image, 0);
+#else
     gtk_misc_set_padding(GTK_MISC(image), 0, 0);
     gtk_misc_set_alignment(GTK_MISC(image), 0.5, 0.5);
 #endif
@@ -1372,7 +1377,10 @@ static GtkWidget *_lxpanel_button_compose(GtkWidget *event_box, GtkWidget *image
         }
         else
             gtk_label_set_text(GTK_LABEL(lbl), label);
-#if !GTK_CHECK_VERSION(3, 0, 0)
+#if GTK_CHECK_VERSION(3, 0, 0)
+        gtk_widget_set_margin_start (lbl, 2);
+        gtk_widget_set_margin_end (lbl, 2);
+#else
         gtk_misc_set_padding(GTK_MISC(lbl), 2, 0);
 #endif
         gtk_box_pack_end(GTK_BOX(inner), lbl, FALSE, FALSE, 0);

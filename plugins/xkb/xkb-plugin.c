@@ -1272,7 +1272,10 @@ static GtkWidget *xkb_configure(LXPanel *panel, GtkWidget *p)
     GtkWidget * p_label_kbd_model = gtk_label_new(NULL);
     snprintf(markup_str, MAX_MARKUP_LEN, "<b>%s</b>", _("Keyboard Model"));
     gtk_label_set_markup(GTK_LABEL(p_label_kbd_model), markup_str);
-#if !GTK_CHECK_VERSION(3, 0, 0)
+#if GTK_CHECK_VERSION(3, 0, 0)
+    gtk_widget_set_margin_start (p_label_kbd_model, 1);
+    gtk_widget_set_margin_end (p_label_kbd_model, 1);
+#else
     gtk_misc_set_padding(GTK_MISC(p_label_kbd_model), 1, 0);
 #endif
     gtk_frame_set_label_widget(GTK_FRAME(p_xkb->p_frame_kbd_model), p_label_kbd_model);
@@ -1300,7 +1303,10 @@ static GtkWidget *xkb_configure(LXPanel *panel, GtkWidget *p)
     GtkWidget * p_label_kbd_layouts = gtk_label_new(NULL);
     snprintf(markup_str, MAX_MARKUP_LEN, "<b>%s</b>", _("Keyboard Layouts"));
     gtk_label_set_markup(GTK_LABEL(p_label_kbd_layouts), markup_str);
-#if !GTK_CHECK_VERSION(3, 0, 0)
+#if GTK_CHECK_VERSION(3, 0, 0)
+    gtk_widget_set_margin_start (p_label_kbd_layouts, 1);
+    gtk_widget_set_margin_end (p_label_kbd_layouts, 1);
+#else
     gtk_misc_set_padding(GTK_MISC(p_label_kbd_layouts), 1, 0);
 #endif
     gtk_frame_set_label_widget(GTK_FRAME(p_xkb->p_frame_kbd_layouts), p_label_kbd_layouts);
@@ -1383,7 +1389,10 @@ static GtkWidget *xkb_configure(LXPanel *panel, GtkWidget *p)
     GtkWidget * p_label_change_layout = gtk_label_new(NULL);
     snprintf(markup_str, MAX_MARKUP_LEN, "<b>%s</b>", _("Change Layout Option"));
     gtk_label_set_markup(GTK_LABEL(p_label_change_layout), markup_str);
-#if !GTK_CHECK_VERSION(3, 0, 0)
+#if GTK_CHECK_VERSION(3, 0, 0)
+    gtk_widget_set_margin_start (p_label_change_layout, 1);
+    gtk_widget_set_margin_end (p_label_change_layout, 1);
+#else
     gtk_misc_set_padding(GTK_MISC(p_label_change_layout), 1, 0);
 #endif
     gtk_frame_set_label_widget(GTK_FRAME(p_xkb->p_frame_change_layout), p_label_change_layout);
@@ -1410,7 +1419,10 @@ static GtkWidget *xkb_configure(LXPanel *panel, GtkWidget *p)
     GtkWidget * p_label_advanced_opt = gtk_label_new(NULL);
     snprintf(markup_str, MAX_MARKUP_LEN, "<b>%s</b>", _("Advanced setxkbmap Options"));
     gtk_label_set_markup(GTK_LABEL(p_label_advanced_opt), markup_str);
-#if !GTK_CHECK_VERSION(3, 0, 0)
+#if GTK_CHECK_VERSION(3, 0, 0)
+    gtk_widget_set_margin_start (p_label_advanced_opt, 1);
+    gtk_widget_set_margin_end (p_label_advanced_opt, 1);
+#else
     gtk_misc_set_padding(GTK_MISC(p_label_advanced_opt), 1, 0);
 #endif
     gtk_frame_set_label_widget(GTK_FRAME(p_frame_advanced_opt), p_label_advanced_opt);
@@ -1458,7 +1470,10 @@ static GtkWidget *xkb_configure(LXPanel *panel, GtkWidget *p)
     GtkWidget * p_label_perapp_layout = gtk_label_new(NULL);
     snprintf(markup_str, MAX_MARKUP_LEN, "<b>%s</b>", _("Per Window Settings"));
     gtk_label_set_markup(GTK_LABEL(p_label_perapp_layout), markup_str);
-#if !GTK_CHECK_VERSION(3, 0, 0)
+#if GTK_CHECK_VERSION(3, 0, 0)
+    gtk_widget_set_margin_start (p_label_perapp_layout, 1);
+    gtk_widget_set_margin_end (p_label_perapp_layout, 1);
+#else
     gtk_misc_set_padding(GTK_MISC(p_label_perapp_layout), 1, 0);
 #endif
     gtk_frame_set_label_widget(GTK_FRAME(p_frame_perapp_layout), p_label_perapp_layout);
@@ -1486,7 +1501,10 @@ static GtkWidget *xkb_configure(LXPanel *panel, GtkWidget *p)
     GtkWidget * p_label_show_layout_as = gtk_label_new(NULL);
     snprintf(markup_str, MAX_MARKUP_LEN, "<b>%s</b>", _("Show Layout as"));
     gtk_label_set_markup(GTK_LABEL(p_label_show_layout_as), markup_str);
-#if !GTK_CHECK_VERSION(3, 0, 0)
+#if GTK_CHECK_VERSION(3, 0, 0)
+    gtk_widget_set_margin_start (p_label_show_layout_as, 1);
+    gtk_widget_set_margin_end (p_label_show_layout_as, 1);
+#else
     gtk_misc_set_padding(GTK_MISC(p_label_show_layout_as), 1, 0);
 #endif
     gtk_frame_set_label_widget(GTK_FRAME(p_frame_display_type), p_label_show_layout_as);
@@ -1595,7 +1613,10 @@ static GtkWidget *xkb_configure(LXPanel *panel, GtkWidget *p)
     GtkWidget * p_label_flag_size = gtk_label_new(NULL);
     snprintf(markup_str, MAX_MARKUP_LEN, "<b>%s</b>", _("Panel Icon Size"));
     gtk_label_set_markup(GTK_LABEL(p_label_flag_size), markup_str);
-#if !GTK_CHECK_VERSION(3, 0, 0)
+#if GTK_CHECK_VERSION(3, 0, 0)
+    gtk_widget_set_margin_start (p_label_flag_size, 1);
+    gtk_widget_set_margin_end (p_label_flag_size, 1);
+#else
     gtk_misc_set_padding(GTK_MISC(p_label_flag_size), 1, 0);
 #endif
     gtk_frame_set_label_widget(GTK_FRAME(p_frame_flag_size), p_label_flag_size);

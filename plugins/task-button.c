@@ -641,7 +641,12 @@ static void assemble_gui(TaskButton *self)
     gtk_container_set_border_width(GTK_CONTAINER(container), 0);
 
     /* Add the image to contain the application icon to the box. */
-#if !GTK_CHECK_VERSION(3, 0, 0)
+#if GTK_CHECK_VERSION(3, 0, 0)
+    gtk_widget_set_margin_start (self->image, 0);
+    gtk_widget_set_margin_end (self->image, 0);
+    gtk_widget_set_margin_top (self->image, 0);
+    gtk_widget_set_margin_bottom (self->image, 0);
+#else
     gtk_misc_set_padding(GTK_MISC(self->image), 0, 0);
 #endif
     gtk_box_pack_start(GTK_BOX(container), self->image, FALSE, FALSE, 0);

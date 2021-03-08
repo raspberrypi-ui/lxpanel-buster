@@ -189,7 +189,10 @@ wireless_menu(netdev_info *ni)
                 essid_label = gtk_label_new(aps->apinfo->essid);
 
             gtk_label_set_justify(GTK_LABEL(essid_label), GTK_JUSTIFY_LEFT);
-#if !GTK_CHECK_VERSION(3, 0, 0)
+#if GTK_CHECK_VERSION(3, 0, 0)
+            gtk_widget_set_margin_start (essid_label, 2);
+            gtk_widget_set_margin_end (essid_label, 2);
+#else
             gtk_misc_set_padding(GTK_MISC(essid_label), 2, 0);
 #endif
             gtk_box_pack_start(GTK_BOX(item_box), essid_label, TRUE, FALSE, 0);
