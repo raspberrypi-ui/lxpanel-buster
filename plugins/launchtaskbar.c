@@ -1950,7 +1950,9 @@ static gboolean accept_net_wm_state(NetWMState * nws)
 /* Determine if a task should be visible given its NET_WM_WINDOW_TYPE. */
 static gboolean accept_net_wm_window_type(NetWMWindowType * nwwt)
 {
-    return ( ! ((nwwt->desktop) || (nwwt->dock) || (nwwt->splash)));
+    /* !!!!! - for some reason, with mutter, the skip_taskbar hint on plugins has no effect and does not get
+     * detected. However, plugin windows do get detected as dialogs - so dialog has been added to this filter... */
+    return ( ! ((nwwt->desktop) || (nwwt->dock) || (nwwt->splash) || (nwwt->dialog)));
 }
 
 /* Set the class associated with a task. */
