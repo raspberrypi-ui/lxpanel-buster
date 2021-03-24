@@ -719,7 +719,10 @@ static gboolean show_system_menu_idle(gpointer user_data)
 static void show_system_menu(GtkWidget *p)
 {
     menup *m = lxpanel_plugin_get_data(p);
-	if (m->has_system_menu) show_menu( m->box, m, 0, GDK_CURRENT_TIME );
+    if (m->has_system_menu && m->show_system_menu_idle == 0)
+        /* FIXME: I've no idea why this doesn't work without timeout
+                              under some WMs, like icewm. */
+        m->show_system_menu_idle = g_timeout_add(200, show_system_menu_idle, m);
 }
 
 #if GTK_CHECK_VERSION(3, 0, 0)
