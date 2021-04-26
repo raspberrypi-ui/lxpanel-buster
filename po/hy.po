@@ -13,10 +13,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.0.5\n"
-"X-Poedit-Language: English\n"
+"X-Poedit-Language: Armenian\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-Country: UNITED KINGDOM\n"
-"X-Pootle-Path: /en_GB/lxpanel/po/hy.po\n"
+"X-Poedit-Country: Armenia\n"
+"X-Pootle-Path: /hy/lxpanel/po/hy.po\n"
 "X-Pootle-Revision: 0\n"
 
 #: ../src/configurator.c:148
@@ -27,7 +27,7 @@ msgstr ""
 
 #: ../src/configurator.c:632
 msgid "Currently loaded plugins"
-msgstr "Ընթացիկ բեռնված ընդլայնումներ"
+msgstr "Ընթացիկ բեռնված հավելումներ"
 
 #: ../src/configurator.c:641
 msgid "Stretch"
@@ -35,11 +35,11 @@ msgstr "Ձգել"
 
 #: ../src/configurator.c:779
 msgid "Add plugin to panel"
-msgstr "Ավելացնել ընդլայնումը պանելին"
+msgstr "Ավելացնել հավելումը պանելին"
 
 #: ../src/configurator.c:807
 msgid "Available plugins"
-msgstr "Հասանելի ընդլայնումներ"
+msgstr "Հասանելի հավելումներ"
 
 #: ../src/configurator.c:1427
 msgid "Logout command is not set"
@@ -66,8 +66,8 @@ msgid ""
 "Really delete this panel?\n"
 "<b>Warning: This can not be recovered.</b>"
 msgstr ""
-"Իրո՞ք ջնջել այս պանելը\n"
-"<b>ԶԳՈՒՇԱՑՈՒՄ. Հնարավոր չէ հետարկել այն։</b>"
+"Իրո՞ք ջնջել պանելը\n"
+"<b>WARNING: This can not be recovered.</b>"
 
 #: ../src/panel.c:1431
 msgid "Confirm"
@@ -84,7 +84,7 @@ msgstr "LXPanel"
 
 #: ../src/panel.c:1489
 msgid "Copyright (C) 2008-2019"
-msgstr "Հեղինակային Իրավունք © 2008-2019"
+msgstr "Հեղինակային իրավունք © 2008-2019"
 
 #: ../src/panel.c:1490
 msgid "Desktop panel for LXDE project"
@@ -96,12 +96,12 @@ msgstr "\"%s\" Կարգավորումներ"
 
 #: ../src/panel.c:1553
 msgid "Add / Remove Panel Items"
-msgstr "Ավելացնել / Ջնջել պանելի տարրերը"
+msgstr "Ավելացնել / Հեռացնել պանելի տարրերը"
 
 #: ../src/panel.c:1561
 #, c-format
 msgid "Remove \"%s\" From Panel"
-msgstr "Ջնջել \"%s\" -ը պանելից"
+msgstr "Հեռացնել \"%s\" պանելից"
 
 #: ../src/panel.c:1573
 msgid "Panel Settings"
@@ -109,7 +109,7 @@ msgstr "Պանելի կարգավորումներ"
 
 #: ../src/panel.c:1579
 msgid "Create New Panel"
-msgstr "Ստեղծել նոր Պանել"
+msgstr "Ստեղծել նոր պանել"
 
 #: ../src/panel.c:1585
 msgid "Delete This Panel"
@@ -117,11 +117,11 @@ msgstr "Ջնջել այս պանելը"
 
 #: ../src/panel.c:1596
 msgid "About"
-msgstr "Panel-ի մասին"
+msgstr "Մեր մասին"
 
 #: ../src/panel.c:1603
 msgid "Panel"
-msgstr "Panel"
+msgstr "Պանել"
 
 #: ../src/panel.c:1821 ../src/panel.c:1829 ../data/ui/panel-pref.glade.h:22
 msgid "Height:"
@@ -133,11 +133,11 @@ msgstr "Լայնություն՝"
 
 #: ../src/panel.c:1823 ../data/ui/panel-pref.glade.h:13
 msgid "Left"
-msgstr "Ձախ՝"
+msgstr "Ձախ"
 
 #: ../src/panel.c:1824 ../data/ui/panel-pref.glade.h:14
 msgid "Right"
-msgstr "Աջ՝"
+msgstr "Աջ"
 
 #: ../src/panel.c:1830 ../data/ui/panel-pref.glade.h:12
 msgid "Top"
@@ -158,7 +158,7 @@ msgstr "Գործարկել..."
 
 #: ../src/gtk-run.c:399
 msgid "Enter the command you want to execute:"
-msgstr "Մուտքագրել հրամանը, որը ցանկանում եք գործարկել՝"
+msgstr "Մուտքագրել այն հրամանը, որը ցանկանում եք գործարկել"
 
 #: ../src/main.c:71 ../plugins/menu.c:732
 msgid "Restart"
@@ -171,44 +171,44 @@ msgstr "Անջատել..."
 #: ../src/main.c:505
 #, c-format
 msgid "lxpanel %s - lightweight GTK2+ panel for UNIX desktops\n"
-msgstr "lxpanel %s - lightweight GTK2+ panel for Linux & UNIX desktops\n"
+msgstr "lxpanel %s - թեթև GTK2+ պանել Linux և UNIX աշխատասեղանների համար\n"
 
 #: ../src/main.c:506
 #, c-format
 msgid "Command line options:\n"
-msgstr "Հրամանաշարի ընտրանքներ\n"
+msgstr "Տերմինալի ընտրանքներ՝\n"
 
 #: ../src/main.c:507
 #, c-format
 msgid " --help      -- print this help and exit\n"
-msgstr " --help      -- տպել այս օգնությունը և դուրս գալ\n"
+msgstr " --օգնություն      -- տպել այս օգնություն և դուրս գալ\n"
 
 #: ../src/main.c:508
 #, c-format
 msgid " --version   -- print version and exit\n"
-msgstr " --version   -- տպել այս տարբերակը և դուրս գալ\n"
+msgstr " --տարբերակ   -- տպել տարբերակը և դուրս գալ\n"
 
 #. g_print(_(" --log <number> -- set log level 0-5. 0 - none 5 - chatty\n"));
 #. g_print(_(" --configure -- launch configuration utility\n"));
 #: ../src/main.c:511
 #, c-format
 msgid " --profile name -- use specified profile\n"
-msgstr " --profile name -- օգտագործել հատկանշված պրոֆիլը\n"
+msgstr " --պրոֆիլի անուն -- օգտագործել նշված պրոֆիլը\n"
 
 #: ../src/main.c:513
 #, c-format
 msgid " -h  -- same as --help\n"
-msgstr " -h  -- նույնն է, ինչպես --օգնությունը\n"
+msgstr " -h  -- հավասար է --օգնություն\n"
 
 #: ../src/main.c:514
 #, c-format
 msgid " -p  -- same as --profile\n"
-msgstr " -p  -- նույնն է, ինչպես --պրոֆիլը\n"
+msgstr " -p  -- հավասար է --պրոֆիլ\n"
 
 #: ../src/main.c:515
 #, c-format
 msgid " -v  -- same as --version\n"
-msgstr " -V  -- նույնն է, ինչպես --տարբերակը\n"
+msgstr " -v  -- հավասար է --տարբերակի\n"
 
 #. g_print(_(" -C  -- same as --configure\n"));
 #: ../src/main.c:517
@@ -219,7 +219,7 @@ msgid ""
 "\n"
 msgstr ""
 "\n"
-"Մանրամասների համար այցելեք http://lxde.org/\n"
+"Այցելեք http://lxde.org/ կայք մարնամասների համար։\n"
 "\n"
 
 #: ../src/input-button.c:147
@@ -250,7 +250,7 @@ msgstr ""
 #: ../plugins/netstatus/netstatus-iface.c:191
 #: ../plugins/netstatus/netstatus-util.c:167
 msgid "Error"
-msgstr "Սխալ"
+msgstr "Սխալմունք"
 
 #. GtkRadioButton "None"
 #: ../src/input-button.c:329 ../data/ui/panel-pref.glade.h:5
@@ -274,22 +274,22 @@ msgstr "Spacer"
 #: ../src/space.c:396 ../data/ui/panel-pref.glade.h:32
 #: ../plugins/batt/batt.c:714
 msgid "Size"
-msgstr "Չափ"
+msgstr "Չափս"
 
 #: ../src/space.c:404
 msgid "Allocate space"
-msgstr "Առանձնացնել տարածք"
+msgstr "Հատկացնել տարածք"
 
 #: ../data/ui/launchtaskbar.glade.h:1 ../plugins/launchtaskbar.c:2507
 #, fuzzy
 msgid "Application Launch and Task Bar"
-msgstr "Ծրագրերի գործարկման գոտի"
+msgstr "Ծրագրի գործարկման գոտի"
 
 #. Launchtaskbar mode: launchbar, taskbar, or combined
 #: ../data/ui/launchtaskbar.glade.h:3
 #, fuzzy
 msgid "<b>Mode:</b>"
-msgstr "<b>Չափ</b>"
+msgstr "<b>Չափս</b>"
 
 #: ../data/ui/launchtaskbar.glade.h:4
 msgid "Launchers"
@@ -302,7 +302,7 @@ msgstr "<b>Ֆոն</b>"
 
 #: ../data/ui/launchtaskbar.glade.h:6
 msgid "Show tooltips"
-msgstr "Ցույց տալ գործիքների հուշումը"
+msgstr "Ցուցադրել գործիքների հուշումները"
 
 #: ../data/ui/launchtaskbar.glade.h:7
 msgid "Icons only"
@@ -314,7 +314,7 @@ msgstr "Հարթ կոճակներ"
 
 #: ../data/ui/launchtaskbar.glade.h:9
 msgid "Show windows from all desktops"
-msgstr "Ցուցադրել բոլոր աշխատասեղանների պատուհանները"
+msgstr "Ցույց տալ պատուհանները բոլոր աշխատասեղանների համար"
 
 #: ../data/ui/launchtaskbar.glade.h:10
 msgid "Only show windows on the same monitor as the task bar"
@@ -326,11 +326,11 @@ msgstr "Օգտագործել մկնիկի անիվը"
 
 #: ../data/ui/launchtaskbar.glade.h:12
 msgid "Flash when there is any window requiring attention"
-msgstr "Թարթել, երբ առկա է ուշադրություն պահանջող պատուհան"
+msgstr "Փողարկեք, երբ առկա է ուշադրություն պահանջող պատուհան"
 
 #: ../data/ui/launchtaskbar.glade.h:13
 msgid "Combine multiple application windows into a single button"
-msgstr "Միավորել բազմաթիվ պատուհանները մեկ կոճակի ներքո"
+msgstr "Միավորել բազմաթիվ ծրագրերի պատուհանները մեկ կոճակի տակ"
 
 #: ../data/ui/launchtaskbar.glade.h:14
 msgid "Disable enlargement for small task icons"
@@ -342,11 +342,11 @@ msgstr ""
 
 #: ../data/ui/launchtaskbar.glade.h:16
 msgid "Maximum width of task button"
-msgstr "Խնդրի կոճակի առավելագույն լայնությունը"
+msgstr "Խնդրի կոճակի առավելագույն լայնություն"
 
 #: ../data/ui/launchtaskbar.glade.h:17
 msgid "Spacing"
-msgstr "Միջակայք"
+msgstr "Տարածություն"
 
 #: ../data/ui/launchtaskbar.glade.h:18
 #, fuzzy
@@ -370,11 +370,11 @@ msgstr "Ծրագրի գործարկման գոտի"
 
 #: ../data/ui/netstatus.glade.h:1
 msgid "<b>Connection</b>"
-msgstr "<b>Միացում</b>"
+msgstr "<b>Կապակցում</b>"
 
 #: ../data/ui/netstatus.glade.h:2
 msgid "Status:"
-msgstr "Կարգավիճակ՝"
+msgstr "Կարգավիճակէ"
 
 #: ../data/ui/netstatus.glade.h:3
 msgid "_Name:"
@@ -386,7 +386,7 @@ msgstr "<b>Ակտիվություն</b>"
 
 #: ../data/ui/netstatus.glade.h:5
 msgid "Received:"
-msgstr "Ստացված՝"
+msgstr "Ստացած՝"
 
 #: ../data/ui/netstatus.glade.h:6
 msgid "Sent:"
@@ -415,12 +415,12 @@ msgstr "Հասցե՝"
 
 #: ../data/ui/netstatus.glade.h:13
 msgid "Destination:"
-msgstr "Վերջնակետ՝"
+msgstr "Նպատակակետ՝"
 
 #: ../data/ui/netstatus.glade.h:14 ../plugins/netstat/netstat.c:372
 #: ../plugins/netstat/netstat.c:383
 msgid "Broadcast:"
-msgstr "Հեռարձակել՝"
+msgstr "Հեռարձակում՝"
 
 #: ../data/ui/netstatus.glade.h:15
 msgid "Subnet Mask:"
@@ -452,11 +452,11 @@ msgstr "Կարգաբերել"
 
 #: ../data/ui/panel-pref.glade.h:1
 msgid "Dynamic"
-msgstr "Շարժական"
+msgstr "Շարժուն"
 
 #: ../data/ui/panel-pref.glade.h:2
 msgid "Pixels"
-msgstr "Պիքսել"
+msgstr "Պիքսելներ"
 
 #: ../data/ui/panel-pref.glade.h:4
 #, no-c-format
@@ -465,19 +465,19 @@ msgstr "% տոկոս"
 
 #: ../data/ui/panel-pref.glade.h:6
 msgid "Err"
-msgstr "Սխալ"
+msgstr "Սխալմունք"
 
 #: ../data/ui/panel-pref.glade.h:7
 msgid "Warn"
-msgstr "Զգուշ."
+msgstr "Զգուշացնել"
 
 #: ../data/ui/panel-pref.glade.h:8
 msgid "Info"
-msgstr "Տեղեկատվություն"
+msgstr "Տեղկատվություն"
 
 #: ../data/ui/panel-pref.glade.h:9
 msgid "All"
-msgstr "Բոլորը"
+msgstr "Ամբողջը"
 
 #: ../data/ui/panel-pref.glade.h:10
 msgid "Panel Preferences"
@@ -493,16 +493,16 @@ msgstr "Կենտրոն"
 
 #: ../data/ui/panel-pref.glade.h:17
 msgid "Alignment:"
-msgstr "Հավասարեցում՝"
+msgstr "Հավասարեցումէ"
 
 #: ../data/ui/panel-pref.glade.h:18
 msgid "Margin:"
-msgstr "Սահման՝"
+msgstr "Լուսանցք՝"
 
 #: ../data/ui/panel-pref.glade.h:19
 #, fuzzy
 msgid "Monitor:"
-msgstr "Մարտկոցի հսկում"
+msgstr "Մարտկոցի հսկիչ"
 
 #: ../data/ui/panel-pref.glade.h:20
 msgid "<b>Position</b>"
@@ -510,11 +510,11 @@ msgstr "<b>Դիրք</b>"
 
 #: ../data/ui/panel-pref.glade.h:23
 msgid "Icon size:"
-msgstr "Պատկերի չափը՝"
+msgstr "Մանրապատկերի չափսը՝"
 
 #: ../data/ui/panel-pref.glade.h:24
 msgid "<b>Size</b>"
-msgstr "<b>Չափ</b>"
+msgstr "<b>Չափս</b>"
 
 #: ../data/ui/panel-pref.glade.h:25
 msgid "Geometry"
@@ -530,11 +530,11 @@ msgstr "Միագույն (անթափանցիկությամբ)"
 
 #: ../data/ui/panel-pref.glade.h:28 ../plugins/xkb/xkb-plugin.c:1455
 msgid "Image"
-msgstr "Պատկեր"
+msgstr "Նկար"
 
 #: ../data/ui/panel-pref.glade.h:29
 msgid "Select an image file"
-msgstr "Ընտրել պատկերի նիշքը"
+msgstr "Ընտրել նկարի նիշքը"
 
 #: ../data/ui/panel-pref.glade.h:30
 msgid "<b>Background</b>"
@@ -550,7 +550,7 @@ msgstr "<b>Տառատեսակ</b>"
 
 #: ../data/ui/panel-pref.glade.h:34
 msgid "Appearance"
-msgstr "Արտաքին տեսքը"
+msgstr "Արտաքին տեսք"
 
 #: ../data/ui/panel-pref.glade.h:35
 msgid "Panel Applets"
@@ -558,11 +558,11 @@ msgstr "Պանելի ծրագրաշար"
 
 #: ../data/ui/panel-pref.glade.h:36
 msgid "Logout Command:"
-msgstr "Դուրս գալու հրամանը՝"
+msgstr "Դուրս գալու հրաման՝"
 
 #: ../data/ui/panel-pref.glade.h:37
 msgid "Terminal Emulator:"
-msgstr "Տերմինալի էմուլյատոր՝"
+msgstr "Տերմինալի էմուլատոր՝"
 
 #: ../data/ui/panel-pref.glade.h:38
 msgid "File Manager:"
@@ -570,15 +570,15 @@ msgstr "Նիշքի կառավարիչ՝"
 
 #: ../data/ui/panel-pref.glade.h:39
 msgid "<b>Set Preferred Applications</b>"
-msgstr "<b>Սահմանել նախընտրելի ծրագրերը</b>"
+msgstr "<b>Սահմանել նախընտրած ծրագրերը</b>"
 
 #: ../data/ui/panel-pref.glade.h:40
 msgid "Make window managers treat the panel as dock"
-msgstr "Պատուհանի կառավարիչներին թույլ տալ վերաբերվելու, որպես հիմնակետ"
+msgstr "Թույլատրել պատուհանի կառավարմանը պանելին վերաբերվել, որպես հանգույց"
 
 #: ../data/ui/panel-pref.glade.h:41
 msgid "Reserve space, and not covered by maximized windows"
-msgstr "Պահուստային տարածք, ծածկված չէ առավելագույնի հասցված պատուհաններով"
+msgstr "Պահուստային տարածք, ծածկված չէ առավելագույնի մեծությամբ պատուհաններով"
 
 #: ../data/ui/panel-pref.glade.h:42
 msgid "<b>Properties</b>"
@@ -586,27 +586,27 @@ msgstr "<b>Հատկություններ</b>"
 
 #: ../data/ui/panel-pref.glade.h:43
 msgid "Minimize panel when not in use"
-msgstr "Փոքրացնել պանելը, երբ չի օգտագործվում"
+msgstr "Փոքրացնել պանելը, երբ այն չի օգտագործվում"
 
 #: ../data/ui/panel-pref.glade.h:44
 msgid "Size when minimized"
-msgstr "Չափը, երբ փոքրացված է"
+msgstr "Չափը նվազագույնի հասցնել"
 
 #: ../data/ui/panel-pref.glade.h:45
 msgid "pixels"
-msgstr "պիքսել"
+msgstr "պիքսելներ"
 
 #: ../data/ui/panel-pref.glade.h:46
 msgid "<b>Automatic hiding</b>"
-msgstr "<b>Ինքնաբերաբար ծածկում</b>"
+msgstr "<b>Թաքցնել ինքնաբերաբար</b>"
 
 #: ../data/ui/panel-pref.glade.h:47
 msgid "Log level"
-msgstr "Տեղեկամտյանի մակարդակ"
+msgstr "Տեղեկամատյանի մակարդակ"
 
 #: ../data/ui/panel-pref.glade.h:48
 msgid "<b>Log level</b>"
-msgstr "<b>Տեղեկամտյանի մակարդակ</b>"
+msgstr "<b>Տեղեկամատյանի մակարդակ</b>"
 
 #: ../data/ui/panel-pref.glade.h:49
 msgid "Advanced"
@@ -614,11 +614,11 @@ msgstr "Առաջնային"
 
 #: ../plugins/cpu/cpu.c:368
 msgid "CPU Usage"
-msgstr "Պրոցեսորի օգտագործումը"
+msgstr "Պրոցեսորի օգտագործում"
 
 #: ../plugins/cpu/cpu.c:370
 msgid "Show usage as percentage"
-msgstr "Ցուցադրել օգտագործման չափը տոկոսներով"
+msgstr "Ցույց տալ օգտագործման չափը տոկոսներով"
 
 #: ../plugins/cpu/cpu.c:371
 msgid "Foreground colour"
@@ -626,7 +626,7 @@ msgstr "Դիմային ֆոնի գույնը"
 
 #: ../plugins/cpu/cpu.c:372
 msgid "Background colour"
-msgstr "Հետին ֆոնի գույնը"
+msgstr "Հետին գոնի գույնը"
 
 #: ../plugins/cpu/cpu.c:380
 msgid "CPU Usage Monitor"
@@ -638,7 +638,7 @@ msgstr "Ցույց տալ պրոցեսորի օգտագործումը"
 
 #: ../plugins/deskno/deskno.c:210 ../plugins/deskno/deskno.c:230
 msgid "Desktop Number / Workspace Name"
-msgstr "Աշխատասեղանի համարը / Աշխատասեղանի անունը"
+msgstr "Desktop Number / Workspace Name"
 
 #: ../plugins/deskno/deskno.c:212
 msgid "Bold font"
@@ -646,19 +646,19 @@ msgstr "Թավ տառատեսակ"
 
 #: ../plugins/deskno/deskno.c:213
 msgid "Display desktop names"
-msgstr "Ցույց տալ աշխատասեղանի անունները"
+msgstr "Ցուցադրել աշխատասեղանի անուննները"
 
 #: ../plugins/deskno/deskno.c:231
 msgid "Display workspace number, by cmeury@users.sf.net"
-msgstr "Ցուցադրել աշխատատարածքի համարը, cmeury@users.sf.net-ի կողմից"
+msgstr "Ցուցադրել աշխատասեղանների թիվը, cmeury@users.sf.net-ի կողմից"
 
 #: ../plugins/launchtaskbar.c:1835 ../plugins/launchtaskbar.c:2477
 msgid "Application Launch Bar"
-msgstr "Ծրագրերի գործարկման գոտի"
+msgstr "Ծրագրի գործարկման գոտի"
 
 #: ../plugins/launchtaskbar.c:1838 ../plugins/launchtaskbar.c:2487
 msgid "Task Bar (Window List)"
-msgstr "Խնդրագոտի (Պատուհանների ցանկ)"
+msgstr "Խնդրագոտի (Պատուհանների ցուցակ)"
 
 #: ../plugins/launchtaskbar.c:2010
 msgid "A_dd to Launcher"
@@ -667,7 +667,7 @@ msgstr ""
 #: ../plugins/launchtaskbar.c:2012
 #, fuzzy
 msgid "Rem_ove from Launcher"
-msgstr "Հեռացնել \"%s\"-ը պանելից"
+msgstr "Հեռացնել \"%s\" -ը պանելից"
 
 #: ../plugins/launchtaskbar.c:2014
 msgid "_New Instance"
@@ -675,30 +675,30 @@ msgstr ""
 
 #: ../plugins/launchtaskbar.c:2478
 msgid "Bar with buttons to launch application"
-msgstr "Կոճակներով գոտի ծրագրերի գործարկամ համար"
+msgstr "Կոճակներով գոտի ծրագիրը գործարկելու համար"
 
 #: ../plugins/launchtaskbar.c:2488
 msgid ""
 "Taskbar shows all opened windows and allow to iconify them, shade or get "
 "focus"
 msgstr ""
-"Taskbar shows all opened windows and allow to iconify them, shade or get "
-"focus"
+"Խնդրագոտին ցույց է տալիս բացված բոլոր պատուհանները և թույլ է տալիս պատկերազարդել,"
+"ստվերել կամ կենտրոնացնել դրանք"
 
 #: ../plugins/launchtaskbar.c:2508
 #, fuzzy
 msgid "Bar with buttons to launch application and/or show all opened windows"
-msgstr "Կոճակներով գոտի ծրագրերի գործարկամ համար"
+msgstr "Կոճակներով գոտի ծրագիրը գործարկելու համար"
 
 #. Add Raise menu item.
 #: ../plugins/task-button.c:351
 msgid "_Raise"
-msgstr "_Բարձրացնել"
+msgstr "_Աճեցնել"
 
 #. Add Restore menu item.
 #: ../plugins/task-button.c:356
 msgid "R_estore"
-msgstr "Վերականգնել"
+msgstr "Վերականգել"
 
 #. Add Maximize menu item.
 #: ../plugins/task-button.c:361
@@ -713,23 +713,23 @@ msgstr "Փոքրացնել"
 #: ../plugins/task-button.c:387
 #, c-format
 msgid "Workspace _%d"
-msgstr "Աշխատատարածք _%d"
+msgstr "_%d աշխատանքային տարածք"
 
 #: ../plugins/task-button.c:392
 #, c-format
 msgid "Workspace %d"
-msgstr "Աշխատատարածք %d"
+msgstr "%d աշխատանքային տարածք"
 
 #. Add "move to all workspaces" item.  This causes the window to be visible no matter what desktop is active.
 #: ../plugins/task-button.c:409
 msgid "_All workspaces"
-msgstr "Բոլոր Աշխատատարածքները"
+msgstr "_Բոլոր աշխատանքային տարածքները"
 
 #. FIXME: add "Current workspace" item, active if not on a current
 #. Add Move to Workspace menu item as a submenu.
 #: ../plugins/task-button.c:417
 msgid "_Move to Workspace"
-msgstr "_Տեղափոխվել դեպի աշխատատարածք"
+msgstr "_Տեղափոխվել աշխատանքային տարածք"
 
 #: ../plugins/task-button.c:432
 msgid "_Close Window"
@@ -755,19 +755,19 @@ msgstr "Գործիքների հուշման ձևաչափ"
 #: ../plugins/dclock.c:555
 #, fuzzy, c-format
 msgid "Format codes: man 3 strftime; %n for line break"
-msgstr "Format codes: man 3 strftime; \\n for line break"
+msgstr "Ձևաչափի կոդեր՝ մարդ 3 strftime; \\n for line break"
 
 #: ../plugins/dclock.c:556
 msgid "Action when clicked (default: display calendar)"
-msgstr "Գործողությունը, երբ սեմղված է (լռելայն՝ ցուցադրել օրացույցը)"
+msgstr "Գործողությունը կտտացնելիս (լռելայն: ցուցադրել օրացույցը)"
 
 #: ../plugins/dclock.c:558
 msgid "Tooltip only"
-msgstr "Միայն գործիքների հուշում"
+msgstr "Գործիքների հուշումը միայն"
 
 #: ../plugins/dclock.c:560
 msgid "Left align"
-msgstr "Ձախ հավասարեցում"
+msgstr "Ձախ կողմում"
 
 #: ../plugins/dclock.c:561
 msgid "Center text"
@@ -775,11 +775,11 @@ msgstr "Տեքստը կենտրոնում"
 
 #: ../plugins/dclock.c:562
 msgid "Right align"
-msgstr "Աջ հավասարեցում"
+msgstr "Աջ կողմում"
 
 #: ../plugins/dclock.c:575
 msgid "Display digital clock and tooltip"
-msgstr "Ցուցադրել թվային ժամացույցն ու գործիքների հուշումը"
+msgstr "Ցուցադրել թվային ժամացույցն ու գործիքի հուշումը"
 
 #: ../plugins/menu.c:362
 msgid "Add to desktop"
@@ -791,7 +791,7 @@ msgstr "Հատկություններ"
 
 #: ../plugins/menu.c:715
 msgid "Click here to open applications menu"
-msgstr "Սեղմել այստեղ ծրագրերի ընտրացանկը բացելու համար"
+msgstr "Սեղմել այստեղ՝ ծրագրերի մենյուն բացելու համար"
 
 #: ../plugins/menu.c:1018 ../plugins/menu.c:1032
 msgid "Menu"
@@ -799,11 +799,11 @@ msgstr "Մենյու"
 
 #: ../plugins/menu.c:1019 ../plugins/dirmenu.c:359
 msgid "Icon"
-msgstr "Պատկեր"
+msgstr "Մանրապատկեր"
 
 #: ../plugins/menu.c:1033
 msgid "Application Menu"
-msgstr "Ծրագրերի ընտրացանկ"
+msgstr "Ծրագրերի մենյու"
 
 #: ../plugins/separator.c:73
 msgid "Separator"
@@ -811,7 +811,7 @@ msgstr "Բաժանիչ"
 
 #: ../plugins/separator.c:74
 msgid "Add a separator to the panel"
-msgstr "Պանելին ավելացնել բաժանիչ"
+msgstr "Ավելացնել բաժանիչը պանելի վրա"
 
 #: ../plugins/pager.c:141
 msgid "Sorry, there was no window manager configuration program found."
@@ -819,19 +819,19 @@ msgstr ""
 
 #: ../plugins/pager.c:193 ../plugins/pager.c:209
 msgid "Desktop Pager"
-msgstr "Աշխատասեղանի «փեյջեր»"
+msgstr "Աշխատասեղանի փեյջեր"
 
 #: ../plugins/pager.c:194 ../plugins/pager.c:210
 msgid "Simple pager plugin"
-msgstr "Պարզ ընդարձակման «փեյջեր»"
+msgstr "Պարզ փեյջերի ընդարձակում"
 
 #: ../plugins/tray.c:691
 msgid "System Tray"
-msgstr "Համակարգի սկուտեղ"
+msgstr "Համակարգի պնակ"
 
 #: ../plugins/tray.c:692
 msgid "System tray"
-msgstr "Համակարգի սկուտեղ"
+msgstr "Համակարգի պնակ"
 
 #: ../plugins/xkb/xkb-plugin.c:409
 msgid "New session is required for this option to take effect"
@@ -840,7 +840,7 @@ msgstr ""
 #. dialog
 #: ../plugins/xkb/xkb-plugin.c:590
 msgid "Select Keyboard Model"
-msgstr "Ընտրել ստեղնաշարի տեսակը"
+msgstr "Ընտրել ստեղնաշարի մոդելը"
 
 #: ../plugins/xkb/xkb-plugin.c:614 ../plugins/xkb/xkb-plugin.c:743
 #: ../plugins/xkb/xkb-plugin.c:921
@@ -855,7 +855,7 @@ msgstr "Idle"
 #. dialog
 #: ../plugins/xkb/xkb-plugin.c:714
 msgid "Select Layout Change Type"
-msgstr "Ընտրել դասավորությունը փոխելու տիպը"
+msgstr "Ընտրել դասավորության փոփոխման տեսակը"
 
 #. dialog
 #: ../plugins/xkb/xkb-plugin.c:887
@@ -872,11 +872,11 @@ msgstr "Դասավորություն"
 
 #: ../plugins/xkb/xkb-plugin.c:1212 ../plugins/xkb/xkb-plugin.c:1544
 msgid "Keyboard Layout Handler"
-msgstr "Ստեղնաշարի դասավարության մշակիչ"
+msgstr "Ստեղնաշարի դասավորության կարգավար"
 
 #: ../plugins/xkb/xkb-plugin.c:1235
 msgid "Keyboard Model"
-msgstr "Ստեղնաշարի տեսակ"
+msgstr "Ստեղնաշարի մոդելը"
 
 #: ../plugins/xkb/xkb-plugin.c:1256
 msgid "Keyboard Layouts"
@@ -904,15 +904,15 @@ msgstr ""
 
 #: ../plugins/xkb/xkb-plugin.c:1374
 msgid "Per Window Settings"
-msgstr "Յուրաքանչյուր պատուհանի կարգավորումը"
+msgstr "Յուրաքանչյուր պատուհանի կարգավորումները"
 
 #: ../plugins/xkb/xkb-plugin.c:1386
 msgid "_Remember layout for each window"
-msgstr "_Remember layout for each window"
+msgstr "_Հիշել յուրաքանչյուր պատուհանի դասավորությունը"
 
 #: ../plugins/xkb/xkb-plugin.c:1395
 msgid "Show Layout as"
-msgstr "Դասավորությունը ցույց տալ որպես"
+msgstr "Ցույց տալ դասավորությունը որպես"
 
 #: ../plugins/xkb/xkb-plugin.c:1456
 msgid "Custom Image"
@@ -924,15 +924,15 @@ msgstr "Տեքստ"
 
 #: ../plugins/xkb/xkb-plugin.c:1483
 msgid "Panel Icon Size"
-msgstr "Պանելի մանրապատկերի չափը"
+msgstr "Պանելի մանրապատկերի չափսը"
 
 #: ../plugins/xkb/xkb-plugin.c:1545
 msgid "Handle keyboard layouts"
-msgstr "Կառավարել ստեղնաշարի դասավորությունները"
+msgstr "Կարգավորել ստեղնաշարի դասավորությունները"
 
 #: ../plugins/wincmd.c:207
 msgid "Left click to iconify all windows.  Middle click to shade them."
-msgstr "Սեղմել մկնիկի ձախը՝ բոլոր պատուհանները մանրապատկելու համար։"
+msgstr "Սեղմեք մկնիկի ձախը՝ բոլոր պատուհանները պատկերազարդելու և միջին կոճակը ստվերելու համար"
 
 #: ../plugins/wincmd.c:245 ../plugins/wincmd.c:255
 msgid "Minimize All Windows"
@@ -940,15 +940,15 @@ msgstr "Փոքրացնել բոլոր պատուհանները"
 
 #: ../plugins/wincmd.c:247
 msgid "Alternately iconify/shade and raise"
-msgstr "Պատահականորեն պատկերավորել/ստվերել և բարձրացնել"
+msgstr "Այլընտրանքորեն պատկերազարդել/ստվերել և բարձրացնել"
 
 #: ../plugins/wincmd.c:256
 msgid ""
 "Sends commands to all desktop windows.\n"
 "Supported commands are 1) iconify and 2) shade"
 msgstr ""
-"Ուղարկել հրամանները բոլոր պատուհաններին\n"
-"Աջակցվող հրամաններն են՝ 1) iconify ու 2) shade"
+"Ուղարկել հրամանները աշխատասեղանի բոլոր պատուհաններին:\n"
+"Աջակցվող հրամաններն են 1) iconify - պատկերազարդել և 2) shade - ստվերել"
 
 #: ../plugins/dirmenu.c:213
 msgid "Open in _Terminal"
@@ -956,7 +956,7 @@ msgstr "Բացել տերմինալում"
 
 #: ../plugins/dirmenu.c:355 ../plugins/dirmenu.c:365
 msgid "Directory Menu"
-msgstr "Պանակի ընտրացանկ"
+msgstr "Պանակի մենյու"
 
 #: ../plugins/dirmenu.c:357
 msgid "Directory"
@@ -969,7 +969,7 @@ msgstr "Պիտակ"
 #: ../plugins/dirmenu.c:366
 #, fuzzy
 msgid "Browse directory tree via menu (Author = PCMan)"
-msgstr "Զննել պանակի ծառը ընտրացանկի միջոցով (Հեղինակ՝ PCMan)"
+msgstr "Բացել պանակի ծառը մենյուի օգնությամբ (Հեղինակ՝ PCMan)"
 
 #: ../plugins/thermal/thermal.c:563 ../plugins/thermal/thermal.c:581
 msgid "Temperature Monitor"
@@ -983,41 +983,41 @@ msgstr "Հատուկ գույն"
 #: ../plugins/thermal/thermal.c:566
 #, fuzzy
 msgid "Warning1 color"
-msgstr "Լիցքավորման գույն՝ 1"
+msgstr "Լիցքավորման գույնը 1"
 
 #: ../plugins/thermal/thermal.c:567
 #, fuzzy
 msgid "Warning2 color"
-msgstr "Լիցքավորման գույն 2"
+msgstr "Լիցքավորման գույնը 1"
 
 #: ../plugins/thermal/thermal.c:568
 msgid "Automatic sensor location"
-msgstr "Տվիչի ինքնաբերաբար տեղադրություն"
+msgstr "Սենսորի ավտոմատ տեղադրություն"
 
 #. FIXME: if off, disable next one
 #: ../plugins/thermal/thermal.c:569
 msgid "Sensor"
-msgstr "Տվիչ"
+msgstr "Սենսոր"
 
 #. FIXME: create a list to select instead
 #: ../plugins/thermal/thermal.c:570
 msgid "Automatic temperature levels"
-msgstr "Ջերմաստիճանի ինքնաշխատ մակարդակները"
+msgstr "Ջերմաստիճանի ավտոմատ մակարդակները"
 
 #. FIXME: if off, disable two below
 #: ../plugins/thermal/thermal.c:571
 #, fuzzy
 msgid "Warning1 temperature"
-msgstr "1-ին զգուշացման ջերմաստիճանը"
+msgstr "Զգուշացում1 ջերմաստիճան"
 
 #: ../plugins/thermal/thermal.c:572
 #, fuzzy
 msgid "Warning2 temperature"
-msgstr "2-րդ զգուշացման ջերմաստիճանը"
+msgstr "Զգուշացում2 ջերմաստիճան"
 
 #: ../plugins/thermal/thermal.c:582
 msgid "Display system temperature"
-msgstr "Ցույց տալ համակարգի ջերմաստիճանը"
+msgstr "Ցուցադրել համակարգի ջերմաստիճանը"
 
 #: ../plugins/cpufreq/cpufreq.c:325
 #, c-format
@@ -1042,7 +1042,7 @@ msgstr ""
 #: ../plugins/volumealsa/volumealsa.c:613
 #: ../plugins/volumealsa/volumealsa.c:973
 msgid "Volume control"
-msgstr "Ձայնի ղեկավարում"
+msgstr "Ուժգնության կառավարում"
 
 #: ../plugins/volumealsa/volumealsa.c:701
 #, fuzzy
@@ -1050,7 +1050,7 @@ msgid ""
 "Error, you need to install an application to configure the sound "
 "(pavucontrol, alsamixer ...)"
 msgstr ""
-"Error, you need to install an application to configure the sound "
+"Սխալմունք, ձայնը կարհաբերելու համար անհրաժեշտ է տեղադրել ծրագիրը "
 "(pavucontol, alsamixer ...)"
 
 #. Create a frame as the child of the viewport.
@@ -1130,7 +1130,7 @@ msgstr ""
 #: ../plugins/volumealsa/volumealsa.c:1553
 #: ../plugins/volumealsa/volumealsa.c:1574
 msgid "Volume Control"
-msgstr "Volume Control"
+msgstr "Ձայնի կարգավորում"
 
 #: ../plugins/volumealsa/volumealsa.c:1516
 msgid "Audio Card"
@@ -1155,11 +1155,11 @@ msgstr ""
 
 #: ../plugins/netstat/netstat.c:183
 msgid "<Hidden Access Point>"
-msgstr "<Թաքնված հասանելիության կետ>"
+msgstr "<Hidden Access Point>"
 
 #: ../plugins/netstat/netstat.c:220
 msgid "Wireless Networks not found in range"
-msgstr "Անլար ցանց չի գտնվել"
+msgstr "Տիրույթում անլար ցանց չի գտնվել"
 
 #. Repair
 #: ../plugins/netstat/netstat.c:256
@@ -1173,24 +1173,24 @@ msgstr "Անջատել"
 
 #: ../plugins/netstat/netstat.c:352
 msgid "Wireless Connection has no connectivity"
-msgstr "Առկա չէ անլար ցանցի հասանելիություն"
+msgstr "Անլար ցանցի կապակցվածություն առկա չէ"
 
 #: ../plugins/netstat/netstat.c:354
 msgid "Network cable is plugged out"
-msgstr "Ցանցի մալուխը միացված չէ"
+msgstr "Ցանցային մալուխը միացված չէ"
 
 #: ../plugins/netstat/netstat.c:356
 msgid "Connection has limited or no connectivity"
-msgstr "Ցանցը սահմանափակ է կամ առկա չէ կապակցում"
+msgstr "Կապը սահմանափակ է կամ միացված չէ"
 
 #: ../plugins/netstat/netstat.c:360 ../plugins/netstat/netstat.c:371
 #: ../plugins/netstat/netstat.c:382
 msgid "IP Address:"
-msgstr "IP Հասցե՝"
+msgstr "IP հասցե՝"
 
 #: ../plugins/netstat/netstat.c:361
 msgid "Remote IP:"
-msgstr "Հեռավար IP՝"
+msgstr "Հեռավար IP:"
 
 #: ../plugins/netstat/netstat.c:362 ../plugins/netstat/netstat.c:373
 #: ../plugins/netstat/netstat.c:384
@@ -1200,17 +1200,17 @@ msgstr "Netmask:"
 #: ../plugins/netstat/netstat.c:363 ../plugins/netstat/netstat.c:375
 #: ../plugins/netstat/netstat.c:386
 msgid "Activity"
-msgstr "Գործողություն"
+msgstr "Ակտիվություն"
 
 #: ../plugins/netstat/netstat.c:363 ../plugins/netstat/netstat.c:375
 #: ../plugins/netstat/netstat.c:386
 msgid "Sent"
-msgstr "Ելք"
+msgstr "Ուղարկած"
 
 #: ../plugins/netstat/netstat.c:363 ../plugins/netstat/netstat.c:375
 #: ../plugins/netstat/netstat.c:386
 msgid "Received"
-msgstr "Մուտք"
+msgstr "Ստացած"
 
 #: ../plugins/netstat/netstat.c:364 ../plugins/netstat/netstat.c:376
 #: ../plugins/netstat/netstat.c:387
@@ -1220,7 +1220,7 @@ msgstr "բիթ"
 #: ../plugins/netstat/netstat.c:365 ../plugins/netstat/netstat.c:377
 #: ../plugins/netstat/netstat.c:388
 msgid "packets"
-msgstr "փաթեթ"
+msgstr "փաթեթներ"
 
 #: ../plugins/netstat/netstat.c:368 ../plugins/netstatus/netstatus-iface.c:173
 msgid "Wireless"
@@ -1232,7 +1232,7 @@ msgstr "Պրոտոկոլ՝"
 
 #: ../plugins/netstat/netstat.c:374 ../plugins/netstat/netstat.c:385
 msgid "HW Address:"
-msgstr "HW Հասցե՝"
+msgstr "HW հասցե՝"
 
 #: ../plugins/netstat/netstat.c:505
 msgid "Manage Networks"
@@ -1245,7 +1245,7 @@ msgstr "Հսկել և կառավարել ցանցը"
 #. create dialog
 #: ../plugins/netstat/passwd_gui.c:90
 msgid "Setting Encryption Key"
-msgstr "Կարգավորել ծածկագիրը"
+msgstr "Ծածկագրման կոդ"
 
 #: ../plugins/netstat/passwd_gui.c:101
 msgid ""
@@ -1253,11 +1253,11 @@ msgid ""
 "You must have the encryption key."
 msgstr ""
 "Այս անլար ցանցը ծածկագրված է։\n"
-"Անհրաժեշտ է մուտքագրել ծածկագիրը։"
+"Անհրաժեշտ է ծածկագիրը"
 
 #: ../plugins/netstat/passwd_gui.c:106
 msgid "Encryption Key:"
-msgstr "Ծածկագիր՝"
+msgstr "Ծածկագիր"
 
 #: ../plugins/netstatus/netstatus.c:154 ../plugins/netstatus/netstatus.c:166
 msgid "Network Status Monitor"
@@ -1265,15 +1265,15 @@ msgstr "Ցանցի կարգավիճակի հսկիչ"
 
 #: ../plugins/netstatus/netstatus.c:156
 msgid "Interface to monitor"
-msgstr "Հսկման միջերես"
+msgstr "Հսկիչի միջերես"
 
 #: ../plugins/netstatus/netstatus.c:157
 msgid "Config tool"
-msgstr "Կարգաբերման գործիք"
+msgstr "Կարգաբերել գործիքը"
 
 #: ../plugins/netstatus/netstatus.c:167
 msgid "Monitor network status"
-msgstr "Հսկել ցանցի կարգաժվիճակը"
+msgstr "Հսկել ցանցի կարգավիճակը"
 
 #: ../plugins/netstatus/netstatus-dialog.c:52
 #: ../plugins/netstatus/netstatus-dialog.c:316
@@ -1287,14 +1287,14 @@ msgstr "Կապի հատկությունները"
 #: ../plugins/netstatus/netstatus-dialog.c:123
 #, c-format
 msgid "Connection Properties: %s"
-msgstr "Կապի հատկությունները՝ %s"
+msgstr "Կապի հատկություններ՝ %s"
 
 #: ../plugins/netstatus/netstatus-dialog.c:136
 #, c-format
 msgid "%lu packet"
 msgid_plural "%lu packets"
-msgstr[0] "%lu packet"
-msgstr[1] "%lu փաթեթ"
+msgstr[0] "%lu փաթեթ"
+msgstr[1] "%lu փաթեթներ"
 
 #: ../plugins/netstatus/netstatus-dialog.c:400
 #, c-format
@@ -1302,13 +1302,13 @@ msgid ""
 "There was an error displaying help:\n"
 "%s"
 msgstr ""
-"Օգնությունը ցուցադրելու ժամանակ առաջավ խնդիրներ՝\n"
+"Օգնությունը ցուցադրելիս սխալ տեղի ունեցավ՝\n"
 "%s"
 
 #: ../plugins/netstatus/netstatus-icon.c:381
 #, c-format
 msgid "Network Connection: %s"
-msgstr "Ցանցի կապակցում՝ %s"
+msgstr "Ցանցի միացումը՝ %s"
 
 #: ../plugins/netstatus/netstatus-icon.c:386
 msgid "Network Connection"
@@ -1320,7 +1320,7 @@ msgstr "Միջերես"
 
 #: ../plugins/netstatus/netstatus-icon.c:848
 msgid "The current interface the icon is monitoring."
-msgstr "Մանրապատկերի ընթացիկ միջերեսը վերահսկվում է"
+msgstr "Ընթացիկ միջերես, որը վերահսկում է մանրապատկերը"
 
 #: ../plugins/netstatus/netstatus-icon.c:855
 msgid "Orientation"
@@ -1328,7 +1328,7 @@ msgstr "Կողմնորոշում"
 
 #: ../plugins/netstatus/netstatus-icon.c:856
 msgid "The orientation of the tray."
-msgstr "Սկուտեղի կողմնորոշումը"
+msgstr "Պնակի կողմնորոշումը։"
 
 #: ../plugins/netstatus/netstatus-icon.c:864
 msgid "Tooltips Enabled"
@@ -1336,7 +1336,7 @@ msgstr "Գործիքների հուշումը միացված է"
 
 #: ../plugins/netstatus/netstatus-icon.c:865
 msgid "Whether or not the icon's tooltips are enabled."
-msgstr "Արդյո՞ք միացված է մանրապատկերի գործքիների հուշումը"
+msgstr "Միացնել կամ անջատել մանրապատկերի գործիքագրերը:"
 
 #: ../plugins/netstatus/netstatus-icon.c:872
 msgid "Show Signal"
@@ -1344,7 +1344,7 @@ msgstr "Ցույց տալ ազդանշանը"
 
 #: ../plugins/netstatus/netstatus-icon.c:873
 msgid "Whether or not the signal strength should be displayed."
-msgstr "Արդյո՞ք ցուցադրվում է ազդանշանի ուժեղացումը"
+msgstr "Ցուցադրել կամ թաքնել ազդանշանի ուժգնությունը"
 
 #: ../plugins/netstatus/netstatus-icon.c:982
 #, c-format
@@ -1353,7 +1353,7 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
-"Խնդրում ենք կապվել ձեր համակարգի ադմինիստրատորին հետևյալ խնդիրը լուծելու համար՝\n"
+"Please contact your system administrator to resolve the following problem:\n"
 "\n"
 "%s"
 
@@ -1363,16 +1363,16 @@ msgstr "Անուն"
 
 #: ../plugins/netstatus/netstatus-iface.c:149
 msgid "The interface name"
-msgstr "Կապի անունը"
+msgstr "Միջերեսի անունը"
 
 #: ../plugins/netstatus/netstatus-iface.c:156
 #: ../plugins/weather/weatherwidget.c:2137
 msgid "State"
-msgstr "Վայր"
+msgstr "Պայման"
 
 #: ../plugins/netstatus/netstatus-iface.c:157
 msgid "The interface state"
-msgstr "Կապի վայրը"
+msgstr "Միջերեսի պայմանը"
 
 #: ../plugins/netstatus/netstatus-iface.c:165
 msgid "Stats"
@@ -1380,11 +1380,11 @@ msgstr "Վիճակագրություն"
 
 #: ../plugins/netstatus/netstatus-iface.c:166
 msgid "The interface packets/bytes statistics"
-msgstr "Միջերեսի փաթեթ/բիթային վիճակագրությունը"
+msgstr "Միջերեսի փաթեթներ/բիթերի վիճակագրություն"
 
 #: ../plugins/netstatus/netstatus-iface.c:174
 msgid "Whether the interface is a wireless interface"
-msgstr "Արդյո՞ք միջերեսը անլար է"
+msgstr "Անկախ նրանից, որ միջերեսը անլար է"
 
 #: ../plugins/netstatus/netstatus-iface.c:181
 msgid "Signal"
@@ -1392,17 +1392,17 @@ msgstr "Ազդանշան"
 
 #: ../plugins/netstatus/netstatus-iface.c:182
 msgid "Wireless signal strength percentage"
-msgstr "Անլար ցանցի ուժգնության տոկոսը"
+msgstr "Անլար ազդանշանի ուժգնության տոկոսը"
 
 #: ../plugins/netstatus/netstatus-iface.c:192
 msgid "The current error condition"
-msgstr "Ընթացիկ սխալի պայման"
+msgstr "Ընթացիկ սխալի պայմանը"
 
 #: ../plugins/netstatus/netstatus-iface.c:440
 #: ../plugins/netstatus/netstatus-iface.c:1205
 #, c-format
 msgid "Unable to open socket: %s"
-msgstr "Հնարավոր չե բացել աղբյուրը՝ %s"
+msgstr "Հնարավոր չէ բացել վարդակը՝ %s"
 
 #: ../plugins/netstatus/netstatus-iface.c:502
 #: ../plugins/netstatus/netstatus-iface.c:1231
@@ -1528,22 +1528,22 @@ msgstr "Ցանցային սարք չի գտնվել"
 #: ../plugins/netstatus/netstatus-sysdeps.c:180
 #, c-format
 msgid "Cannot open /proc/net/dev: %s"
-msgstr "Հնարավոր չէ բացել /proc/net/dev-ը՝ %s"
+msgstr "Չի կարողանում բացել /proc/net/dev՝ %s"
 
 #: ../plugins/netstatus/netstatus-sysdeps.c:185
 #, fuzzy
 msgid "Could not parse /proc/net/dev. No data."
-msgstr "Հնարավոր չէ ստանալ /proc/net/dev-ը։ Անհայտ ձևաչափ։"
+msgstr "Չհաջողվեց վերլուծել /proc/net/dev -ը։ Անհայտ ձևաչափ։"
 
 #: ../plugins/netstatus/netstatus-sysdeps.c:190
 msgid "Could not parse /proc/net/dev. Unknown format."
-msgstr "Հնարավոր չէ ստանալ /proc/net/dev-ը։ Անհայտ ձևաչափ։"
+msgstr "Չհաջողվեց վերլուծել /proc/net/dev. Անհայտ ձևաչափ։"
 
 #: ../plugins/netstatus/netstatus-sysdeps.c:205
 #: ../plugins/netstatus/netstatus-sysdeps.c:332
 #, c-format
 msgid "Could not parse interface name from '%s'"
-msgstr "Հնարավոր չէ ստանալ կապի անունը '%s' -ից"
+msgstr "Չհաջողվեց վերլուծել'%s' -ի միջերեսի անունը"
 
 #: ../plugins/netstatus/netstatus-sysdeps.c:218
 #: ../plugins/netstatus/netstatus-sysdeps.c:647
@@ -1552,41 +1552,41 @@ msgid ""
 "Could not parse interface statistics from '%s'. prx_idx = %d; ptx_idx = %d; "
 "brx_idx = %d; btx_idx = %d;"
 msgstr ""
-"Հնարավոր չէ ստանալ կապի վիճակագրությունը '%s' -ից։ prx_idx = %d; ptx_idx = %d; "
+"Չհաջողվեց վերլուծել '%s' -ի վիճակագրությունը. prx_idx = %d; ptx_idx = %d; "
 "brx_idx = %d; btx_idx = %d;"
 
 #: ../plugins/netstatus/netstatus-sysdeps.c:312
 #, fuzzy
 msgid "Could not parse /proc/net/wireless. No data."
-msgstr "Հնարավոր չէ ստանալ /proc/net/wireless -ը։ Անհայտ ձևաչափ։"
+msgstr "Չհաջողվեց վերլուծել /proc/net/wireless -ը. Անհայտ ձևաչափ."
 
 #: ../plugins/netstatus/netstatus-sysdeps.c:316
-msgid "Could not parse /proc/net/wireless. Unknown format."
-msgstr "Հնարավոր չէ ստանալ /proc/net/wireless -ը. Անհայտ ձևաչափ։"
+msgid "Could not parse /proc/net/wireless. Անհայտ ձևաչափ։"
+msgstr "Չհաջողվեց վերլուծել /proc/net/wireless. Անհայտ ձևաչափ։"
 
 #: ../plugins/netstatus/netstatus-sysdeps.c:343
 #, c-format
 msgid "Could not parse wireless details from '%s'. link_idx = %d;"
-msgstr "Հնարավոր չէ ստանալ անլար ցանցի մանրամասները '%s' -ից։ link_idx = %d;"
+msgstr "Չհաջողվեց վերլուծել '%s' անլար ցանցի մանրամասները։ link_idx = %d;"
 
 #: ../plugins/netstatus/netstatus-sysdeps.c:416
 #, c-format
 msgid "Could not connect to interface, '%s'"
-msgstr "Could not connect to interface, '%s'"
+msgstr "Չհաջողվեց միանալ '%s' միջերեսին"
 
 #: ../plugins/netstatus/netstatus-sysdeps.c:422
 #, c-format
 msgid "Could not send ioctl to interface, '%s'"
-msgstr "Հնարավոր չէ ուղարկել ioctl-ը ցանցի միջերեսին, '%s'"
+msgstr "Չհաջողվեց ուղարկել ioctl -ն միջերեսին, '%s'"
 
 #: ../plugins/netstatus/netstatus-sysdeps.c:600
 #, c-format
 msgid "Could not parse command line '%s': %s"
-msgstr "Հնարավոր չէ ուղարկել '%s' հրահանգաշարը՝ %s"
+msgstr "Չհաջողվեց վերլուծել '%s' հրանգաշարը՝ %s"
 
 #: ../plugins/netstatus/netstatus-sysdeps.c:637
 msgid "Could not parse 'netstat' output. Unknown format"
-msgstr "Հնարավոր չէ ուղարկել 'netstat' արդյունքը։ Անհայտ ձևաչափ։"
+msgstr "Չհաջողվեց վերլուծել 'netstat' ելքը. Անհայտ ձևաչափ"
 
 #: ../plugins/netstatus/netstatus-util.c:152
 msgid "Disconnected"
@@ -1598,30 +1598,30 @@ msgstr "Idle"
 
 #: ../plugins/netstatus/netstatus-util.c:158
 msgid "Sending"
-msgstr "Ելից"
+msgstr "Sending"
 
 #: ../plugins/netstatus/netstatus-util.c:161
 msgid "Receiving"
-msgstr "Մտից"
+msgstr "Receiving"
 
 #: ../plugins/netstatus/netstatus-util.c:164
 msgid "Sending/Receiving"
-msgstr "Ելից/Մտից"
+msgstr "Sending/Receiving"
 
 #: ../plugins/batt/batt.c:156
 #, fuzzy, c-format
 msgid "Battery %d: %d%% charged, %d:%02d until full"
-msgstr "Մարտկոց՝ %d%% -ն լցված է, %d:%02d մինչ ամբողջական կլցվի"
+msgstr "Մարտկոց՝ %d%% լիցքավորված է, %d:%02d լրիվությամբ"
 
 #: ../plugins/batt/batt.c:170
 #, fuzzy, c-format
 msgid "Battery %d: %d%% charged, %d:%02d left"
-msgstr "Մարտկոց՝ %d%% -ն լցված է, մնացել է %d:%02d "
+msgstr "Մարտկոց՝ %d%% լիցքավորված է, %d:%02d մնացել է"
 
 #: ../plugins/batt/batt.c:177
 #, fuzzy, c-format
 msgid "Battery %d: %d%% charged"
-msgstr "Մարտկոց՝ %d%% -ն լցված է"
+msgstr "Մարտկոց՝ %d%% լիցքավորված է"
 
 #: ../plugins/batt/batt.c:187
 #, c-format
@@ -1688,12 +1688,12 @@ msgstr ""
 
 #: ../plugins/batt/batt.c:243
 msgid "No batteries found"
-msgstr "Առկա չէ մարտկոց"
+msgstr "Մարտկոց չի գտնվել"
 
 #: ../plugins/batt/batt.c:546 ../plugins/batt/batt.c:679
 #, fuzzy
 msgid "Battery low"
-msgstr "Ցածր մարտկոցի լիցք"
+msgstr "Մարտկոցի հսկիչ"
 
 #: ../plugins/batt/batt.c:702 ../plugins/batt/batt.c:726
 msgid "Battery Monitor"
@@ -1701,7 +1701,7 @@ msgstr "Մարտկոցի հսկիչ"
 
 #: ../plugins/batt/batt.c:704
 msgid "Hide if there is no battery"
-msgstr "Թաքցնել, եթե մարտկոցն առկա չէ։"
+msgstr "Թաքցնել, եթե առկա չէ մարտկոց"
 
 #: ../plugins/batt/batt.c:705
 msgid "Alarm command"
@@ -1709,7 +1709,7 @@ msgstr "Զարթուցիչի հրաման"
 
 #: ../plugins/batt/batt.c:706
 msgid "Alarm time (minutes left)"
-msgstr "Զարթուցիչի ժամանակ (րոպե մնացել է)"
+msgstr "Զարթուցիչի ժամ (րոպե անցել է)"
 
 #: ../plugins/batt/batt.c:707
 msgid "Background color"
@@ -1733,7 +1733,7 @@ msgstr "Լիցքաթափման գույն 2"
 
 #: ../plugins/batt/batt.c:712
 msgid "Border width"
-msgstr "Եզրերի հաստությունը"
+msgstr "Սահմանի լայնությունը"
 
 #: ../plugins/batt/batt.c:716
 msgid "Show Extended Information"
@@ -1742,7 +1742,7 @@ msgstr ""
 #: ../plugins/batt/batt.c:717
 #, fuzzy
 msgid "Number of battery to monitor"
-msgstr "Վերահսկման միջերես"
+msgstr "Հսկիչի միջերես"
 
 #: ../plugins/batt/batt.c:727
 msgid "Display battery status using ACPI"
@@ -1754,40 +1754,40 @@ msgstr "LED ստեղնաշար"
 
 #: ../plugins/kbled/kbled.c:205
 msgid "Show CapsLock"
-msgstr "Ցուցադրել CapsLock"
+msgstr "Ցույց տալ CapsLock -ը"
 
 #: ../plugins/kbled/kbled.c:206
 msgid "Show NumLock"
-msgstr "Ցուցադրել NumLock"
+msgstr "Ցույց տալ NumLock -ը"
 
 #: ../plugins/kbled/kbled.c:207
 msgid "Show ScrollLock"
-msgstr "Ցուցադրել ScrollLock"
+msgstr "Ցույց տալ ScrollLock -ը"
 
 #: ../plugins/kbled/kbled.c:235
 msgid "Indicators for CapsLock, NumLock, and ScrollLock keys"
-msgstr " Ցուցիչներ CapsLock-ի, NumLock-ի և ScrollLock-ի համար"
+msgstr "Ցուցիչներ CapsLock-ի, NumLock-ի և ScrollLock ստեղների համար"
 
 #. A label to allow for click through
 #: ../plugins/indicator/indicator.c:694
 msgid "No Indicators"
-msgstr "Ցուցիչներ առկա չէ"
+msgstr "Առկա չէ ցուցիչներ"
 
 #: ../plugins/indicator/indicator.c:863 ../plugins/indicator/indicator.c:881
 msgid "Indicator applets"
-msgstr "Ցուցիչների ծրագրաշար"
+msgstr "Ցուցիչի ծրագրաշար"
 
 #: ../plugins/indicator/indicator.c:865
 msgid "Indicator Applications"
-msgstr "Ծրագրերի ցուցիչներ"
+msgstr "Ցուցիչի ծրագրեր"
 
 #: ../plugins/indicator/indicator.c:866
 msgid "Clock Indicator"
-msgstr "Ժամի ցուցիչ"
+msgstr "Ժամացույցի ցուցիչ"
 
 #: ../plugins/indicator/indicator.c:867
 msgid "Messaging Menu"
-msgstr "Հաղորդագրությունների մենյու"
+msgstr "Հաղորդագրության մենյու"
 
 #: ../plugins/indicator/indicator.c:868
 msgid "Network Menu"
@@ -1795,7 +1795,7 @@ msgstr "Ցանցի մենյու"
 
 #: ../plugins/indicator/indicator.c:869
 msgid "Session Menu"
-msgstr "Նստաշրջանի մենյու"
+msgstr "Սեսիայի մենյու"
 
 #: ../plugins/indicator/indicator.c:870
 msgid "Sound Menu"
@@ -1803,7 +1803,7 @@ msgstr "Ձայնի մենյու"
 
 #: ../plugins/indicator/indicator.c:882
 msgid "Add indicator applets to the panel"
-msgstr "Պանելին ավելացնել ցուցիչի ծրագրաշարը"
+msgstr "Ավելացնել ցուցիչի ծրագրաշարը պանելի վրա"
 
 #: ../plugins/monitors/monitors.c:285
 #, c-format
@@ -1813,11 +1813,11 @@ msgstr "Պրոցեսորի օգտագործումը՝ %.2f%%"
 #: ../plugins/monitors/monitors.c:386
 #, c-format
 msgid "RAM usage: %.1fMB (%.2f%%)"
-msgstr "RAM օգտագործումը՝ %.1fMB (%.2f%%)"
+msgstr "RAM-ի օգտագործումը՝ %.1fMB (%.2f%%)"
 
 #: ../plugins/monitors/monitors.c:732 ../plugins/monitors/monitors.c:821
 msgid "Resource monitors"
-msgstr "Պաշարների հսկիչներ"
+msgstr "Պաշարների հսկում"
 
 #: ../plugins/monitors/monitors.c:735
 msgid "CPU color"
@@ -1833,11 +1833,11 @@ msgstr "RAM-ի գույնը"
 
 #: ../plugins/monitors/monitors.c:738
 msgid "Action when clicked (default: lxtask)"
-msgstr "Գործողությունը, երբ սեղմված է (լռելայն՝ lxtask)"
+msgstr "Գործողությունը կտտացնելիս (լռելայն: lxtask)"
 
 #: ../plugins/monitors/monitors.c:822
 msgid "Display monitors (CPU, RAM)"
-msgstr "Ցուցադրել հսիկչները (CPU, RAM)"
+msgstr "Ցուցադրել հսկիչները (CPU, RAM)"
 
 #: ../plugins/weather/weatherwidget.c:52
 msgid "[N/A]"
@@ -1874,7 +1874,7 @@ msgstr ""
 #: ../plugins/weather/weatherwidget.c:1074
 #, fuzzy
 msgid "Preferences"
-msgstr "Panel Preferences"
+msgstr "Պանելի նախընտրանքներ"
 
 #: ../plugins/weather/weatherwidget.c:1080
 msgid "Refresh"
@@ -1953,7 +1953,7 @@ msgstr ""
 #: ../plugins/weather/weatherwidget.c:1521
 #, fuzzy
 msgid "C_hange"
-msgstr "Change Type"
+msgstr "Փոխել տիպը"
 
 #. Both are available
 #: ../plugins/weather/weatherwidget.c:1612
@@ -1980,7 +1980,7 @@ msgstr ""
 #: ../plugins/weather/weatherwidget.c:1746
 #, fuzzy
 msgid "Pressure:"
-msgstr "IP Հասցե՝"
+msgstr "IP հասցե՝"
 
 #: ../plugins/weather/weatherwidget.c:1773
 msgid "Visibility:"
@@ -2008,7 +2008,7 @@ msgstr ""
 #: ../plugins/weather/weatherwidget.c:2311
 #, fuzzy, c-format
 msgid "Location not set."
-msgstr "Դուրս գալու հրամանը սահմանված չէ"
+msgstr "Logout command is not set"
 
 #: ../plugins/weather/weatherwidget.c:1981
 #, c-format
@@ -2032,7 +2032,7 @@ msgstr ""
 #: ../plugins/weather/weatherwidget.c:2286
 #, fuzzy
 msgid "Currently in "
-msgstr "Ընթացիկ բեռնված ընդարձակումներ"
+msgstr "Այս պահին բեռնված հավելումներ"
 
 #: ../plugins/weather/weatherwidget.c:2292
 msgid "Today: "
@@ -2045,7 +2045,7 @@ msgstr ""
 #: ../plugins/weather/weather.c:415
 #, fuzzy
 msgid "Weather Plugin"
-msgstr "WNCKpager ըդնարձակում"
+msgstr "WNCKpager հավելում"
 
 #: ../plugins/weather/weather.c:416
 msgid "Show weather conditions for a location."
@@ -2139,40 +2139,40 @@ msgstr ""
 #~ msgstr " --log <number> -- set log level 0-5. 0 - none 5 - chatty\n"
 
 #~ msgid "Display Image and Tooltip"
-#~ msgstr "Ցուցադրել պատկերն ու գործիքների հուշումը"
+#~ msgstr "Display Image and Tooltip"
 
 #~ msgid "Normal"
-#~ msgstr "Նորմալ"
+#~ msgstr "Normal"
 
 #~ msgid "Warning1"
-#~ msgstr "Զգուշացում1"
+#~ msgstr "Warning1"
 
 #~ msgid "Warning2"
-#~ msgstr "Զգուշացում2"
+#~ msgstr "Warning2"
 
 #~ msgid "Failed to launch time configuration tool: %s"
-#~ msgstr "Ժամի կարգաբերման գործարկումը ձախողվեց՝ %s"
+#~ msgstr "Failed to launch time configuration tool: %s"
 
 #~ msgid "Model"
-#~ msgstr "Տեսակ"
+#~ msgstr "Model"
 
 #~ msgid "WNCKPager"
 #~ msgstr "WNCKPager"
 
 #~ msgid "<b>Icon</b>"
-#~ msgstr "<b>Պատկեր</b>"
+#~ msgstr "<b>Icon</b>"
 
 #~ msgid "Configure Keyboard Layout Switcher"
-#~ msgstr "Կարգաբերել ստեղնաշարի դասավորության փոխարկումը"
+#~ msgstr "Configure Keyboard Layout Switcher"
 
 #~ msgid "image"
-#~ msgstr "Նկար"
+#~ msgstr "image"
 
 #~ msgid "text"
-#~ msgstr "Տեքստ"
+#~ msgstr "text"
 
 #~ msgid "Per application settings"
-#~ msgstr "Ամեն ծրագրի կարգավորումը "
+#~ msgstr "Per application settings"
 
 #~ msgid "Default layout:"
-#~ msgstr "Լռելայն դասավորություն՝"
+#~ msgstr "Default layout:"
